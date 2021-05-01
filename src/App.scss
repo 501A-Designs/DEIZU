@@ -1,0 +1,283 @@
+@import url("https://fonts.googleapis.com/css2?family=Potta+One&display=swap");
+
+$border: 1px solid lightgray;
+$r10: 10px;
+$r5: 5px;
+
+$btnMargin:5px;
+$btnPadding:7px 12px 7px 12px;
+$miniBtnPadding:0.5em 1em 0.5em 1em;
+$padding:15px;
+$margin:15px;
+
+$lightBlue: #c1dde1;
+$blue: #006372;
+$lightGreen: #bae3a7;
+$green: #266300;
+$lightYellow: #ffde88;
+$yellow: #6f5000;
+$systemWhite:rgb(255, 254, 252);
+
+$lightBoxShadow: 0px 5px 10px lightgray;
+$heavyBoxShadow:0px 10px 15px grey;
+
+$transitionSpeed: 0.5s;
+
+
+h1 {
+  font-family: "Potta One", cursive;
+  font-weight: normal;
+}
+* {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  // background-color: rgb(255, 252, 246);
+}
+
+.startMenu{
+    padding: 3% 20% 3% 20%;
+
+    h1{
+        text-align: center;
+    }
+    button{
+      margin-bottom: 10px;
+    }
+}
+
+footer{
+    margin-top:50px;
+    text-align: center;
+}
+
+// Buttons
+.standardBtn {
+  border: none;
+  border-radius: $r5;
+  padding: $btnPadding;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  margin: 0px 5px 0px 5px;
+}
+
+.scheduleGrid {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding: 8px;
+
+  div {
+    margin: 5px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: $r5;
+    text-align: center;
+  }
+  button {
+    border: $border;
+    cursor: pointer;
+    border-radius: $r5;
+    outline: none;
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+// width: 70%;
+// max-width: 300px;
+// font-size: 30px;
+
+input {
+  border: $border;
+  padding: 10px;
+  margin: 5px;
+  outline: none;
+  transition: 0.5s;
+  border-radius: $r5;
+  transition: $transitionSpeed;
+
+  &:focus {
+    box-shadow: $lightBoxShadow;
+  }
+}
+
+.headerGrid {
+  display: grid;
+
+  .headerBtn {
+    display: flex;
+    align-items: flex-end;
+  }
+  #profileInfo {
+    margin: $margin $btnMargin;
+    padding: $padding;
+    border: $border;
+    border-radius: $r10;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    section {
+      display: flex;
+      align-items: center;
+
+      h3 {
+        margin: 0px;
+      }
+    }
+
+    img {
+      border: $border;
+      border-radius: $r10;
+      width: 80px;
+      height: 80px;
+      justify-self: end;
+    }
+  }
+}
+
+.card {
+  padding: $padding * 2;
+  border: $border;
+  border-radius: $r10;
+  margin: 15px 5px 15px 5px;
+}
+.blue {
+  background-color: $lightBlue;
+}
+.yellow {
+  background-color: $lightYellow;
+}
+
+.centerBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  button {
+    width: 200px;
+    // min-width: 100px;
+  }
+}
+
+// Button Colors
+.greenBtn {
+  background-color: $lightGreen;
+  color: $green;
+}
+.blueBtn {
+  background-color: $lightBlue;
+  color: $blue;
+}
+.yellowBtn {
+  background-color: $lightYellow;
+  color: $yellow;
+}
+
+//Popup
+.popupBack{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .popup{
+      border-radius:$r10;
+      padding: $padding;
+      background-color:white;
+      box-shadow: $heavyBoxShadow;
+      position:absolute;
+      width: 50%;
+      max-width: 400px;
+      z-index:2;
+      transform: translateY(-250px);
+      transition:$transitionSpeed;
+      animation: selectAni $transitionSpeed;
+      .closeBtn{
+        background-color:rgb(255, 153, 153);
+        cursor: pointer;
+        padding: $miniBtnPadding;
+        outline: none;
+        border: none;
+        border-radius: $r5;
+        float:right;
+      }
+      .colors{
+        button{
+          cursor: pointer;
+          outline: none;
+          border: none;
+          margin: $btnMargin;
+          padding: $miniBtnPadding;
+          border-radius: $r5;
+          transition: $transitionSpeed;
+          &:hover{
+              box-shadow: $lightBoxShadow;
+          }
+        }
+        #red{background-color:rgb(255, 153, 153);}
+        #blue{background-color:lightblue;}
+        #yellow{background-color:yellow;}
+        #green{background-color:lightgreen;}
+        #peach{background-color:pink;}
+        #purple{background-color:rgb(228, 151, 228);}
+      }
+      .inputGrid{
+        display: grid;
+        input{
+          width: 80%;
+            // display: flex;
+            // max-width: 200px;
+        }
+      }
+    }
+    @keyframes selectAni{
+      0%{
+          // transform: translateY(100px); 
+          opacity: 0;
+          box-shadow: 5px 5px 10px light;
+          border-radius: 5px;
+      }
+      35%{
+          transform: translateY(-300px);
+      }
+    }
+}
+
+// Media Queries
+@media screen and (max-width: 500px) {
+  body {
+    padding: 1%;
+  }
+  .headerGrid, .inputGrid{
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (min-width: 501px) and (max-width: 1000px) {
+  body {
+    padding: 5%;
+  }
+  .headerGrid, .inputGrid{
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (min-width: 1001px) and (max-width: 1500px) {
+  body {
+    padding: 2% 10% 2% 10%;
+  }
+  .headerGrid, .inputGrid{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (min-width: 1501px) {
+  body {
+    padding: 3% 12% 3% 12%;
+  }
+  .headerGrid, .inputGrid{
+    grid-template-columns: 1fr 1fr;
+    #profileInfo{
+      justify-self: end;
+      max-width: 400px;
+      min-width: 300px;
+    }
+  }
+}

@@ -1,0 +1,337 @@
+@import url("https://fonts.googleapis.com/css2?family=Potta+One&display=swap");
+h1 {
+  font-family: "Potta One", cursive;
+  font-weight: normal;
+}
+
+* {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+.startMenu {
+  padding: 3% 20% 3% 20%;
+}
+
+.startMenu h1 {
+  text-align: center;
+}
+
+.startMenu button {
+  margin-bottom: 10px;
+}
+
+footer {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.standardBtn {
+  border: none;
+  border-radius: 5px;
+  padding: 7px 12px 7px 12px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  margin: 0px 5px 0px 5px;
+}
+
+.scheduleGrid {
+  display: -ms-grid;
+  display: grid;
+  gap: 5px;
+  -ms-grid-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding: 8px;
+}
+
+.scheduleGrid div {
+  margin: 5px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.scheduleGrid button {
+  border: 1px solid lightgray;
+  cursor: pointer;
+  border-radius: 5px;
+  outline: none;
+  text-align: center;
+  font-weight: bold;
+}
+
+input {
+  border: 1px solid lightgray;
+  padding: 10px;
+  margin: 5px;
+  outline: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+
+input:focus {
+  -webkit-box-shadow: 0px 5px 10px lightgray;
+          box-shadow: 0px 5px 10px lightgray;
+}
+
+.headerGrid {
+  display: -ms-grid;
+  display: grid;
+}
+
+.headerGrid .headerBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.headerGrid #profileInfo {
+  margin: 15px 5px;
+  padding: 15px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+}
+
+.headerGrid #profileInfo section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.headerGrid #profileInfo section h3 {
+  margin: 0px;
+}
+
+.headerGrid #profileInfo img {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  width: 80px;
+  height: 80px;
+  -ms-grid-column-align: end;
+      justify-self: end;
+}
+
+.card {
+  padding: 30px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  margin: 15px 5px 15px 5px;
+}
+
+.blue {
+  background-color: #c1dde1;
+}
+
+.yellow {
+  background-color: #ffde88;
+}
+
+.centerBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.centerBtn button {
+  width: 200px;
+}
+
+.greenBtn {
+  background-color: #bae3a7;
+  color: #266300;
+}
+
+.blueBtn {
+  background-color: #c1dde1;
+  color: #006372;
+}
+
+.yellowBtn {
+  background-color: #ffde88;
+  color: #6f5000;
+}
+
+.popupBack {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.popupBack .popup {
+  border-radius: 10px;
+  padding: 15px;
+  background-color: white;
+  -webkit-box-shadow: 0px 10px 15px grey;
+          box-shadow: 0px 10px 15px grey;
+  position: absolute;
+  width: 50%;
+  max-width: 400px;
+  z-index: 2;
+  -webkit-transform: translateY(-250px);
+          transform: translateY(-250px);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-animation: selectAni 0.5s;
+          animation: selectAni 0.5s;
+}
+
+.popupBack .popup .closeBtn {
+  background-color: #ff9999;
+  cursor: pointer;
+  padding: 0.5em 1em 0.5em 1em;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  float: right;
+}
+
+.popupBack .popup .colors button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  margin: 5px;
+  padding: 0.5em 1em 0.5em 1em;
+  border-radius: 5px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.popupBack .popup .colors button:hover {
+  -webkit-box-shadow: 0px 5px 10px lightgray;
+          box-shadow: 0px 5px 10px lightgray;
+}
+
+.popupBack .popup .colors #red {
+  background-color: #ff9999;
+}
+
+.popupBack .popup .colors #blue {
+  background-color: lightblue;
+}
+
+.popupBack .popup .colors #yellow {
+  background-color: yellow;
+}
+
+.popupBack .popup .colors #green {
+  background-color: lightgreen;
+}
+
+.popupBack .popup .colors #peach {
+  background-color: pink;
+}
+
+.popupBack .popup .colors #purple {
+  background-color: #e497e4;
+}
+
+.popupBack .popup .inputGrid {
+  display: -ms-grid;
+  display: grid;
+}
+
+.popupBack .popup .inputGrid input {
+  width: 80%;
+}
+
+@-webkit-keyframes selectAni {
+  0% {
+    opacity: 0;
+    -webkit-box-shadow: 5px 5px 10px light;
+            box-shadow: 5px 5px 10px light;
+    border-radius: 5px;
+  }
+  35% {
+    -webkit-transform: translateY(-300px);
+            transform: translateY(-300px);
+  }
+}
+
+@keyframes selectAni {
+  0% {
+    opacity: 0;
+    -webkit-box-shadow: 5px 5px 10px light;
+            box-shadow: 5px 5px 10px light;
+    border-radius: 5px;
+  }
+  35% {
+    -webkit-transform: translateY(-300px);
+            transform: translateY(-300px);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    padding: 1%;
+  }
+  .headerGrid, .inputGrid {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 501px) and (max-width: 1000px) {
+  body {
+    padding: 5%;
+  }
+  .headerGrid, .inputGrid {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1500px) {
+  body {
+    padding: 2% 10% 2% 10%;
+  }
+  .headerGrid, .inputGrid {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1501px) {
+  body {
+    padding: 3% 12% 3% 12%;
+  }
+  .headerGrid, .inputGrid {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+  }
+  .headerGrid #profileInfo, .inputGrid #profileInfo {
+    -ms-grid-column-align: end;
+        justify-self: end;
+    max-width: 400px;
+    min-width: 300px;
+  }
+}
+/*# sourceMappingURL=App.css.map */
