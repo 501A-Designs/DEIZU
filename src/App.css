@@ -1,19 +1,31 @@
-@import url("https://fonts.googleapis.com/css2?family=Potta+One&display=swap");
 h1 {
-  font-family: "Potta One", cursive;
-  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
 }
 
 * {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
+header, footer {
+  margin: 15px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 .startMenu {
-  padding: 3% 20% 3% 20%;
+  padding: 3% 10% 3% 10%;
 }
 
 .startMenu h1 {
   text-align: center;
+}
+
+.startMenu .emoji {
+  text-align: center;
+  font-size: 40px;
 }
 
 .startMenu button {
@@ -25,14 +37,27 @@ footer {
   text-align: center;
 }
 
+footer a {
+  color: gray;
+  cursor: pointer;
+}
+
 .standardBtn {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   border: none;
   border-radius: 5px;
-  padding: 7px 12px 7px 12px;
+  padding: 8px 12px 8px 12px;
   font-weight: bold;
   outline: none;
   cursor: pointer;
   margin: 0px 5px 0px 5px;
+}
+
+.standardBtn:hover {
+  opacity: 60%;
 }
 
 .scheduleGrid {
@@ -111,8 +136,16 @@ input:focus {
           align-items: center;
 }
 
-.headerGrid #profileInfo section h3 {
+.headerGrid #profileInfo section h3, .headerGrid #profileInfo section h4 {
   margin: 0px;
+}
+
+.headerGrid #profileInfo section h4 {
+  margin-top: 5px;
+  font-weight: normal;
+  background-color: #e2e2e2;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 .headerGrid #profileInfo img {
@@ -174,6 +207,20 @@ input:focus {
   color: #6f5000;
 }
 
+.closeBtn {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-color: #ff9999;
+  cursor: pointer;
+  padding: 0.5em 1em 0.5em 1em;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  float: right;
+}
+
 .popupBack {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -202,16 +249,6 @@ input:focus {
   transition: 0.5s;
   -webkit-animation: selectAni 0.5s;
           animation: selectAni 0.5s;
-}
-
-.popupBack .popup .closeBtn {
-  background-color: #ff9999;
-  cursor: pointer;
-  padding: 0.5em 1em 0.5em 1em;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  float: right;
 }
 
 .popupBack .popup .colors button {
@@ -311,7 +348,7 @@ input:focus {
 
 @media screen and (min-width: 1001px) and (max-width: 1500px) {
   body {
-    padding: 2% 10% 2% 10%;
+    padding: 2% 12% 2% 12%;
   }
   .headerGrid, .inputGrid {
     -ms-grid-columns: 1fr 1fr;
@@ -321,7 +358,7 @@ input:focus {
 
 @media screen and (min-width: 1501px) {
   body {
-    padding: 3% 12% 3% 12%;
+    padding: 3% 20% 3% 20%;
   }
   .headerGrid, .inputGrid {
     -ms-grid-columns: 1fr 1fr;
@@ -332,6 +369,50 @@ input:focus {
         justify-self: end;
     max-width: 400px;
     min-width: 300px;
+  }
+}
+
+#sideBar {
+  -webkit-transform: translateY(10px);
+          transform: translateY(10px);
+  position: absolute;
+  width: 300px;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: white;
+  -webkit-box-shadow: 0px 10px 15px grey;
+          box-shadow: 0px 10px 15px grey;
+  -webkit-animation: sideBarAni 0.5s;
+          animation: sideBarAni 0.5s;
+}
+
+@-webkit-keyframes sideBarAni {
+  0% {
+    opacity: 0;
+    -webkit-box-shadow: 0px 5px 10px lightgray;
+            box-shadow: 0px 5px 10px lightgray;
+    border-radius: 5px;
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+  }
+  35% {
+    -webkit-transform: translateY(10px) translateX(50px);
+            transform: translateY(10px) translateX(50px);
+  }
+}
+
+@keyframes sideBarAni {
+  0% {
+    opacity: 0;
+    -webkit-box-shadow: 0px 5px 10px lightgray;
+            box-shadow: 0px 5px 10px lightgray;
+    border-radius: 5px;
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+  }
+  35% {
+    -webkit-transform: translateY(10px) translateX(50px);
+            transform: translateY(10px) translateX(50px);
   }
 }
 /*# sourceMappingURL=App.css.map */

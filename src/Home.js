@@ -12,9 +12,10 @@ export default function Home() {
     
     return (
       <div className="startMenu">
-          <h1>
-            📅 Schedule Creator
-          </h1>
+          <header>
+            <div className="emoji">📅</div>
+            <h1>Schedule Creator</h1>
+          </header>
           <section
             className="card"
             style={{ textAlign: 'center', border: '1px solid lightgrey' }}
@@ -43,7 +44,10 @@ export default function Home() {
             </button>
             <button
               className="standardBtn blueBtn"
-              onClick="http://y-com.jp/"
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href='https://www.notion.so/Schedule-Creator-687747c356924e13ad96b981161d3cd3';
+              }}
             >
               サイトについて
             </button>
