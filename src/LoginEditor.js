@@ -1,15 +1,26 @@
 import React,{useState} from 'react'
-import firebase, {auth} from './firebase';
+import firebase, {auth, db} from './firebase';
 
 import ScheduleGrid from './ScheduleGrid'
 import OtherSheets from './OtherSheets'
 
 export default function LoginEditor() {
   const [sheetsSideBar, setSheetsSideBar] = useState(false);
+
+  const [titleName, setTitleValue] = useState('');
+  const dataRef = db.collection('users');
   
   const fullName = auth.currentUser.displayName;
   const firstName = fullName.split(" ")[0];
 
+
+  const saveTitle = async (e) => {
+    e.preventDefault();
+    dataRef.doc().set({
+      title: titleName
+    })
+    setTitleValue('');
+  }
 
     return (
       <>
@@ -49,7 +60,13 @@ export default function LoginEditor() {
             <img alt="no" src={auth.currentUser.photoURL}></img>
           </div>
         </section>
-        <input id="titleInput" type="text" placeholder="タイトル" />
+        <input
+          id="titleInput"
+          type="text"
+          placeholder="タイトル"
+          value={titleName}
+          onChange={(e) => setTitleValue(e.target.value)}
+        />
         <ScheduleGrid />
       </>
     )  

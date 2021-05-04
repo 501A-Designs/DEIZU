@@ -8,6 +8,7 @@ $miniBtnPadding:0.5em 1em 0.5em 1em;
 $padding:15px;
 $margin:15px;
 
+$lightGrey:rgb(226, 226, 226);
 $lightBlue: #c1dde1;
 $blue: #006372;
 $lightGreen: #bae3a7;
@@ -87,7 +88,10 @@ footer{
     border-radius: $r5;
     text-align: center;
   }
-  button {
+  .cell{
+    text-align: left;
+    padding: 0px;
+    background-color: $lightGrey;
     border: $border;
     cursor: pointer;
     border-radius: $r5;
@@ -140,7 +144,7 @@ input {
       h4{
         margin-top: 5px;
         font-weight: normal;
-        background-color: rgb(226, 226, 226);
+        background-color: $lightGrey;
         padding: 5px 10px;
         border-radius: 5px;
       }
@@ -199,10 +203,10 @@ input {
   user-select: none;
   background-color:rgb(255, 153, 153);
   cursor: pointer;
-  padding: $miniBtnPadding;
+  padding: 5px 7px;
   outline: none;
   border: none;
-  border-radius: $r5;
+  border-radius: 50%;
   float:right;
 }
 //Popup
@@ -220,7 +224,7 @@ input {
       width: 50%;
       max-width: 400px;
       z-index:2;
-      transform: translateY(-250px);
+      // transform: translateY(-250px);
       transition:$transitionSpeed;
       animation: selectAni $transitionSpeed;
       .colors{
@@ -247,22 +251,48 @@ input {
         display: grid;
         input{
           width: 80%;
-            // display: flex;
-            // max-width: 200px;
+            display: flex;
+            max-width: 200px;
         }
+        div{
+          grid-column-start: 1;
+          grid-column-end: 3;
+        }
+        button{
+          user-select: none;
+          background-color:lightblue;
+          cursor: pointer;
+          padding: $miniBtnPadding;
+          outline: none;
+          border: none;
+          border-radius: $r5;
+          max-width: 200px;
+          margin: 0px 5px;
+        }
+      }
+      .displayTitle{
+        text-align: center;
       }
     }
     @keyframes selectAni{
       0%{
           // transform: translateY(100px); 
-          opacity: 0;
-          box-shadow: 5px 5px 10px light;
+          // opacity: 0;
+          // box-shadow: 5px 5px 10px light;
           border-radius: 5px;
+          transform: scale3d(0,0,0) translateY(-10px);
       }
       35%{
-          transform: translateY(-300px);
+          transform: scale3d(1.05,1.05,1.05) translateY(-50px);
       }
     }
+}
+.cautionBanner{
+  padding: $padding * 2;
+  border: 1px solid rgb(232, 145, 145);
+  border-radius: $r5;
+  background-color: rgb(255, 204, 204);
+  margin: 15px 5px 15px 5px;
 }
 
 // Media Queries
@@ -273,6 +303,9 @@ input {
   .headerGrid, .inputGrid{
     grid-template-columns: 1fr;
   }
+  .cautionBanner{
+    display: block;
+  }
 }
 @media screen and (min-width: 501px) and (max-width: 1000px) {
   body {
@@ -280,6 +313,10 @@ input {
   }
   .headerGrid, .inputGrid{
     grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+  }
+  .cautionBanner{
+    display: none;
   }
 }
 @media screen and (min-width: 1001px) and (max-width: 1500px) {
@@ -288,6 +325,9 @@ input {
   }
   .headerGrid, .inputGrid{
     grid-template-columns: 1fr 1fr;
+  }
+  .cautionBanner{
+    display: none;
   }
 }
 @media screen and (min-width: 1501px) {
@@ -301,6 +341,9 @@ input {
       max-width: 400px;
       min-width: 300px;
     }
+  }
+  .cautionBanner{
+    display: none;
   }
 }
 

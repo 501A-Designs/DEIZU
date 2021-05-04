@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       {/* <Home/> */}
-      {user ? <LoginEditor/>: <Home/>}
+      {user ? <LoginEditor/> : <Home />}
       
       <footer>
         <h4>Developed By 501A</h4>

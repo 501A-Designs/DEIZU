@@ -77,7 +77,10 @@ footer a {
   text-align: center;
 }
 
-.scheduleGrid button {
+.scheduleGrid .cell {
+  text-align: left;
+  padding: 0px;
+  background-color: #e2e2e2;
   border: 1px solid lightgray;
   cursor: pointer;
   border-radius: 5px;
@@ -214,10 +217,10 @@ input:focus {
           user-select: none;
   background-color: #ff9999;
   cursor: pointer;
-  padding: 0.5em 1em 0.5em 1em;
+  padding: 5px 7px;
   outline: none;
   border: none;
-  border-radius: 5px;
+  border-radius: 50%;
   float: right;
 }
 
@@ -243,8 +246,6 @@ input:focus {
   width: 50%;
   max-width: 400px;
   z-index: 2;
-  -webkit-transform: translateY(-250px);
-          transform: translateY(-250px);
   -webkit-transition: 0.5s;
   transition: 0.5s;
   -webkit-animation: selectAni 0.5s;
@@ -298,32 +299,67 @@ input:focus {
 
 .popupBack .popup .inputGrid input {
   width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 200px;
+}
+
+.popupBack .popup .inputGrid div {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.popupBack .popup .inputGrid button {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-color: lightblue;
+  cursor: pointer;
+  padding: 0.5em 1em 0.5em 1em;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  max-width: 200px;
+  margin: 0px 5px;
+}
+
+.popupBack .popup .displayTitle {
+  text-align: center;
 }
 
 @-webkit-keyframes selectAni {
   0% {
-    opacity: 0;
-    -webkit-box-shadow: 5px 5px 10px light;
-            box-shadow: 5px 5px 10px light;
     border-radius: 5px;
+    -webkit-transform: scale3d(0, 0, 0) translateY(-10px);
+            transform: scale3d(0, 0, 0) translateY(-10px);
   }
   35% {
-    -webkit-transform: translateY(-300px);
-            transform: translateY(-300px);
+    -webkit-transform: scale3d(1.05, 1.05, 1.05) translateY(-50px);
+            transform: scale3d(1.05, 1.05, 1.05) translateY(-50px);
   }
 }
 
 @keyframes selectAni {
   0% {
-    opacity: 0;
-    -webkit-box-shadow: 5px 5px 10px light;
-            box-shadow: 5px 5px 10px light;
     border-radius: 5px;
+    -webkit-transform: scale3d(0, 0, 0) translateY(-10px);
+            transform: scale3d(0, 0, 0) translateY(-10px);
   }
   35% {
-    -webkit-transform: translateY(-300px);
-            transform: translateY(-300px);
+    -webkit-transform: scale3d(1.05, 1.05, 1.05) translateY(-50px);
+            transform: scale3d(1.05, 1.05, 1.05) translateY(-50px);
   }
+}
+
+.cautionBanner {
+  padding: 30px;
+  border: 1px solid #e89191;
+  border-radius: 5px;
+  background-color: #ffcccc;
+  margin: 15px 5px 15px 5px;
 }
 
 @media screen and (max-width: 500px) {
@@ -334,6 +370,9 @@ input:focus {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
   }
+  .cautionBanner {
+    display: block;
+  }
 }
 
 @media screen and (min-width: 501px) and (max-width: 1000px) {
@@ -343,6 +382,11 @@ input:focus {
   .headerGrid, .inputGrid {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
+    -ms-grid-rows: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+  }
+  .cautionBanner {
+    display: none;
   }
 }
 
@@ -353,6 +397,9 @@ input:focus {
   .headerGrid, .inputGrid {
     -ms-grid-columns: 1fr 1fr;
         grid-template-columns: 1fr 1fr;
+  }
+  .cautionBanner {
+    display: none;
   }
 }
 
@@ -369,6 +416,9 @@ input:focus {
         justify-self: end;
     max-width: 400px;
     min-width: 300px;
+  }
+  .cautionBanner {
+    display: none;
   }
 }
 

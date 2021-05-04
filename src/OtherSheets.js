@@ -6,8 +6,8 @@ export default function OtherSheets(props) {
             <button
                 className="closeBtn"
                 onClick={() => props.setTrigger(false)}
-            >Close</button>
-            <h1>他の表</h1>
+            >✕</button>
+            <h2>他の表</h2>
             <nav className="otherSheets">
                 {/* Insert Other Sheets */}
             </nav>
