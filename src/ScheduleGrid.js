@@ -3,11 +3,6 @@ import './App.css';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import {auth, db} from './firebase';
-// import Popup from './Popup';
-
-
-// WHAT TO DO NEXT
-// BE ABLE TO CLOSE MODAL
 
 
 export default function ScheduleGrid() {
