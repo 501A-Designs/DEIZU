@@ -5,6 +5,11 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import {auth, db} from './firebase';
 // import Popup from './Popup';
 
+
+// WHAT TO DO NEXT
+// BE ABLE TO CLOSE MODAL
+
+
 export default function ScheduleGrid() {
 
     return (
@@ -121,8 +126,9 @@ export default function ScheduleGrid() {
             
             // const closePopup = () => popupProps.setTrigger(false)
     
-            return (popupProps.trigger) ? (
-                <section className="popupBack">
+            return (
+                <section style={style} className="popupBack"
+                >
                     <div className="popup">
 
                         <section>
@@ -159,21 +165,22 @@ export default function ScheduleGrid() {
                         </section>
                         <button
                             className="closeBtn"
-                            onClick={() => popupProps.setTrigger(true)}
+                            onClick={e => {setStyle({display: 'none'})}}
                         >✕</button>
                     </div>
                 </section>
-            ) : "";
+            )
         }
 
+        const [style, setStyle] = useState({display: 'none'});
+
         return (
-            <section className="cell" onClick={()=> setBtnPopup(true)}>
-                <h2>{cellName}</h2>
-                <Popup
-                    trigger={btnPopup}
-                    setTrigger={setBtnPopup}
-                />
-            </section>
+            <div style={{margin:'0px', padding:'0px'}}>
+                <section className="cell" onClick={e => {setStyle({display: 'block'});}}>
+                    <h2>{cellName}</h2>
+                </section>
+                <Popup />
+            </div>
         )
     }
 

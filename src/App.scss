@@ -98,6 +98,9 @@ footer{
     outline: none;
     text-align: center;
     font-weight: bold;
+    &:hover{
+      opacity: 50%;
+    }
   }
 }
 
@@ -211,17 +214,23 @@ input {
 }
 //Popup
 .popupBack{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
     
     .popup{
       border-radius:$r10;
       padding: $padding;
       background-color:white;
       box-shadow: $heavyBoxShadow;
-      position:absolute;
+      position:fixed;
+      // width: 80%;
+      top: calc(35% - 25px);
+      bottom: calc(25% - 25px);
       width: 50%;
+      height: 35%;
+      max-height: 290px;
+      overflow-y: auto;
       max-width: 400px;
       z-index:2;
       // transform: translateY(-250px);
@@ -306,6 +315,9 @@ input {
   .cautionBanner{
     display: block;
   }
+  .popup{
+    right: calc(25% - 25px);
+  }
 }
 @media screen and (min-width: 501px) and (max-width: 1000px) {
   body {
@@ -313,10 +325,12 @@ input {
   }
   .headerGrid, .inputGrid{
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
   }
   .cautionBanner{
     display: none;
+  }
+  .popup{
+    right: calc(25% - 25px);
   }
 }
 @media screen and (min-width: 1001px) and (max-width: 1500px) {
@@ -328,6 +342,9 @@ input {
   }
   .cautionBanner{
     display: none;
+  }
+  .popup{
+    right: calc(35% - 25px);
   }
 }
 @media screen and (min-width: 1501px) {
@@ -344,6 +361,9 @@ input {
   }
   .cautionBanner{
     display: none;
+  }
+  .popup{
+    right: calc(40% - 25px);
   }
 }
 

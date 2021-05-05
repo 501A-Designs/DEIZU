@@ -89,6 +89,10 @@ footer a {
   font-weight: bold;
 }
 
+.scheduleGrid .cell:hover {
+  opacity: 50%;
+}
+
 input {
   border: 1px solid lightgray;
   padding: 10px;
@@ -224,26 +228,19 @@ input:focus {
   float: right;
 }
 
-.popupBack {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
 .popupBack .popup {
   border-radius: 10px;
   padding: 15px;
   background-color: white;
   -webkit-box-shadow: 0px 10px 15px grey;
           box-shadow: 0px 10px 15px grey;
-  position: absolute;
+  position: fixed;
+  top: calc(35% - 25px);
+  bottom: calc(25% - 25px);
   width: 50%;
+  height: 35%;
+  max-height: 290px;
+  overflow-y: auto;
   max-width: 400px;
   z-index: 2;
   -webkit-transition: 0.5s;
@@ -373,6 +370,9 @@ input:focus {
   .cautionBanner {
     display: block;
   }
+  .popup {
+    right: calc(25% - 25px);
+  }
 }
 
 @media screen and (min-width: 501px) and (max-width: 1000px) {
@@ -382,11 +382,12 @@ input:focus {
   .headerGrid, .inputGrid {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-    -ms-grid-rows: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
   }
   .cautionBanner {
     display: none;
+  }
+  .popup {
+    right: calc(25% - 25px);
   }
 }
 
@@ -400,6 +401,9 @@ input:focus {
   }
   .cautionBanner {
     display: none;
+  }
+  .popup {
+    right: calc(35% - 25px);
   }
 }
 
@@ -419,6 +423,9 @@ input:focus {
   }
   .cautionBanner {
     display: none;
+  }
+  .popup {
+    right: calc(40% - 25px);
   }
 }
 
