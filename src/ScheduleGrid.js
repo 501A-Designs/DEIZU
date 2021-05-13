@@ -6,6 +6,14 @@ import {auth, db} from './firebase';
 
 
 export default function ScheduleGrid() {
+    const [user] = useAuthState(auth);
+    const dataRef = db.collection('users');
+
+    dataRef.doc(user.uid).get().then((doc) => {
+        const bruh = doc.data()
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
 
     return (
         <div>
@@ -85,47 +93,34 @@ export default function ScheduleGrid() {
     )
 
     function ScheduleCell(props) {
-        // const [subjectName, setSubjectValue] = useState('');
-        // const [btnPopup, setBtnPopup] = useState(false);
-
-        // btnPopup - Reactive value
-        // setBtnPopup - Setter
-        const [btnPopup, setBtnPopup] = useState(false);
-    
         const cellName = props.cellId;
-    
+        const cellLink = props.cellId + "Link";
         
-        // const saveSubject = async (e) => {
-        //     const cellName = props.cellId;
-        //     e.preventDefault();
-        //     dataRef.doc().set({
-        //         [cellName]: subjectName
-        //     })
-        //     setSubjectValue('');
-        // }
-        
-        function Popup(popupProps) {
-            const [user] = useAuthState(auth);
+        function Popup() {
             const [subjectName, setSubjectValue] = useState('');
-            const dataRef = db.collection('users');
-            // console.log(cellName)
-            
+            const [subjectLink, setSubjectLinkValue] = useState('');
             
             const saveSubject = async (e) => {
                 e.preventDefault();
-                dataRef.doc().set({
-                    [cellName]: subjectName
-                })
-                setSubjectValue('');
+                dataRef.doc(user.uid).set({
+                    cells: {
+                        [cellName]: {
+                            [cellName]: subjectName,
+                            [cellLink]: subjectLink
+                        }
+                    }
+                }, { merge: true })
+                // setSubjectValue('');
             }
-            
-            // const closePopup = () => popupProps.setTrigger(false)
-    
+ 
             return (
                 <section style={style} className="popupBack"
                 >
                     <div className="popup">
-
+                        <button
+                            className="closeBtn"
+                            onClick={e => {setStyle({display: 'none'})}}
+                        ></button>
                         <section>
                             <div className="colors">
                                 <button id="red">赤</button>
@@ -147,10 +142,11 @@ export default function ScheduleGrid() {
                                     onChange={(e) => setSubjectValue(e.target.value)}
                                 />
                                 {user ? <input
-                                    type="text"
-                                    className="popupInput"
+                                            type="text"
+                                            className="popupInput"
                                     placeholder="リンク"
-                                /> : null}
+                                    onChange={(e) => setSubjectLinkValue(e.target.value)}
+                                        /> : null}
                                 <div>
                                 <h2 className="displayTitle">{subjectName ? subjectName: <h4 style={{color:'gray', margin:'0px'}}>プレビュー</h4>}</h2>
                                 <button type="submit">保存</button>
@@ -158,20 +154,22 @@ export default function ScheduleGrid() {
                                 </div>
                             </form>
                         </section>
-                        <button
-                            className="closeBtn"
-                            onClick={e => {setStyle({display: 'none'})}}
-                        >✕</button>
                     </div>
                 </section>
             )
         }
 
-        const [style, setStyle] = useState({display: 'none'});
+        const [style, setStyle] = useState({ display: 'none' });
+
+        // const [cellValue] = useCollectionData
+        // const { subjectValue, linkValue } = props.
 
         return (
             <div style={{margin:'0px', padding:'0px'}}>
-                <section className="cell" onClick={e => {setStyle({display: 'block'});}}>
+                <section
+                    className="cell"
+                    onClick={e => { setStyle({ display: 'block' }); }}
+                >
                     <h2>{cellName}</h2>
                 </section>
                 <Popup />

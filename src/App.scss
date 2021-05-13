@@ -15,10 +15,12 @@ $lightGreen: #bae3a7;
 $green: #266300;
 $lightYellow: #ffde88;
 $yellow: #6f5000;
+$red: #720000;
+$lightRed: #e3a7a7;
 $systemWhite:rgb(255, 254, 252);
 
 $lightBoxShadow: 0px 5px 10px lightgray;
-$heavyBoxShadow:0px 10px 15px grey;
+$heavyBoxShadow:0px 7px 10px rgb(179, 179, 179);
 
 $transitionSpeed: 0.5s;
 
@@ -63,7 +65,7 @@ footer{
 // Buttons
 .standardBtn {
   user-select: none;
-  border: none;
+  // border: none;
   border-radius: $r5;
   padding: $btnPadding;
   font-weight: bold;
@@ -104,6 +106,7 @@ footer{
   }
 }
 
+
 // width: 70%;
 // max-width: 300px;
 // font-size: 30px;
@@ -122,20 +125,13 @@ input {
   }
 }
 
-.headerGrid {
-  display: grid;
-
-  .headerBtn {
-    display: flex;
-    align-items: flex-end;
-  }
   #profileInfo {
     margin: $margin $btnMargin;
     padding: $padding;
     border: $border;
-    border-radius: $r10;
+    border-radius: $r5;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2.4fr;
 
     section {
       display: flex;
@@ -149,19 +145,19 @@ input {
         font-weight: normal;
         background-color: $lightGrey;
         padding: 5px 10px;
-        border-radius: 5px;
+        border-radius: $r5;
+        width: fit-content;
       }
     }
 
     img {
       border: $border;
-      border-radius: $r10;
-      width: 80px;
-      height: 80px;
-      justify-self: end;
+      border-radius: $r10*5;
+      width: 65px;
+      height: 65px;
     }
   }
-}
+
 
 .card {
   padding: $padding * 2;
@@ -191,26 +187,42 @@ input {
 // Button Colors
 .greenBtn {
   background-color: $lightGreen;
+  border: 1px solid $lightGreen;
   color: $green;
 }
 .blueBtn {
   background-color: $lightBlue;
+  border: 1px solid $lightBlue;
   color: $blue;
 }
 .yellowBtn {
   background-color: $lightYellow;
+  border: 1px solid $lightYellow;
   color: $yellow;
+}
+.redBtn {
+  background-color: $lightRed;
+  border: 1px solid $lightRed;
+  color: $red;
 }
 
 .closeBtn{
   user-select: none;
-  background-color:rgb(255, 153, 153);
+  background: none;
   cursor: pointer;
-  padding: 5px 7px;
+  font-size: 20px;
   outline: none;
   border: none;
   border-radius: 50%;
   float:right;
+  padding: 2px 5px;
+
+  &::before{
+    content: "✕";
+  }
+  &:hover{
+    background-color: $lightGrey;
+  }
 }
 //Popup
 .popupBack{
@@ -223,13 +235,14 @@ input {
       padding: $padding;
       background-color:white;
       box-shadow: $heavyBoxShadow;
+      border: $border;
       position:fixed;
       // width: 80%;
       top: calc(35% - 25px);
       bottom: calc(25% - 25px);
       width: 50%;
       height: 35%;
-      max-height: 290px;
+      max-height: 260px;
       overflow-y: auto;
       max-width: 400px;
       z-index:2;
@@ -309,7 +322,7 @@ input {
   body {
     padding: 1%;
   }
-  .headerGrid, .inputGrid{
+  .inputGrid{
     grid-template-columns: 1fr;
   }
   .cautionBanner{
@@ -323,7 +336,7 @@ input {
   body {
     padding: 5%;
   }
-  .headerGrid, .inputGrid{
+  .inputGrid{
     grid-template-columns: 1fr;
   }
   .cautionBanner{
@@ -337,7 +350,7 @@ input {
   body {
     padding: 2% 12% 2% 12%;
   }
-  .headerGrid, .inputGrid{
+  .inputGrid{
     grid-template-columns: 1fr 1fr;
   }
   .cautionBanner{
@@ -351,13 +364,13 @@ input {
   body {
     padding: 3% 20% 3% 20%;
   }
-  .headerGrid, .inputGrid{
+  .inputGrid{
     grid-template-columns: 1fr 1fr;
-    #profileInfo{
-      justify-self: end;
-      max-width: 400px;
-      min-width: 300px;
-    }
+    // #profileInfo{
+    //   justify-self: end;
+    //   max-width: 400px;
+    //   min-width: 300px;
+    // }
   }
   .cautionBanner{
     display: none;
@@ -370,11 +383,13 @@ input {
 #sideBar{
   transform: translateY(10px);
   position: absolute;
-  width: 300px;
+  width: 330px;
+  z-index: 3;
   border-radius: $r10;
   padding: $padding;
   background-color: white;
   box-shadow: $heavyBoxShadow;
+  border: $border;
   animation: sideBarAni $transitionSpeed;
 }
 @keyframes sideBarAni{
@@ -385,6 +400,37 @@ input {
       transform: translateY(10px);
   }
   35%{
-      transform: translateY(10px) translateX(50px);
+      transform: translateY(40px);
   }
+}
+
+.screenshotTitle{
+  display: none;
+}
+
+.screenshotMode{
+  user-select: none;
+  transition: $transitionSpeed;
+  background-color: $systemWhite;
+  border: $border;
+  border-radius: $r10;
+  z-index: 4;
+  padding: 15px;
+  transform: translateY(-15%) scale3d(1.05,1.05,1.05);
+
+  .screenshotTitle{
+    text-align: center;
+    display: block;
+  }
+}
+.backdrop{
+  z-index: 0;
+  background-color: $lightGrey;
+  opacity: 0.7;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  transition: $transitionSpeed;
 }
