@@ -5,6 +5,8 @@ import ScheduleGrid from './ScheduleGrid'
 // import OtherSheets from './OtherSheets'
 
 export default function LoginEditor() {
+  // const [state, setState] = useState('home');
+
   const [sheetsSideBar, setSheetsSideBar] = useState(false);
 
   const [titleName, setTitleValue] = useState('');
@@ -60,18 +62,15 @@ export default function LoginEditor() {
     return (
       <>
         {/* <Menu /> */}
-  
         <section className="headerGrid">
-          <div>
-              <h1>時間割を作成！</h1>
+          <div style={{display:'flex', gap:'10px'}}>
+            <h1>時間割を作成！</h1>
+            {auth ? <h6 className="loginStatus" onClick={() => setSheetsSideBar(true)}>⚡ログイン済み</h6> : null}
           </div>
+          <UserInfo trigger={sheetsSideBar} setTrigger={setSheetsSideBar}></UserInfo>
 
         </section>
         <div>
-            <button
-              className="standardBtn yellowBtn"
-              onClick={() => setSheetsSideBar(true)}
-            >😀 {firstName}のプロフィール</button>
             <button
               className="standardBtn greenBtn"
               onClick={()=>{
@@ -82,7 +81,6 @@ export default function LoginEditor() {
             >
               スクショモード
             </button>
-            <UserInfo trigger={sheetsSideBar} setTrigger={setSheetsSideBar}></UserInfo>
             <input
               id="titleInput"
               type="text"
@@ -109,6 +107,10 @@ export default function LoginEditor() {
 
 function SignOut() {
     return auth.currentUser && (
-        <button className="standardBtn redBtn" onClick={function () {auth.signOut();}}>ログアウト</button>
+      <button className="standardBtn redBtn"
+        onClick={() => {
+          auth.signOut();
+        }}>
+      ログアウト</button>
     )
 }

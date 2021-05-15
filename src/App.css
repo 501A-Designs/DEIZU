@@ -2,6 +2,8 @@
 h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 * {
@@ -17,7 +19,7 @@ header, footer {
 }
 
 .startMenu {
-  padding: 3% 10% 3% 10%;
+  padding: 3% 0%;
 }
 
 .startMenu h1 {
@@ -38,7 +40,7 @@ footer {
   text-align: center;
 }
 
-footer a {
+a {
   color: gray;
   cursor: pointer;
 }
@@ -80,13 +82,14 @@ footer a {
 .scheduleGrid .cell {
   text-align: left;
   padding: 0px;
-  background-color: #e2e2e2;
+  background-color: #f3f3f3;
   border: 1px solid lightgray;
   cursor: pointer;
   border-radius: 5px;
   outline: none;
   text-align: center;
   font-weight: bold;
+  height: 100%;
 }
 
 .scheduleGrid .cell:hover {
@@ -154,7 +157,7 @@ input:focus {
 .card {
   padding: 30px;
   border: 1px solid lightgray;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 15px 5px 15px 5px;
 }
 
@@ -163,6 +166,7 @@ input:focus {
 }
 
 .yellow {
+  border: 1px solid #ffde88;
   background-color: #ffde88;
 }
 
@@ -230,7 +234,8 @@ input:focus {
 }
 
 .closeBtn:hover {
-  background-color: #e2e2e2;
+  color: #720000;
+  background-color: #e3a7a7;
 }
 
 .popupBack .popup {
@@ -430,8 +435,6 @@ input:focus {
 }
 
 #sideBar {
-  -webkit-transform: translateY(10px);
-          transform: translateY(10px);
   position: absolute;
   width: 330px;
   z-index: 3;
@@ -450,9 +453,6 @@ input:focus {
     opacity: 0;
     -webkit-box-shadow: 0px 5px 10px lightgray;
             box-shadow: 0px 5px 10px lightgray;
-    border-radius: 5px;
-    -webkit-transform: translateY(10px);
-            transform: translateY(10px);
   }
   35% {
     -webkit-transform: translateY(40px);
@@ -465,9 +465,6 @@ input:focus {
     opacity: 0;
     -webkit-box-shadow: 0px 5px 10px lightgray;
             box-shadow: 0px 5px 10px lightgray;
-    border-radius: 5px;
-    -webkit-transform: translateY(10px);
-            transform: translateY(10px);
   }
   35% {
     -webkit-transform: translateY(40px);
@@ -511,5 +508,23 @@ input:focus {
   left: 0px;
   -webkit-transition: 0.5s;
   transition: 0.5s;
+}
+
+.loginStatus {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border: 1px solid lightgray;
+  border-radius: 50px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 7px 12px;
+}
+
+.loginStatus:hover {
+  cursor: pointer;
+  background-color: #f3f3f3;
 }
 /*# sourceMappingURL=App.css.map */

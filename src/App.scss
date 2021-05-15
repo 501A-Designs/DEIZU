@@ -8,6 +8,7 @@ $miniBtnPadding:0.5em 1em 0.5em 1em;
 $padding:15px;
 $margin:15px;
 
+$veryLightGrey:rgb(243, 243, 243);
 $lightGrey:rgb(226, 226, 226);
 $lightBlue: #c1dde1;
 $blue: #006372;
@@ -28,6 +29,8 @@ $transitionSpeed: 0.5s;
 h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 * {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
@@ -39,7 +42,7 @@ header, footer{
 }
 
 .startMenu{
-    padding: 3% 10% 3% 10%;
+    padding: 3% 0%;
 
     h1{
         text-align: center;
@@ -54,14 +57,14 @@ header, footer{
 }
 
 footer{
-    margin-top:50px;
-    text-align: center;
-    a{
-      color: gray;
-      cursor: pointer;
-    }
+  margin-top:50px;
+  text-align: center;
 }
-
+a{
+  color: gray;
+  cursor: pointer;
+}
+  
 // Buttons
 .standardBtn {
   user-select: none;
@@ -93,13 +96,14 @@ footer{
   .cell{
     text-align: left;
     padding: 0px;
-    background-color: $lightGrey;
+    background-color: $veryLightGrey;
     border: $border;
     cursor: pointer;
     border-radius: $r5;
     outline: none;
     text-align: center;
     font-weight: bold;
+    height: 100%;
     &:hover{
       opacity: 50%;
     }
@@ -162,13 +166,14 @@ input {
 .card {
   padding: $padding * 2;
   border: $border;
-  border-radius: $r10;
+  border-radius: $r5;
   margin: 15px 5px 15px 5px;
 }
 .blue {
   background-color: $lightBlue;
 }
 .yellow {
+  border: 1px solid $lightYellow;
   background-color: $lightYellow;
 }
 
@@ -221,7 +226,8 @@ input {
     content: "✕";
   }
   &:hover{
-    background-color: $lightGrey;
+    color: $red;
+    background-color: $lightRed;
   }
 }
 //Popup
@@ -273,8 +279,8 @@ input {
         display: grid;
         input{
           width: 80%;
-            display: flex;
-            max-width: 200px;
+          display: flex;
+          max-width: 200px;
         }
         div{
           grid-column-start: 1;
@@ -381,7 +387,6 @@ input {
 }
 
 #sideBar{
-  transform: translateY(10px);
   position: absolute;
   width: 330px;
   z-index: 3;
@@ -396,8 +401,6 @@ input {
   0%{
       opacity: 0;
       box-shadow: $lightBoxShadow;
-      border-radius: 5px;
-      transform: translateY(10px);
   }
   35%{
       transform: translateY(40px);
@@ -433,4 +436,16 @@ input {
   top: 0px;
   left: 0px;
   transition: $transitionSpeed;
+}
+
+.loginStatus{
+  user-select: none;
+  border: $border;
+  border-radius: $r10*5;
+  width: fit-content;
+  padding: 7px 12px;
+  &:hover{
+    cursor: pointer;
+    background-color: $veryLightGrey;
+  }
 }

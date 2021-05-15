@@ -6,14 +6,10 @@ import {auth, db} from './firebase';
 
 
 export default function ScheduleGrid() {
+    // const [state, setState] = useState('home');
+
     const [user] = useAuthState(auth);
     const dataRef = db.collection('users');
-
-    dataRef.doc(user.uid).get().then((doc) => {
-        const bruh = doc.data()
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
 
     return (
         <div>
@@ -97,7 +93,6 @@ export default function ScheduleGrid() {
         const cellLink = props.cellId + "Link";
         
         function Popup() {
-            const [subjectName, setSubjectValue] = useState('');
             const [subjectLink, setSubjectLinkValue] = useState('');
             
             const saveSubject = async (e) => {
@@ -110,16 +105,16 @@ export default function ScheduleGrid() {
                         }
                     }
                 }, { merge: true })
-                // setSubjectValue('');
+                setSubjectValue('');
             }
+
  
             return (
-                <section style={style} className="popupBack"
-                >
+                <section style={style} className="popupBack">
                     <div className="popup">
                         <button
                             className="closeBtn"
-                            onClick={e => {setStyle({display: 'none'})}}
+                            onClick={() => {setStyle({display: 'none'})}}
                         ></button>
                         <section>
                             <div className="colors">
@@ -144,9 +139,8 @@ export default function ScheduleGrid() {
                                 {user ? <input
                                             type="text"
                                             className="popupInput"
-                                    placeholder="リンク"
-                                    onChange={(e) => setSubjectLinkValue(e.target.value)}
-                                        /> : null}
+                                            placeholder="リンク"
+                                            onChange={(e) => setSubjectLinkValue(e.target.value)}/> : null}
                                 <div>
                                 <h2 className="displayTitle">{subjectName ? subjectName: <h4 style={{color:'gray', margin:'0px'}}>プレビュー</h4>}</h2>
                                 <button type="submit">保存</button>
@@ -159,7 +153,20 @@ export default function ScheduleGrid() {
             )
         }
 
+        const [subjectName, setSubjectValue] = useState('');
+
         const [style, setStyle] = useState({ display: 'none' });
+
+        const getSubjects = (doc) => {
+            const dataObject = doc.data().cells;
+            console.log(dataObject.cellId)
+        }
+        dataRef.doc(user.uid).get().then((doc) => {
+                getSubjects(doc)
+                // console.log(doc.data().cells)
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
 
         // const [cellValue] = useCollectionData
         // const { subjectValue, linkValue } = props.
@@ -168,15 +175,14 @@ export default function ScheduleGrid() {
             <div style={{margin:'0px', padding:'0px'}}>
                 <section
                     className="cell"
-                    onClick={e => { setStyle({ display: 'block' }); }}
+                    onClick={() => { setStyle({ display: 'block' }); }}
                 >
                     <h2>{cellName}</h2>
+                    {/* subjectName ? subjectName:  */}
                 </section>
                 <Popup />
             </div>
         )
     }
-
-
 }
 

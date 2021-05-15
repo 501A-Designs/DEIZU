@@ -15,4 +15,4 @@ Schedule Creatorはオープンソース！
 
 つまり、ソースコードは全てGitHubに有ります。
 
-開発者、私（501A）の[サイト](http://y-com.jp/)はこちらです。
+開発者、私（501A）の[サイト](https://501a.netlify.app/)はこちらです。
