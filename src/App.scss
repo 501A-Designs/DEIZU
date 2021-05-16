@@ -8,6 +8,8 @@ $miniBtnPadding:0.5em 1em 0.5em 1em;
 $padding:15px;
 $margin:15px;
 
+$opacity:60%;
+
 $veryLightGrey:rgb(243, 243, 243);
 $lightGrey:rgb(226, 226, 226);
 $lightBlue: #c1dde1;
@@ -76,7 +78,7 @@ a{
   cursor: pointer;
   margin: 0px 5px 0px 5px;
   &:hover{
-    opacity: 60%;
+    opacity: $opacity;
   }
 }
 
@@ -106,7 +108,7 @@ a{
     line-height: 27px;
     height: 100%;
     &:hover{
-      opacity: 50%;
+      opacity: $opacity;
     }
   }
 }
