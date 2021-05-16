@@ -103,6 +103,7 @@ a{
     outline: none;
     text-align: center;
     font-weight: bold;
+    line-height: 27px;
     height: 100%;
     &:hover{
       opacity: 50%;
@@ -118,7 +119,7 @@ a{
 input {
   border: $border;
   padding: 10px;
-  margin: 5px;
+  margin: $btnMargin;
   outline: none;
   transition: 0.5s;
   border-radius: $r5;
@@ -164,10 +165,13 @@ input {
 
 
 .card {
-  padding: $padding * 2;
+  padding: $padding;
   border: $border;
   border-radius: $r5;
   margin: 15px 5px 15px 5px;
+  p{
+    margin: $margin;
+  }
 }
 .blue {
   background-color: $lightBlue;
@@ -212,109 +216,118 @@ input {
 }
 
 .closeBtn{
-  user-select: none;
-  background: none;
-  cursor: pointer;
-  font-size: 20px;
-  outline: none;
-  border: none;
-  border-radius: 50%;
-  float:right;
-  padding: 2px 5px;
 
+  margin-bottom: 5px;
+  button{
+    user-select: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    padding: 2px 5px;
+    float: right;
+
+    &::before{
+      content: "✕";
+    }
+    &:hover{
+      color: $red;
+      background-color: $lightRed;
+    }
+  }  
+}
+.saveBtn{
+  user-select: none;
+  background-color:lightblue;
+  cursor: pointer;
+  padding: $miniBtnPadding;
+  outline: none;
+  
+  border: none;
+  border-radius: $r5;
+  max-width: 200px;
+  margin: $btnMargin;
+  outline: none;
+  transition: 0.5s;
   &::before{
-    content: "✕";
-  }
-  &:hover{
-    color: $red;
-    background-color: $lightRed;
+    content: "保存";
   }
 }
+
 //Popup
-.popupBack{
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    
-    .popup{
-      border-radius:$r10;
-      padding: $padding;
-      background-color:white;
-      box-shadow: $heavyBoxShadow;
-      border: $border;
-      position:fixed;
-      // width: 80%;
-      top: calc(35% - 25px);
-      bottom: calc(25% - 25px);
-      width: 50%;
-      height: 35%;
-      max-height: 260px;
-      overflow-y: auto;
-      max-width: 400px;
-      z-index:2;
-      // transform: translateY(-250px);
-      transition:$transitionSpeed;
-      animation: selectAni $transitionSpeed;
-      .colors{
-        button{
-          cursor: pointer;
-          outline: none;
-          border: none;
-          margin: $btnMargin;
-          padding: $miniBtnPadding;
-          border-radius: $r5;
-          transition: $transitionSpeed;
-          &:hover{
-              box-shadow: $lightBoxShadow;
-          }
-        }
-        #red{background-color:rgb(255, 153, 153);}
-        #blue{background-color:lightblue;}
-        #yellow{background-color:yellow;}
-        #green{background-color:lightgreen;}
-        #peach{background-color:pink;}
-        #purple{background-color:rgb(228, 151, 228);}
-      }
-      .inputGrid{
-        display: grid;
-        input{
-          width: 80%;
-          display: flex;
-          max-width: 200px;
-        }
-        div{
-          grid-column-start: 1;
-          grid-column-end: 3;
-        }
-        button{
-          user-select: none;
-          background-color:lightblue;
-          cursor: pointer;
-          padding: $miniBtnPadding;
-          outline: none;
-          border: none;
-          border-radius: $r5;
-          max-width: 200px;
-          margin: 0px 5px;
-        }
-      }
-      .displayTitle{
-        text-align: center;
+.popup{
+  border-radius:$r10;
+  padding: $padding;
+  background-color:white;
+  box-shadow: $heavyBoxShadow;
+  border: $border;
+  position:fixed;
+  // width: 80%;
+  outline: none;
+
+  top: calc(35% - 25px);
+  bottom: calc(25% - 25px);
+  width: 50%;
+  height: 35%;
+  max-height: 260px;
+  overflow-y: auto;
+  max-width: 400px;
+  z-index:2;
+  // transform: translateY(-250px);
+  transition:$transitionSpeed;
+  animation: selectAni $transitionSpeed;
+
+  .colors{
+    margin-bottom: $margin;
+    button{
+      width: 100%;
+      max-width: 40px;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      margin: $btnMargin;
+      padding: $miniBtnPadding;
+      border-radius: $r5;
+      transition: $transitionSpeed;
+      &:hover{
+          box-shadow: $lightBoxShadow;
       }
     }
-    @keyframes selectAni{
-      0%{
-          // transform: translateY(100px); 
-          // opacity: 0;
-          // box-shadow: 5px 5px 10px light;
-          border-radius: 5px;
-          transform: scale3d(0,0,0) translateY(-10px);
-      }
-      35%{
-          transform: scale3d(1.05,1.05,1.05) translateY(-50px);
-      }
+  }
+    // input{
+    //   width: 80%;
+    //   display: flex;
+    //   max-width: 200px;
+    // }
+  .displayTitle{
+    text-align: center;
+    padding: 5px;
+    margin: $margin*2 auto;
+    width: 50%;
+    border-radius: $r5;
+  }
+
+  @keyframes selectAni{
+    0%{
+        border-radius: 5px;
+        transform: scale3d(0,0,0) translateY(-10px);
     }
+    35%{
+        transform: scale3d(1.05,1.05,1.05) translateY(-50px);
+    }
+  }
 }
+
+#red{background-color:rgb(255, 153, 153);}
+#blue{background-color:lightblue;}
+#yellow{background-color:yellow;}
+#green{background-color:lightgreen;}
+#peach{background-color:pink;}
+#purple{background-color:rgb(228, 151, 228);}
+
+
 .cautionBanner{
   padding: $padding * 2;
   border: 1px solid rgb(232, 145, 145);
@@ -438,14 +451,36 @@ input {
   transition: $transitionSpeed;
 }
 
+.webStatus{
+  user-select: none;
+  border: $border;
+  border-radius: $r10*5;
+  width: fit-content;
+  padding: 7px 12px;
+  &::before{
+    content:"💻 ウェブエディター版";
+  }
+}
 .loginStatus{
   user-select: none;
   border: $border;
   border-radius: $r10*5;
   width: fit-content;
   padding: 7px 12px;
+  &::before{
+    content:"🚀 ログイン済み";
+  }
   &:hover{
     cursor: pointer;
     background-color: $veryLightGrey;
   }
+}
+
+.centerAll{
+  margin-top: $margin*2;
+}
+.colors, form{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }

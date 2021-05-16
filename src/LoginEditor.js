@@ -28,11 +28,10 @@ export default function LoginEditor() {
 
   function UserInfo(props) {
     return (props.trigger) ? (
-        <div id = "sideBar" >
-            <button
-                className="closeBtn"
-                onClick={() => props.setTrigger(false)}
-            ></button>
+      <div id="sideBar" >
+          <div className="closeBtn">
+            <button onClick={() => props.setTrigger(false)}></button>
+          </div>
             <h2>プロフィール</h2>
             <div id="profileInfo">
               <img alt="no" src={auth.currentUser.photoURL}></img>
@@ -65,7 +64,7 @@ export default function LoginEditor() {
         <section className="headerGrid">
           <div style={{display:'flex', gap:'10px'}}>
             <h1>時間割を作成！</h1>
-            {auth ? <h6 className="loginStatus" onClick={() => setSheetsSideBar(true)}>⚡ログイン済み</h6> : null}
+            {auth ? <h6 className="loginStatus" onClick={() => setSheetsSideBar(true)}></h6> : null}
           </div>
           <UserInfo trigger={sheetsSideBar} setTrigger={setSheetsSideBar}></UserInfo>
 

@@ -53,12 +53,12 @@ function App() {
               <br/>
           </p>
           <div className="centerBtn">
-            <button
+            {/* <button
                 className="standardBtn greenBtn"
                 onClick={signInWithGoogle}
             >
               Googleでログイン
-            </button>
+            </button> */}
               <button
                 className="standardBtn yellowBtn"
                 onClick={webView}
