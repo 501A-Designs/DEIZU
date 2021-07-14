@@ -51,9 +51,8 @@ export default function LoginEditor() {
                 }
               }
             >
-              スクショモード
+              📱 スクショモード
             </button>
-            <SignOut />
             <button
               className="standardBtn blueBtn"
               formTarget="_blank"
@@ -62,8 +61,9 @@ export default function LoginEditor() {
                 window.location.href='https://www.notion.so/Schedule-Creator-687747c356924e13ad96b981161d3cd3';
               }}
             >
-              サイトについて
+              📆 サイトについて
             </button>
+            <SignOut />
           </div>
         </section>
         <div

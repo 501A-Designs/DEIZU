@@ -10,8 +10,6 @@ $miniBtnPadding: 0.5em 1em 0.5em 1em;
 $padding: 15px;
 $margin: 15px;
 
-$opacity: 60%;
-
 $veryLightGrey: rgb(243, 243, 243);
 $lightGrey: rgb(226, 226, 226);
 $lightBlue: #c1dde1;
@@ -26,6 +24,8 @@ $systemWhite: rgb(255, 254, 252);
 
 $lightBoxShadow: 0px 5px 10px lightgray;
 $heavyBoxShadow: 0px 7px 10px rgb(179, 179, 179);
+
+$scale: scale3d(1.05, 1.05, 1.05);
 
 $transitionSpeed: 0.5s;
 
@@ -95,7 +95,8 @@ a {
 	transition: $transitionSpeed;
 
 	&:hover {
-		opacity: $opacity;
+		box-shadow: $heavyBoxShadow;
+		transform: $scale;
 	}
 }
 .alignItems {
@@ -139,6 +140,11 @@ a {
 		line-height: 27px;
 		height: 100%;
 		transition: $transitionSpeed;
+
+		&:hover {
+			box-shadow: $heavyBoxShadow;
+			transform: $scale;
+		}
 
 		h2 {
 			margin: 0;

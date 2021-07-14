@@ -77,7 +77,10 @@ a {
 }
 
 .standardBtn:hover {
-  opacity: 60%;
+  -webkit-box-shadow: 0px 7px 10px #b3b3b3;
+          box-shadow: 0px 7px 10px #b3b3b3;
+  -webkit-transform: scale3d(1.05, 1.05, 1.05);
+          transform: scale3d(1.05, 1.05, 1.05);
 }
 
 .alignItems {
@@ -139,6 +142,13 @@ a {
   height: 100%;
   -webkit-transition: 0.5s;
   transition: 0.5s;
+}
+
+.scheduleGrid .cell:hover {
+  -webkit-box-shadow: 0px 7px 10px #b3b3b3;
+          box-shadow: 0px 7px 10px #b3b3b3;
+  -webkit-transform: scale3d(1.05, 1.05, 1.05);
+          transform: scale3d(1.05, 1.05, 1.05);
 }
 
 .scheduleGrid .cell h2 {
