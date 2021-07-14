@@ -4,12 +4,10 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
 export default function WebEditor() {
-    const [bannerStyle, setBannerStyle] = useState({ display: 'block' });
-
     window.onbeforeunload = confirmExit;
     function confirmExit()
     {
-      return "Do you want to leave this page without saving?";
+      return "保存せずにこのページを終了しますか？";
     }
 
     function WebScheduleCell() {
@@ -142,20 +140,14 @@ export default function WebEditor() {
 
     return (
         <>
-            <section className="headerGrid">
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div style={{display:'flex', gap:'10px'}}>
-                        <h1>時間割を作成！</h1><h6 className="webStatus"></h6>
-                    </div>
+            <section className="alignItems">
+                <h1>時間割を作成！</h1>
+                <div className="webStatus">
+                    <h5></h5>
                 </div>
             </section>
 
-            <section className="card yellow" style={bannerStyle}>
-                <div className="closeBtn">
-                    <button
-                        onClick={() => { setBannerStyle({ display: 'none' }); }}
-                    ></button>
-                </div>
+            <section className="card yellow">
                 <p>
                     Schedule Creator のウェブエディターへようこそ！マスをクリックすると科目を入力できます。作り終わったらスクショ！<br />
                     なお、時間割の保存やいくつもの時間割表を作成したい場合はアカウント登録する必要が有ります。<br />

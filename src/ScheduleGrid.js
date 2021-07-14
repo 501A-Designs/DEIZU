@@ -1,15 +1,129 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import {auth, db} from './firebase';
 import './App.css';
+import Modal from 'react-modal';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
-import {auth, db} from './firebase';
 
+Modal.setAppElement('#root');
 
 export default function ScheduleGrid() {
     // const [state, setState] = useState('home');
-
     const [user] = useAuthState(auth);
     const dataRef = db.collection('users');
+    
+    function ScheduleCell(props) {
+        const [modalIsOpen, setIsOpen] = useState(false);
+        const [subjectName, setSubjectValue] = useState('');
+        const [subjectLinkValue, setSubjectLinkValue] = useState('');
+        
+        const [cellColor, setCellColor] = useState('');
+        
+        const cellName = props.cellId;
+        const cellClr = props.cellId + "Color";
+        const cellLink = props.cellId + "Link";
+
+        const saveSubject = async (e) => {
+            e.preventDefault();
+            dataRef.doc(user.uid).set({
+                cells: {
+                    [cellName]: {
+                        [cellName]: subjectName,
+                        [cellLink]: subjectLinkValue,
+                        [cellClr]: cellColor
+                    }
+                }
+            }, { merge: true })
+            // setSubjectValue('');
+            setIsOpen(false);
+        }
+        const handleChanges = (e) => {
+            setSubjectValue(e.target.value);
+        }
+        const handleLinkChanges = (e) => {
+            setSubjectLinkValue(e.target.value);
+        }
+        useEffect(() => {
+            dataRef.doc(user.uid).get().then((doc) => {
+                const dataObject = doc.data().cells;
+                const cellData = dataObject[cellName];
+    
+                // Within Cell Data
+                const cellNameData = cellData[cellName];
+                const cellLinkData = cellData[cellLink];
+                const cellColorData = cellData[cellClr];
+
+                setSubjectValue(cellNameData);
+                setSubjectLinkValue(cellLinkData);
+                setCellColor(cellColorData);
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+        },[])
+
+        return (
+            <div style={{ margin: '0px', padding: '0px' }}>    
+                <section
+                    className="cell"
+                    id={cellColor}
+                    onClick={() => setIsOpen(true)}
+                >
+                    <div>
+                        <h2>
+                            {subjectName}
+                        </h2>
+                        {subjectLinkValue ? <a href={subjectLinkValue} target="_blank">リンク↗</a> : null}
+                    </div>
+                </section>
+                <Modal isOpen={modalIsOpen} className="popup">
+                    <div className="closeBtn">
+                        <button type="submit" onClick={() => setIsOpen(false)}></button>
+                    </div>
+                    <div className="centerAll">
+                        <h2 className="displayTitle"
+                            id={cellColor}>
+                                {subjectName ? subjectName : <h4 style={{margin: '0px' }}>科目名</h4>}
+                            <h6 className="displayLink">{subjectLinkValue ? subjectLinkValue : "<リンクURL>"}</h6>
+                        </h2>
+
+                        <div className="colors">
+                            <button id="red" onClick={() => { setCellColor('red') }}>赤</button>
+                            <button id="blue" onClick={() => { setCellColor('blue') }}>青</button>
+                            <button id="yellow" onClick={() => { setCellColor('yellow') }}>黄</button>
+                            <button id="green" onClick={() => { setCellColor('green') }}>緑</button>
+                            <button id="peach" onClick={() => { setCellColor('peach') }}>桃</button>
+                            <button id="purple" onClick={() => { setCellColor('purple') }}>紫</button>
+                            <button id="mugi" onClick={() => { setCellColor('mugi') }}>麦</button>
+                            <button id="teal" onClick={() => { setCellColor('teal') }}>淡</button>
+                            <button id="" onClick={() => { setCellColor('') }}>無</button>
+                        </div>
+                        <form onSubmit={saveSubject}>
+                            <div>
+                                <input
+                                    type="text"
+                                    className="popupInput"
+                                    placeholder="科目名"
+                                    value={subjectName}
+                                    onChange={handleChanges}
+                                />
+                                <input
+                                    type="text"
+                                    className="popupInput"
+                                    placeholder="リンク"
+                                    value={subjectLinkValue}
+                                    onChange={handleLinkChanges}
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="saveBtn"
+                            ></button>
+                        </form>
+                    </div>
+                </Modal>
+          </div>
+        );
+    }
 
     return (
         <div>
@@ -85,104 +199,9 @@ export default function ScheduleGrid() {
                 <ScheduleCell cellId="e7"/>
                 <ScheduleCell cellId="f7" />
             </section>
+            <h5 className="waterMark">
+                Made by {user.displayName.split(" ")[0]} with schedule-creator-site.web.app
+            </h5>
         </div>
     )
-
-    function ScheduleCell(props) {
-        const cellName = props.cellId;
-        const cellLink = props.cellId + "Link";
-        
-        function Popup() {
-            const [subjectLink, setSubjectLinkValue] = useState('');
-            
-            const saveSubject = async (e) => {
-                e.preventDefault();
-                dataRef.doc(user.uid).set({
-                    cells: {
-                        [cellName]: {
-                            [cellName]: subjectName,
-                            [cellLink]: subjectLink
-                        }
-                    }
-                }, { merge: true })
-                setSubjectValue('');
-            }
-
- 
-            return (
-                <section style={style} className="popupBack">
-                    <div className="popup">
-                        <button
-                            className="closeBtn"
-                            onClick={() => {setStyle({display: 'none'})}}
-                        ></button>
-                        <section>
-                            <div className="colors">
-                                <button id="red">赤</button>
-                                <button id="blue">青</button>
-                                <button id="yellow">黄</button>
-                                <button id="green">緑</button>
-                                <button id="peach">桃</button>
-                                <button id="purple">紫</button>
-                            </div>
-                            <form
-                                className="inputGrid"
-                                onSubmit={saveSubject}>
-                                
-                                <input
-                                    type="text"
-                                    className="popupInput"
-                                    placeholder="科目名"
-                                    value={subjectName}
-                                    onChange={(e) => setSubjectValue(e.target.value)}
-                                />
-                                {user ? <input
-                                            type="text"
-                                            className="popupInput"
-                                            placeholder="リンク"
-                                            onChange={(e) => setSubjectLinkValue(e.target.value)}/> : null}
-                                <div>
-                                <h2 className="displayTitle">{subjectName ? subjectName: <h4 style={{color:'gray', margin:'0px'}}>プレビュー</h4>}</h2>
-                                <button type="submit">保存</button>
-
-                                </div>
-                            </form>
-                        </section>
-                    </div>
-                </section>
-            )
-        }
-
-        const [subjectName, setSubjectValue] = useState('');
-
-        const [style, setStyle] = useState({ display: 'none' });
-
-        const getSubjects = (doc) => {
-            const dataObject = doc.data().cells;
-            console.log(dataObject.cellId)
-        }
-        dataRef.doc(user.uid).get().then((doc) => {
-                getSubjects(doc)
-                // console.log(doc.data().cells)
-            }).catch((error) => {
-                console.log("Error getting document:", error);
-            });
-
-        // const [cellValue] = useCollectionData
-        // const { subjectValue, linkValue } = props.
-
-        return (
-            <div style={{margin:'0px', padding:'0px'}}>
-                <section
-                    className="cell"
-                    onClick={() => { setStyle({ display: 'block' }); }}
-                >
-                    <h2>{cellName}</h2>
-                    {/* subjectName ? subjectName:  */}
-                </section>
-                <Popup />
-            </div>
-        )
-    }
-}
-
+};

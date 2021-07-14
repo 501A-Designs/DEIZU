@@ -1,16 +1,33 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap");
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e2e2e2;
+  border-radius: 10px 0px 0px 10px;
+}
+
+::-webkit-scrollbar-track {
+  margin: 15px;
+  width: 5px;
+  height: 5px;
+  background-color: transparent;
+}
+
 h1 {
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2em;
   font-weight: bold;
-  margin-left: 5px;
-  margin-right: 5px;
 }
 
 * {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-family: "Kiwi Maru", serif;
 }
 
-header, footer {
+header,
+footer {
   margin: 15px;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -55,11 +72,28 @@ a {
   font-weight: bold;
   outline: none;
   cursor: pointer;
-  margin: 0px 5px 0px 5px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .standardBtn:hover {
   opacity: 60%;
+}
+
+.alignItems {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
+
+.spaceBetween {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .scheduleGrid {
@@ -68,7 +102,6 @@ a {
   gap: 5px;
   -ms-grid-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr;
       grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  padding: 8px;
 }
 
 .scheduleGrid div {
@@ -80,8 +113,21 @@ a {
 }
 
 .scheduleGrid .cell {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  align-items: center;
   text-align: left;
-  padding: 0px;
   background-color: #f3f3f3;
   border: 1px solid lightgray;
   cursor: pointer;
@@ -91,16 +137,29 @@ a {
   font-weight: bold;
   line-height: 27px;
   height: 100%;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
-.scheduleGrid .cell:hover {
-  opacity: 60%;
+.scheduleGrid .cell h2 {
+  margin: 0;
+}
+
+.scheduleGrid .cell a {
+  font-size: 13px;
+  margin-top: -18px;
+  -webkit-text-decoration-style: dashed;
+          text-decoration-style: dashed;
+  -webkit-text-decoration-color: #3a3a3a;
+          text-decoration-color: #3a3a3a;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 1.5px;
+  color: black;
 }
 
 input {
   border: 1px solid lightgray;
   padding: 10px;
-  margin: 5px;
   outline: none;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -114,7 +173,6 @@ input:focus {
 }
 
 #profileInfo {
-  margin: 15px 5px;
   padding: 15px;
   border: 1px solid lightgray;
   border-radius: 5px;
@@ -133,7 +191,8 @@ input:focus {
           align-items: center;
 }
 
-#profileInfo section h3, #profileInfo section h4 {
+#profileInfo section h3,
+#profileInfo section h4 {
   margin: 0px;
 }
 
@@ -234,7 +293,9 @@ input:focus {
   outline: none;
   border: none;
   border-radius: 50%;
-  padding: 2px 5px;
+  padding: 0px 5px;
+  width: 30px;
+  height: 30px;
   float: right;
 }
 
@@ -259,7 +320,6 @@ input:focus {
   border: none;
   border-radius: 5px;
   max-width: 200px;
-  margin: 5px;
   outline: none;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -276,12 +336,12 @@ input:focus {
   -webkit-box-shadow: 0px 7px 10px #b3b3b3;
           box-shadow: 0px 7px 10px #b3b3b3;
   border: 1px solid lightgray;
-  position: fixed;
   outline: none;
+  position: fixed;
   top: calc(35% - 25px);
   bottom: calc(25% - 25px);
   width: 50%;
-  height: 35%;
+  height: 50%;
   max-height: 260px;
   overflow-y: auto;
   max-width: 400px;
@@ -320,6 +380,13 @@ input:focus {
   margin: 30px auto;
   width: 50%;
   border-radius: 5px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.popup .displayLink {
+  margin: 5px 0px 0px 0px;
+  overflow-x: auto;
 }
 
 @-webkit-keyframes selectAni {
@@ -348,26 +415,42 @@ input:focus {
 
 #red {
   background-color: #ff9999;
+  border: 1px solid #ff9999;
 }
 
 #blue {
   background-color: lightblue;
+  border: 1px solid lightblue;
 }
 
 #yellow {
-  background-color: yellow;
+  background-color: #ffde88;
+  border: 1px solid #ffde88;
 }
 
 #green {
   background-color: lightgreen;
+  border: 1px solid lightgreen;
 }
 
 #peach {
   background-color: pink;
+  border: 1px solid pink;
 }
 
 #purple {
   background-color: #e497e4;
+  border: 1px solid #e497e4;
+}
+
+#mugi {
+  background-color: #e4c997;
+  border: 1px solid #e4c997;
+}
+
+#teal {
+  background-color: #97e4c0;
+  border: 1px solid #97e4c0;
 }
 
 .cautionBanner {
@@ -505,6 +588,19 @@ input:focus {
   display: block;
 }
 
+.screenshotMode .waterMark {
+  opacity: 1;
+}
+
+.waterMark {
+  opacity: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  text-align: center;
+}
+
 .backdrop {
   z-index: 0;
   background-color: #e2e2e2;
@@ -518,23 +614,11 @@ input:focus {
   transition: 0.5s;
 }
 
-.webStatus {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  border: 1px solid lightgray;
-  border-radius: 50px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 7px 12px;
-}
-
-.webStatus::before {
+.webStatus h5::before {
   content: "💻 ウェブエディター版";
 }
 
+.webStatus,
 .loginStatus {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -545,23 +629,37 @@ input:focus {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  padding: 7px 12px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 2px 5px 2px 2px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.loginStatus::before {
-  content: "🚀 ログイン済み";
+.webStatus h5,
+.loginStatus h5 {
+  margin: 7px;
 }
 
-.loginStatus:hover {
-  cursor: pointer;
-  background-color: #f3f3f3;
+.webStatus img,
+.loginStatus img {
+  border-radius: 50px;
+  width: 35px;
+  height: 35px;
 }
 
 .centerAll {
   margin-top: 30px;
 }
 
-.colors, form {
+.colors,
+form,
+form div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -570,5 +668,12 @@ input:focus {
           justify-content: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.colors input,
+form input,
+form div input {
+  margin: 5px;
 }
 /*# sourceMappingURL=App.css.map */
