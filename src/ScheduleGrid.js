@@ -72,7 +72,7 @@ export default function ScheduleGrid() {
                         <h2>
                             {subjectName}
                         </h2>
-                        {subjectLinkValue ? <a href={subjectLinkValue} target="_blank">リンク↗</a> : null}
+                        {subjectLinkValue ? <a href={subjectLinkValue} target="_blank"><span className="eraseOnMobile">リンク</span>↗</a> : null}
                     </div>
                 </section>
                 <Modal isOpen={modalIsOpen} className="popup">

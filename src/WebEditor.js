@@ -143,7 +143,7 @@ export default function WebEditor() {
             <section className="alignItems">
                 <h1>時間割を作成！</h1>
                 <div className="webStatus">
-                    <h5></h5>
+                    <h5>💻 <span className="eraseOnMobile">ウェブエディター版</span></h5>
                 </div>
             </section>
 

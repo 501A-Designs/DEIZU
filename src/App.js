@@ -1,5 +1,6 @@
 import React,{useState, useRef, useEffect} from 'react';
 import './App.css';
+import logo from './schedulecreatorlogo.png';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 // import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -33,8 +34,8 @@ function App() {
     return (
       <div className="startMenu">
         <header>
-          <div className="emoji">📅</div>
-          <h1>Schedule Creator</h1>
+          <img className="logo" src={logo} alt="Logo"/>
+          <h1 className="classicHeader">Schedule Creator</h1>
         </header>
         <div className="cautionBanner">
         注意！スマートフォンまた小さいディスプレイご利用の場合は、時間割表作成に置いて画角における不具合がございます。ご了承下さい。
