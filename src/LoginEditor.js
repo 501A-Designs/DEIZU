@@ -73,7 +73,8 @@ export default function LoginEditor() {
               setStyle({ display: 'none' });
               setScreenshotFrame('');
             }
-          }></div>
+          }>  
+        </div>
         <section className={screenshotFrame}>
           <h1 className="screenshotTitle">{titleName}</h1>
           <ScheduleGrid />
