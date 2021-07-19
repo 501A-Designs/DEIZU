@@ -1,6 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap");
 
 $border: 1px solid lightgray;
+$glassBorder: 1px solid rgba(228, 228, 228, 0.3);
 $r10: 10px;
 $r5: 5px;
 
@@ -21,6 +22,8 @@ $yellow: #6f5000;
 $red: #720000;
 $lightRed: #e3a7a7;
 $systemWhite: rgb(255, 254, 252);
+
+$floatBoxShadow: 0px 1px 20px rgb(230, 230, 230);
 
 $lightBoxShadow: 0px 5px 10px lightgray;
 $heavyBoxShadow: 0px 7px 10px rgb(179, 179, 179);
@@ -45,51 +48,77 @@ $transitionSpeed: 0.5s;
 	height: 5px;
 	background-color: transparent;
 }
+.versionBadge {
+	border-radius: $r10;
+	background-color: $lightGrey;
+	color: grey;
+	padding: $padding/2 $padding;
+}
+.email {
+}
 
 h1 {
 	font-size: 2em;
 	font-weight: bold;
 }
-
 * {
-	font-family: "Kiwi Maru", serif;
+	// font-family: "Kiwi Maru", serif;
+	font-family: Arial, Helvetica, sans-serif;
 }
-
 .classicHeader {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+@mixin blurEffect {
+	-webkit-backdrop-filter: blur(16px);
+	backdrop-filter: blur(16px);
+	background: radial-gradient(
+		86.36% 107.55% at 6.49% 12.32%,
+		rgba(255, 255, 255, 0.5) 0%,
+		rgba(255, 255, 255, 0.5) 100%
+	);
+	// border: $border;
+}
+
 header,
 footer {
-	margin: $margin;
 	user-select: none;
+}
+footer {
+	@include blurEffect;
+	border: $glassBorder;
+	position: sticky;
+	box-shadow: $floatBoxShadow;
+	// box-shadow: 0px -5px 10px -4px rgb(230, 230, 230);
+	border-radius: $r10 * 2 $r10 * 2 0px 0px;
+	width: 100%;
+	bottom: 1px;
+	z-index: 20;
+	padding: $padding/4 $padding;
+	box-sizing: border-box;
 	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-content: center;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
 }
 
 .startMenu {
-	padding: 3% 0%;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+	justify-content: center;
 
-	h1 {
-		text-align: center;
-	}
 	.logo {
-		box-shadow: $lightBoxShadow;
-		border-radius: $r10;
-		padding: 15px;
-		width: 50px;
-		height: 50px;
+		width: 300px;
+		height: auto;
 	}
 	button {
 		margin-bottom: 10px;
+		&:hover {
+			&::after {
+				content: " →";
+			}
+		}
 	}
-}
-
-footer {
-	margin-top: 50px;
-	text-align: center;
 }
 a {
 	color: gray;
@@ -98,25 +127,38 @@ a {
 
 // Buttons
 .standardBtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	user-select: none;
+	gap: 5px;
 	// border: none;
 	border-radius: $r5;
 	padding: $btnPadding;
 	font-weight: bold;
 	outline: none;
 	cursor: pointer;
-	transition: $transitionSpeed;
+	transition: $transitionSpeed / 2;
 
 	&:hover {
-		box-shadow: $heavyBoxShadow;
 		transform: $scale;
 	}
+}
+.btnIcon {
+	font-size: large;
+}
+.largeIcon {
+	font-size: 25px;
 }
 .alignItems {
 	display: flex;
 	-webkit-align-items: center;
 	align-items: center;
-	gap: 10px;
+	gap: 5px;
+
+	h1 {
+		margin-right: $margin;
+	}
 }
 .spaceBetween {
 	-webkit-justify-content: space-between;
@@ -129,21 +171,28 @@ a {
 	grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
 	div {
-		margin: 5px;
+		margin: $margin/3;
 		font-weight: bold;
 		padding: 10px;
 		border-radius: $r5;
 		text-align: center;
+	}
+	.dayLabel {
+		margin: $margin/3 auto;
+		@include blurEffect;
+		border-radius: $r10 * 3;
+		width: fit-content;
+		padding: 10px $padding;
 	}
 	.cell {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
-
 		align-items: center;
 		text-align: left;
-		background-color: $veryLightGrey;
+		@include blurEffect;
+		// background: $veryLightGrey;
 		border: $border;
 		cursor: pointer;
 		border-radius: $r5;
@@ -152,7 +201,7 @@ a {
 		font-weight: bold;
 		line-height: 27px;
 		height: 100%;
-		transition: $transitionSpeed;
+		transition: $transitionSpeed/2;
 
 		h2 {
 			margin: 0;
@@ -174,6 +223,7 @@ a {
 // font-size: 30px;
 
 input {
+	@include blurEffect;
 	border: $border;
 	padding: 10px;
 	outline: none;
@@ -186,47 +236,22 @@ input {
 	}
 }
 
-#profileInfo {
-	padding: $padding;
-	border: $border;
-	border-radius: $r5;
+.duoGrid {
 	display: grid;
-	grid-template-columns: 1fr 2.4fr;
-
-	section {
+	div {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
-
-		h3,
-		h4 {
-			margin: 0px;
-		}
-		h4 {
-			margin-top: 5px;
-			font-weight: normal;
-			background-color: $lightGrey;
-			padding: 5px 10px;
-			border-radius: $r5;
-			width: fit-content;
-		}
-	}
-
-	img {
-		border: $border;
-		border-radius: $r10 * 5;
-		width: 65px;
-		height: 65px;
+		justify-content: center;
 	}
 }
 
 .card {
-	padding: $padding;
-	border: $border;
-	border-radius: $r5;
-	margin: 15px 5px 15px 5px;
-	p {
-		margin: $margin;
-	}
+	padding: $padding * 2;
+	margin: $margin;
+	border-radius: $r10;
+	box-shadow: $floatBoxShadow;
+	max-width: 600px;
 }
 .blue {
 	background-color: $lightBlue;
@@ -268,6 +293,11 @@ input {
 	background-color: $lightRed;
 	border: 1px solid $lightRed;
 	color: $red;
+}
+.greyBtn {
+	background-color: $lightGrey;
+	border: 1px solid $lightGrey;
+	color: rgb(90, 90, 90);
 }
 
 .closeBtn {
@@ -408,13 +438,21 @@ input {
 	background-color: rgb(151, 228, 192);
 	border: 1px solid rgb(151, 228, 192);
 }
+#navy {
+	background-color: rgb(128, 160, 228);
+	border: 1px solid rgb(128, 160, 228);
+}
+#orange {
+	background-color: rgb(255, 199, 78);
+	border: 1px solid rgb(255, 199, 78);
+}
 
 .cautionBanner {
 	padding: $padding * 2;
 	border: 1px solid rgb(232, 145, 145);
 	border-radius: $r5;
 	background-color: rgb(255, 204, 204);
-	margin: 15px 5px 15px 5px;
+	margin: 0;
 }
 
 // screenshot mode
@@ -428,9 +466,10 @@ input {
 	background-color: $systemWhite;
 	border: $border;
 	border-radius: $r10;
+	box-shadow: $floatBoxShadow;
 	z-index: 4;
-	padding: 5px;
-	transform: translateY(-15%) scale3d(1.05, 1.05, 1.05);
+	padding: $padding / 3;
+	transform: translateY(-20%) scale3d(1.05, 1.05, 1.05);
 
 	.screenshotTitle {
 		text-align: center;
@@ -448,8 +487,7 @@ input {
 
 .backdrop {
 	z-index: 0;
-	background-color: $lightGrey;
-	opacity: 0.7;
+	@include blurEffect;
 	width: 100%;
 	height: 100%;
 	position: fixed;
@@ -460,14 +498,12 @@ input {
 
 // Media Queries
 @media screen and (max-width: 400px) {
-	body {
-		padding: 1%;
-	}
-	.inputGrid {
+	.inputGrid,
+	.duoGrid {
 		grid-template-columns: 1fr;
 	}
 	.cautionBanner {
-		display: block;
+		display: none;
 	}
 	.popup {
 		right: calc(25% - 25px);
@@ -480,7 +516,10 @@ input {
 	}
 	.screenshotMode {
 		padding: 5px;
-		transform: translateY(-15%);
+		transform: translateY(-27%);
+	}
+	footer {
+		display: none;
 	}
 
 	.cell {
@@ -493,16 +532,20 @@ input {
 			}
 		}
 	}
+	.loginEditor {
+		padding: 2%;
+	}
+	.rightOthersCard {
+		right: 4%;
+	}
 }
 @media screen and (min-width: 401px) and (max-width: 500px) {
-	body {
-		padding: 1%;
-	}
-	.inputGrid {
+	.inputGrid,
+	.duoGrid {
 		grid-template-columns: 1fr;
 	}
 	.cautionBanner {
-		display: block;
+		display: none;
 	}
 	.popup {
 		right: calc(25% - 25px);
@@ -515,7 +558,10 @@ input {
 	}
 	.screenshotMode {
 		padding: 5px;
-		transform: translateY(-15%);
+		transform: translateY(-20%);
+	}
+	footer {
+		display: none;
 	}
 	.cell {
 		div {
@@ -527,12 +573,16 @@ input {
 			}
 		}
 	}
+	.loginEditor {
+		padding: 3% 5% 0% 5%;
+	}
+	.rightOthersCard {
+		right: 7%;
+	}
 }
 @media screen and (min-width: 501px) and (max-width: 1000px) {
-	body {
-		padding: 5%;
-	}
-	.inputGrid {
+	.inputGrid,
+	.duoGrid {
 		grid-template-columns: 1fr;
 	}
 	.cautionBanner {
@@ -547,12 +597,19 @@ input {
 	input {
 		max-width: 150px;
 	}
+	.loginEditor {
+		padding: 3% 9% 0% 9%;
+	}
+	.rightOthersCard {
+		right: 10%;
+	}
 }
 @media screen and (min-width: 1001px) and (max-width: 1500px) {
-	body {
-		padding: 2% 12% 2% 12%;
+	.startMenu {
+		height: 100vh;
 	}
-	.inputGrid {
+	.inputGrid,
+	.duoGrid {
 		grid-template-columns: 1fr 1fr;
 	}
 	.cautionBanner {
@@ -564,13 +621,21 @@ input {
 	.cell:hover {
 		box-shadow: $heavyBoxShadow;
 		transform: $scale;
+		@include blurEffect;
+	}
+	.loginEditor {
+		padding: 3% 13% 0% 13%;
+	}
+	.rightOthersCard {
+		right: 15%;
 	}
 }
 @media screen and (min-width: 1501px) {
-	body {
-		padding: 3% 20% 3% 20%;
+	.startMenu {
+		height: 100vh;
 	}
-	.inputGrid {
+	.inputGrid,
+	.duoGrid {
 		grid-template-columns: 1fr 1fr;
 		// #profileInfo{
 		//   justify-self: end;
@@ -587,10 +652,17 @@ input {
 	.cell:hover {
 		box-shadow: $heavyBoxShadow;
 		transform: $scale;
+		@include blurEffect;
 	}
 	#titleInput {
 		width: 80%;
 		max-width: 200px;
+	}
+	.loginEditor {
+		padding: 3% 16% 0% 16%;
+	}
+	.rightOthersCard {
+		right: 17%;
 	}
 }
 
@@ -614,9 +686,16 @@ input {
 		transform: translateY(40px);
 	}
 }
-
+.loginStatus {
+	cursor: pointer;
+	transition: $transitionSpeed;
+	&:hover {
+		filter: brightness(80%);
+	}
+}
 .webStatus,
 .loginStatus {
+	@include blurEffect;
 	user-select: none;
 	border: $border;
 	border-radius: $r10 * 5;
@@ -642,10 +721,117 @@ input {
 form,
 form div {
 	display: flex;
+	gap: 5px;
 	justify-content: center;
 	flex-wrap: wrap;
-	margin-bottom: 10px;
-	input {
-		margin: 5px;
+	margin-bottom: $margin;
+}
+
+.scheduleCenter {
+	height: 100vh;
+	margin: 3% 15% 0% 15%;
+}
+
+.loginEditor {
+	height: 100vh;
+}
+
+[dataTitle]:hover:after {
+	opacity: 1;
+	transition: all 0.1s ease 0.5s;
+	transform: scale3d(1.07, 1.07, 1.07);
+	visibility: visible;
+}
+
+[dataTitle] {
+	position: relative;
+	&:after {
+		content: attr(dataTitle);
+		position: absolute;
+		bottom: -1.1em;
+		left: 100%;
+		padding: 4px 4px 4px 8px;
+		color: black;
+		white-space: nowrap;
+		-moz-border-radius: $r5;
+		-webkit-border-radius: $r5;
+		border-radius: $r5;
+		@include blurEffect;
+		box-shadow: $lightBoxShadow;
+		opacity: 0;
+		z-index: 99999;
+		visibility: hidden;
 	}
+}
+
+.othersCard {
+	-moz-border-radius: $r10;
+	-webkit-border-radius: $r10;
+	border-radius: $r10;
+	width: 300px;
+	max-height: 500px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	transform: translateY(40%);
+	padding: $padding;
+	position: absolute;
+	z-index: 50;
+	@include blurEffect;
+	border: $glassBorder;
+	box-shadow: $heavyBoxShadow;
+	animation: othersCardAni $transitionSpeed;
+	section {
+		display: flex;
+		align-items: center;
+		-webkit-justify-content: space-between;
+		justify-content: space-between;
+		padding: $padding;
+		margin-top: $margin/3;
+		margin-bottom: $margin/3;
+		border-radius: $r5;
+		transition: $transitionSpeed/2;
+
+		&:hover {
+			cursor: pointer;
+			background-color: white;
+			box-shadow: $floatBoxShadow;
+			transform: $scale;
+		}
+		span:hover {
+			cursor: pointer;
+			font-weight: bold;
+			&::before {
+				content: "→";
+			}
+		}
+	}
+}
+
+.rightOthersCard {
+	transform: translateY(50%);
+	animation: othersCardAni $transitionSpeed;
+	img {
+		border-radius: $r5;
+		width: 37px;
+		height: 37px;
+	}
+}
+@keyframes othersCardAni {
+	0% {
+		transform: translateY(40%);
+	}
+	50% {
+		transform: translateY(60%);
+	}
+}
+
+.backgroundImg {
+	z-index: -5;
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	overflow: hidden;
 }
