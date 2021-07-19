@@ -17,6 +17,10 @@
 }
 
 .versionBadge {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   border-radius: 10px;
   background-color: #e2e2e2;
   color: grey;
@@ -159,8 +163,8 @@ a {
   display: -ms-grid;
   display: grid;
   gap: 5px;
-  -ms-grid-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-      grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  -ms-grid-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 .scheduleGrid div {
@@ -169,6 +173,54 @@ a {
   padding: 10px;
   border-radius: 5px;
   text-align: center;
+}
+
+.scheduleGrid .periodLabel {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0;
+  cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.scheduleGrid .periodLabel:hover {
+  border: 1px solid rgba(228, 228, 228, 0.3);
+  -webkit-transform: scale3d(1.05, 1.05, 1.05);
+          transform: scale3d(1.05, 1.05, 1.05);
+  -webkit-box-shadow: 0px 1px 20px #e6e6e6;
+          box-shadow: 0px 1px 20px #e6e6e6;
+}
+
+.scheduleGrid .periodLabel .periodAlign {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.scheduleGrid .periodLabel .periodAlign h3 {
+  margin: 0;
+}
+
+.scheduleGrid .periodLabel .periodAlign time {
+  color: #575757;
+  border-radius: 5px;
+  background-color: #f3f3f3;
+  padding: 2px 5px;
 }
 
 .scheduleGrid .dayLabel {
@@ -202,6 +254,7 @@ a {
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
+  background: #e2e2e2;
   border: 1px solid lightgray;
   cursor: pointer;
   border-radius: 5px;
@@ -547,14 +600,16 @@ input:focus {
   -webkit-box-shadow: 0px 1px 20px #e6e6e6;
           box-shadow: 0px 1px 20px #e6e6e6;
   z-index: 4;
+  overflow-x: scroll;
   padding: 5px;
-  -webkit-transform: translateY(-20%) scale3d(1.05, 1.05, 1.05);
-          transform: translateY(-20%) scale3d(1.05, 1.05, 1.05);
+  -webkit-transform: translateY(-15%) scale3d(1.05, 1.05, 1.05);
+          transform: translateY(-15%) scale3d(1.05, 1.05, 1.05);
 }
 
 .screenshotMode .screenshotTitle {
   text-align: center;
   display: block;
+  margin-bottom: 5px;
 }
 
 .screenshotMode .waterMark {
@@ -604,8 +659,8 @@ input:focus {
   }
   .screenshotMode {
     padding: 5px;
-    -webkit-transform: translateY(-27%);
-            transform: translateY(-27%);
+    -webkit-transform: translateY(-15%);
+            transform: translateY(-15%);
   }
   footer {
     display: none;
@@ -646,8 +701,8 @@ input:focus {
   }
   .screenshotMode {
     padding: 5px;
-    -webkit-transform: translateY(-20%);
-            transform: translateY(-20%);
+    -webkit-transform: translateY(-18%);
+            transform: translateY(-18%);
   }
   footer {
     display: none;
@@ -915,8 +970,8 @@ form div {
   max-height: 500px;
   overflow-x: hidden;
   overflow-y: scroll;
-  -webkit-transform: translateY(40%);
-          transform: translateY(40%);
+  -webkit-transform: translateY(50%);
+          transform: translateY(50%);
   padding: 15px;
   position: absolute;
   z-index: 50;

@@ -49,12 +49,11 @@ $transitionSpeed: 0.5s;
 	background-color: transparent;
 }
 .versionBadge {
+	user-select: none;
 	border-radius: $r10;
 	background-color: $lightGrey;
 	color: grey;
 	padding: $padding/2 $padding;
-}
-.email {
 }
 
 h1 {
@@ -168,7 +167,7 @@ a {
 .scheduleGrid {
 	display: grid;
 	gap: 5px;
-	grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
 	div {
 		margin: $margin/3;
@@ -176,6 +175,37 @@ a {
 		padding: 10px;
 		border-radius: $r5;
 		text-align: center;
+	}
+	.periodLabel {
+		@include blurEffect;
+		border: 1px solid transparent;
+		border-radius: $r5;
+		padding: $padding / 3;
+		margin: 0;
+		cursor: pointer;
+		transition: $transitionSpeed;
+		&:hover {
+			border: $glassBorder;
+			transform: $scale;
+			box-shadow: $floatBoxShadow;
+		}
+		.periodAlign {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			display: flex;
+			justify-content: space-between;
+			flex-direction: column;
+			h3 {
+				margin: 0;
+			}
+			time {
+				color: rgb(87, 87, 87);
+				border-radius: $r5;
+				background-color: $veryLightGrey;
+				padding: 2px 5px;
+			}
+		}
 	}
 	.dayLabel {
 		margin: $margin/3 auto;
@@ -192,7 +222,7 @@ a {
 		align-items: center;
 		text-align: left;
 		@include blurEffect;
-		// background: $veryLightGrey;
+		background: $lightGrey;
 		border: $border;
 		cursor: pointer;
 		border-radius: $r5;
@@ -468,12 +498,14 @@ input {
 	border-radius: $r10;
 	box-shadow: $floatBoxShadow;
 	z-index: 4;
+	overflow-x: scroll;
 	padding: $padding / 3;
-	transform: translateY(-20%) scale3d(1.05, 1.05, 1.05);
+	transform: translateY(-15%) scale3d(1.05, 1.05, 1.05);
 
 	.screenshotTitle {
 		text-align: center;
 		display: block;
+		margin-bottom: $margin/3;
 	}
 	.waterMark {
 		opacity: 1;
@@ -516,7 +548,7 @@ input {
 	}
 	.screenshotMode {
 		padding: 5px;
-		transform: translateY(-27%);
+		transform: translateY(-15%);
 	}
 	footer {
 		display: none;
@@ -558,7 +590,7 @@ input {
 	}
 	.screenshotMode {
 		padding: 5px;
-		transform: translateY(-20%);
+		transform: translateY(-18%);
 	}
 	footer {
 		display: none;
@@ -772,7 +804,7 @@ form div {
 	max-height: 500px;
 	overflow-x: hidden;
 	overflow-y: scroll;
-	transform: translateY(40%);
+	transform: translateY(50%);
 	padding: $padding;
 	position: absolute;
 	z-index: 50;

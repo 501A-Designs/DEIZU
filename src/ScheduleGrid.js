@@ -8,11 +8,106 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 Modal.setAppElement('#root');
 
 export default function ScheduleGrid(props) {
+    const modalStyle = {
+        overlay: {
+            background: `radial-gradient(
+                86.36% 107.55% at 6.49% 12.32%,
+                rgba(255, 255, 255, 0.5) 0%,
+                rgba(255, 255, 255, 0.5) 100%
+            )`,
+            backdropFilter:`blur(16px)`
+        }
+    };
     // const [state, setState] = useState('home');
     const [user] = useAuthState(auth);
     const dataRef = db.collection('users');
 
     const sheetTitle = props.sheetTitle;
+    
+    function TimeLabel(props) {
+        const displayPeriod = props.num;
+        const [modalIsOpen, setIsOpen] = useState(false);
+        const [timeStart, setTimeStart] = useState('');
+        const [timeEnd, setTimeEnd] = useState('');
+
+        const saveTime = async (e) => {
+            e.preventDefault();
+            dataRef.doc(user.uid).set({
+                time: {
+                    [sheetTitle]: {
+                        [displayPeriod]: {
+                            start: timeStart,
+                            end: timeEnd
+                        }
+                    }
+                }
+            }, { merge: true })
+            // setSubjectValue('');
+            setIsOpen(false);
+        }
+        const handleStartChanges = (e) => {
+            setTimeStart(e.target.value);
+        }
+        const handleEndChanges = (e) => {
+            setTimeEnd(e.target.value);
+        }
+        useEffect(() => {
+            dataRef.doc(user.uid).get().then((doc) => {
+                const dataObject = doc.data().time[sheetTitle];
+                const jigen = dataObject[displayPeriod];
+                const periodStart = jigen.start;
+                const periodEnd = jigen.end;
+                setTimeStart(periodStart);
+                setTimeEnd(periodEnd);
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+        }, [])
+
+        return (
+            <div className="periodLabel" onClick={() => { setIsOpen(true) }}>
+                <div className="periodAlign">
+                    {timeStart? <time>{timeStart}</time>:<br/>}
+                    <h3>{displayPeriod}</h3>
+                    {timeEnd? <time>{timeEnd}</time>:<br/>}
+                </div>
+                <Modal
+                    style={modalStyle}
+                    isOpen={modalIsOpen}
+                    className="popup"
+                >
+                    <div className="closeBtn">
+                        <button type="submit" onClick={() => setIsOpen(false)}></button>
+                    </div>
+                    <div className="centerAll">
+                        <h2>時間を設定</h2>
+                        <form onSubmit={saveTime}>
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="始め"
+                                    value={timeStart}
+                                    onChange={handleStartChanges}
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="終わり"
+                                    value={timeEnd}
+                                    onChange={handleEndChanges}
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="saveBtn"
+                            ></button>
+                        </form>
+                    </div>
+                </Modal>
+            </div>
+        )
+    }
+
+
 
     function ScheduleCell(props) {
         const [modalIsOpen, setIsOpen] = useState(false);
@@ -82,16 +177,7 @@ export default function ScheduleGrid(props) {
                     </div>
                 </section>
                 <Modal
-                    style={{
-                        overlay: {
-                            background: `radial-gradient(
-                                86.36% 107.55% at 6.49% 12.32%,
-                                rgba(255, 255, 255, 0.5) 0%,
-                                rgba(255, 255, 255, 0.5) 100%
-                            )`,
-                            backdropFilter:`blur(16px)`
-                        }
-                    }}
+                    style={modalStyle}
                     isOpen={modalIsOpen} className="popup"
                 >
                     <div className="closeBtn">
@@ -155,7 +241,7 @@ export default function ScheduleGrid(props) {
                 <div className="dayLabel">土</div>
 
                 {/* 1st Row */}
-                <h3>１</h3>
+                <TimeLabel num="1"/>
                 <ScheduleCell cellId="a1" />
                 <ScheduleCell cellId="b1" />
                 <ScheduleCell cellId="c1" />
@@ -164,7 +250,7 @@ export default function ScheduleGrid(props) {
                 <ScheduleCell cellId="f1" />
 
                 {/* 2nd Row */}
-                <h3>２</h3>
+                <TimeLabel num="2"/>
                 <ScheduleCell cellId="a2" />
                 <ScheduleCell cellId="b2" />
                 <ScheduleCell cellId="c2" />
@@ -173,7 +259,7 @@ export default function ScheduleGrid(props) {
                 <ScheduleCell cellId="f2" />
 
                 {/* 3rd Row */}
-                <h3>３</h3>
+                <TimeLabel num="3"/>
                 <ScheduleCell cellId="a3" />
                 <ScheduleCell cellId="b3" />
                 <ScheduleCell cellId="c3" />
@@ -182,7 +268,7 @@ export default function ScheduleGrid(props) {
                 <ScheduleCell cellId="f3" />
 
                 {/* 4th Row */}
-                <h3>４</h3>
+                <TimeLabel num="4"/>
                 <ScheduleCell cellId="a4" />
                 <ScheduleCell cellId="b4" />
                 <ScheduleCell cellId="c4" />
@@ -191,7 +277,7 @@ export default function ScheduleGrid(props) {
                 <ScheduleCell cellId="f4" />
 
                 {/* 5th Row */}
-                <h3>５</h3>
+                <TimeLabel num="5"/>
                 <ScheduleCell cellId="a5" />
                 <ScheduleCell cellId="b5" />
                 <ScheduleCell cellId="c5" />
@@ -200,7 +286,7 @@ export default function ScheduleGrid(props) {
                 <ScheduleCell cellId="f5" />
 
                 {/* 6th Row */}
-                <h3>６</h3>
+                <TimeLabel num="6"/>
                 <ScheduleCell cellId="a6" />
                 <ScheduleCell cellId="b6" />
                 <ScheduleCell cellId="c6" />
@@ -209,7 +295,7 @@ export default function ScheduleGrid(props) {
                 <ScheduleCell cellId="f6" />
 
                 {/* 7th Row */}
-                <h3>７</h3>
+                <TimeLabel num="7"/>
                 <ScheduleCell cellId="a7" />
                 <ScheduleCell cellId="b7" />
                 <ScheduleCell cellId="c7" />

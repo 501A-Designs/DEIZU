@@ -60,7 +60,6 @@ export default function LoginEditor() {
       console.log("Error getting document:", error);
     });
   },[])
-  console.log(otherSheets);
 
   function OtherSheet() {
     let itemsToRender;
@@ -190,7 +189,7 @@ export default function LoginEditor() {
           }
           }>
         </div>
-        <section className={screenshotFrame}>
+        <section className={screenshotFrame} style={{overflowX: 'scroll'}}>
           <h1 className="screenshotTitle">{titleName}</h1>
           <ScheduleGrid sheetTitle={titleName} />
         </section>
