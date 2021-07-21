@@ -48,6 +48,7 @@ $transitionSpeed: 0.5s;
 	height: 5px;
 	background-color: transparent;
 }
+
 .versionBadge {
 	user-select: none;
 	border-radius: $r10;
@@ -87,7 +88,6 @@ footer {
 	@include blurEffect;
 	border: $glassBorder;
 	position: sticky;
-	box-shadow: $floatBoxShadow;
 	// box-shadow: 0px -5px 10px -4px rgb(230, 230, 230);
 	border-radius: $r10 * 2 $r10 * 2 0px 0px;
 	width: 100%;
@@ -119,6 +119,14 @@ footer {
 		}
 	}
 }
+
+.dashMenu {
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+	justify-content: center;
+}
+
 a {
 	color: gray;
 	cursor: pointer;
@@ -149,6 +157,7 @@ a {
 .largeIcon {
 	font-size: 25px;
 }
+
 .alignItems {
 	display: flex;
 	-webkit-align-items: center;
@@ -165,6 +174,7 @@ a {
 }
 
 .scheduleGrid {
+	padding: $padding / 2;
 	display: grid;
 	gap: 5px;
 	grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -187,7 +197,7 @@ a {
 		&:hover {
 			border: $glassBorder;
 			transform: $scale;
-			box-shadow: $floatBoxShadow;
+			box-shadow: $lightBoxShadow;
 		}
 		.periodAlign {
 			margin: 0;
@@ -281,6 +291,7 @@ input {
 	margin: $margin;
 	border-radius: $r10;
 	box-shadow: $floatBoxShadow;
+	min-width: 300px;
 	max-width: 600px;
 }
 .blue {
@@ -385,8 +396,8 @@ input {
 	top: calc(35% - 25px);
 	bottom: calc(25% - 25px);
 	width: 50%;
-	height: 50%;
-	max-height: 260px;
+	height: fit-content;
+	// max-height: 260px;
 	overflow-y: auto;
 	max-width: 400px;
 	z-index: 2;
@@ -491,16 +502,12 @@ input {
 }
 
 .screenshotMode {
+	@include blurEffect;
 	user-select: none;
-	transition: $transitionSpeed;
-	background-color: $systemWhite;
-	border: $border;
-	border-radius: $r10;
-	box-shadow: $floatBoxShadow;
 	z-index: 4;
 	overflow-x: scroll;
-	padding: $padding / 3;
-	transform: translateY(-15%) scale3d(1.05, 1.05, 1.05);
+	transition: $transitionSpeed * 2;
+	transform: translateY(-15%);
 
 	.screenshotTitle {
 		text-align: center;
@@ -637,7 +644,8 @@ input {
 	}
 }
 @media screen and (min-width: 1001px) and (max-width: 1500px) {
-	.startMenu {
+	.startMenu,
+	.dashMenu {
 		height: 100vh;
 	}
 	.inputGrid,
@@ -663,7 +671,8 @@ input {
 	}
 }
 @media screen and (min-width: 1501px) {
-	.startMenu {
+	.startMenu,
+	.dashMenu {
 		height: 100vh;
 	}
 	.inputGrid,
@@ -791,8 +800,29 @@ form div {
 		@include blurEffect;
 		box-shadow: $lightBoxShadow;
 		opacity: 0;
-		z-index: 99999;
+		z-index: 100;
 		visibility: hidden;
+	}
+}
+.dashboardOthersheets {
+	padding: $padding * 2;
+	max-height: 250px;
+	overflow-y: scroll;
+	section {
+		padding: $padding;
+		border-radius: $r5;
+		transition: $transitionSpeed/2;
+
+		&:hover {
+			cursor: pointer;
+			background-color: white;
+			box-shadow: $floatBoxShadow;
+			transform: $scale;
+			font-weight: bold;
+			&::before {
+				content: "→";
+			}
+		}
 	}
 }
 
@@ -866,4 +896,31 @@ form div {
 	height: 100%;
 	object-fit: cover;
 	overflow: hidden;
+}
+
+.profileBackgroundImg {
+	position: absolute;
+	transform: scale(1.02, 1.02);
+	background-color: radial-gradient(
+		86.36% 107.55% at 6.49% 12.32%,
+		rgba(255, 255, 255, 0.5) 0%,
+		rgba(255, 255, 255, 0.5) 100%
+	);
+	background-size: cover;
+	opacity: 0.3;
+	filter: blur(30px);
+	border-radius: 30%;
+	// margin-top: -5%;
+	top: -10%;
+	width: 95%;
+	height: 20%;
+	max-height: 200px;
+	object-fit: cover;
+}
+.profileImg {
+	margin-top: 5%;
+	border-radius: $r10 * 10;
+	border: $r10 solid rgba(228, 228, 228, 0.3);
+	width: 130px;
+	height: 130px;
 }

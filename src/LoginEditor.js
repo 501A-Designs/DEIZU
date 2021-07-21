@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import firebase,{ auth, db } from './firebase';
-import {MdAddCircle,MdBackspace, MdList, MdCropFree, MdDescription, MdDirectionsRun, MdModeEdit } from 'react-icons/md';
-
-import ScheduleGrid from './ScheduleGrid'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
+import {MdAddCircle,MdBackspace, MdList, MdCropFree, MdDescription, MdDirectionsRun, MdModeEdit } from 'react-icons/md';
 
-export default function LoginEditor() {
+import firebase,{ auth, db } from './firebase';
+import ScheduleGrid from './ScheduleGrid'
+
+
+export default function LoginEditor(prop) {
   const [user] = useAuthState(auth);
   // const [state, setState] = useState('home');
   const [sheetsSideBar, setSheetsSideBar] = useState({ display: 'none' });
@@ -14,7 +15,7 @@ export default function LoginEditor() {
 
   const [otherSheets, setOtherSheets] = useState();
   
-  const [titleName, setTitleValue] = useState('');
+  const [titleName, setTitleValue] = useState(prop.dashSheetTitle);
   
   const [wallpaperUrl, setWallpaperUrl] = useState('');
   
@@ -74,7 +75,7 @@ export default function LoginEditor() {
         }}/></section>;
       });
     } else {
-      itemsToRender = "Loading...";
+        itemsToRender = "作成した時間割表はありません";
     }
     return <div>{itemsToRender}</div>;
   }
@@ -86,7 +87,7 @@ export default function LoginEditor() {
       {/* <Menu /> */}
       <section className="alignItems spaceBetween">
         <div className="alignItems">
-          <input
+            <input
               id="titleInput"
               type="text"
               placeholder="⚡スーパーインプット"
@@ -94,8 +95,8 @@ export default function LoginEditor() {
               onChange={(e) => setTitleValue(e.target.value)}
             />
             <button className="standardBtn greyBtn" onClick={() => { setSheetsSideBar({ display: 'block' }); getSheetTitles();}} dataTitle="他の表を閲覧">
-            <MdList className="btnIcon" />
-          </button>
+              <MdList className="btnIcon" />
+            </button>
             
           {/* CARD MODALS */}
           <div className="othersCard leftOthersCard" style={sheetsSideBar}>
@@ -166,20 +167,23 @@ export default function LoginEditor() {
         
         <section className="alignItems spaceBetween">
           <h1>{titleName ? titleName : "タイトル追加・表を検索"}</h1>
-          <div style={{ display: 'flex', gap: '5px' }}>
-            <button
-              className="standardBtn greyBtn"
-              onClick={() => {
-                setStyle({ display: 'block' });
-                setScreenshotFrame('screenshotMode');
-                setSheetsSideBar({ display: 'none' });
-                setSettingsSideBar({ display: 'none' });
-              }}
-            >
-              <MdCropFree className="btnIcon" /><span className="eraseOnMobile"> スクショモード</span>
-            </button>
-          </div>
+          {titleName ? 
+            <div style={{ display: 'flex', gap: '5px' }}>
+              <button
+                className="standardBtn greyBtn"
+                onClick={() => {
+                  setStyle({ display: 'block' });
+                  setScreenshotFrame('screenshotMode');
+                  setSheetsSideBar({ display: 'none' });
+                  setSettingsSideBar({ display: 'none' });
+                }}
+              >
+                <MdCropFree className="btnIcon" /><span className="eraseOnMobile"> スクショモード</span>
+              </button>
+            </div>
+          :null}
         </section>
+
         <div
           className="backdrop"
           style={style}
@@ -189,9 +193,9 @@ export default function LoginEditor() {
           }
           }>
         </div>
-        <section className={screenshotFrame} style={{overflowX: 'scroll'}}>
+        <section className={screenshotFrame} style={{overflowX: 'scroll', borderRadius:'20px'}}>
           <h1 className="screenshotTitle">{titleName}</h1>
-          <ScheduleGrid sheetTitle={titleName} />
+          {titleName ? <ScheduleGrid sheetTitle={titleName} /> : "［⚡スーパーインプット］でタイトルを指定する必要がございます。なお、タイトルを一度指定すると変更することができませんのでご了承下さい。"}
         </section>
       </div>
     </>

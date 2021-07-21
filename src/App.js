@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
-import { MdReportProblem,MdPerson, MdDescription } from 'react-icons/md';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
+import { MdReportProblem,MdPerson, MdDescription } from 'react-icons/md';
 import './App.css';
 import logo from './deizu.png';
-import favicon from './deizuFavicon.png';
-
-import { useAuthState } from 'react-firebase-hooks/auth';
-// import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 import firebase, { auth } from './firebase';
-
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-import LoginEditor from './LoginEditor'
+import Dashboard from './Dashboard'
 
 function App() {
   const [user] = useAuthState(auth);
@@ -81,7 +75,7 @@ function App() {
 
   return (
     <div className="App">
-      {user ? <LoginEditor /> : <Home />}
+      {user ? <Dashboard /> : <Home />}
       <footer>
         <img src={logo} style={{ width: '80px', height: '58px' }}></img>
         <h4>Designed & Developed By 501A</h4>

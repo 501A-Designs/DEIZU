@@ -55,8 +55,6 @@ footer {
   border: 1px solid rgba(228, 228, 228, 0.3);
   position: -webkit-sticky;
   position: sticky;
-  -webkit-box-shadow: 0px 1px 20px #e6e6e6;
-          box-shadow: 0px 1px 20px #e6e6e6;
   border-radius: 20px 20px 0px 0px;
   width: 100%;
   bottom: 1px;
@@ -95,6 +93,18 @@ footer {
 
 .startMenu button:hover::after {
   content: " →";
+}
+
+.dashMenu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 a {
@@ -160,6 +170,7 @@ a {
 }
 
 .scheduleGrid {
+  padding: 7.5px;
   display: -ms-grid;
   display: grid;
   gap: 5px;
@@ -192,8 +203,8 @@ a {
   border: 1px solid rgba(228, 228, 228, 0.3);
   -webkit-transform: scale3d(1.05, 1.05, 1.05);
           transform: scale3d(1.05, 1.05, 1.05);
-  -webkit-box-shadow: 0px 1px 20px #e6e6e6;
-          box-shadow: 0px 1px 20px #e6e6e6;
+  -webkit-box-shadow: 0px 5px 10px lightgray;
+          box-shadow: 0px 5px 10px lightgray;
 }
 
 .scheduleGrid .periodLabel .periodAlign {
@@ -328,6 +339,7 @@ input:focus {
   border-radius: 10px;
   -webkit-box-shadow: 0px 1px 20px #e6e6e6;
           box-shadow: 0px 1px 20px #e6e6e6;
+  min-width: 300px;
   max-width: 600px;
 }
 
@@ -453,8 +465,9 @@ input:focus {
   top: calc(35% - 25px);
   bottom: calc(25% - 25px);
   width: 50%;
-  height: 50%;
-  max-height: 260px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   overflow-y: auto;
   max-width: 400px;
   z-index: 2;
@@ -588,22 +601,19 @@ input:focus {
 }
 
 .screenshotMode {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-  background-color: #fffefc;
-  border: 1px solid lightgray;
-  border-radius: 10px;
-  -webkit-box-shadow: 0px 1px 20px #e6e6e6;
-          box-shadow: 0px 1px 20px #e6e6e6;
   z-index: 4;
   overflow-x: scroll;
-  padding: 5px;
-  -webkit-transform: translateY(-15%) scale3d(1.05, 1.05, 1.05);
-          transform: translateY(-15%) scale3d(1.05, 1.05, 1.05);
+  -webkit-transition: 1s;
+  transition: 1s;
+  -webkit-transform: translateY(-15%);
+          transform: translateY(-15%);
 }
 
 .screenshotMode .screenshotTitle {
@@ -750,7 +760,8 @@ input:focus {
 }
 
 @media screen and (min-width: 1001px) and (max-width: 1500px) {
-  .startMenu {
+  .startMenu,
+  .dashMenu {
     height: 100vh;
   }
   .inputGrid,
@@ -782,7 +793,8 @@ input:focus {
 }
 
 @media screen and (min-width: 1501px) {
-  .startMenu {
+  .startMenu,
+  .dashMenu {
     height: 100vh;
   }
   .inputGrid,
@@ -960,8 +972,35 @@ form div {
   -webkit-box-shadow: 0px 5px 10px lightgray;
           box-shadow: 0px 5px 10px lightgray;
   opacity: 0;
-  z-index: 99999;
+  z-index: 100;
   visibility: hidden;
+}
+
+.dashboardOthersheets {
+  padding: 30px;
+  max-height: 250px;
+  overflow-y: scroll;
+}
+
+.dashboardOthersheets section {
+  padding: 15px;
+  border-radius: 5px;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.dashboardOthersheets section:hover {
+  cursor: pointer;
+  background-color: white;
+  -webkit-box-shadow: 0px 1px 20px #e6e6e6;
+          box-shadow: 0px 1px 20px #e6e6e6;
+  -webkit-transform: scale3d(1.05, 1.05, 1.05);
+          transform: scale3d(1.05, 1.05, 1.05);
+  font-weight: bold;
+}
+
+.dashboardOthersheets section:hover::before {
+  content: "→";
 }
 
 .othersCard {
@@ -1070,5 +1109,31 @@ form div {
   -o-object-fit: cover;
      object-fit: cover;
   overflow: hidden;
+}
+
+.profileBackgroundImg {
+  position: absolute;
+  -webkit-transform: scale(1.02, 1.02);
+          transform: scale(1.02, 1.02);
+  background-color: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
+  background-size: cover;
+  opacity: 0.3;
+  -webkit-filter: blur(30px);
+          filter: blur(30px);
+  border-radius: 30%;
+  top: -10%;
+  width: 95%;
+  height: 20%;
+  max-height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.profileImg {
+  margin-top: 5%;
+  border-radius: 100px;
+  border: 10px solid rgba(228, 228, 228, 0.3);
+  width: 130px;
+  height: 130px;
 }
 /*# sourceMappingURL=App.css.map */

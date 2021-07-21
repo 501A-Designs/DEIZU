@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import firebase, { auth, db } from './firebase';
-import './App.css';
-import Modal from 'react-modal';
-
 import { useAuthState } from 'react-firebase-hooks/auth';
+
+import './App.css';
+
+import firebase, { auth, db } from './firebase';
+import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
@@ -76,26 +77,21 @@ export default function ScheduleGrid(props) {
                     isOpen={modalIsOpen}
                     className="popup"
                 >
-                    <div className="closeBtn">
-                        <button type="submit" onClick={() => setIsOpen(false)}></button>
-                    </div>
                     <div className="centerAll">
                         <h2>時間を設定</h2>
                         <form onSubmit={saveTime}>
-                            <div>
-                                <input
-                                    type="text"
-                                    placeholder="始め"
-                                    value={timeStart}
-                                    onChange={handleStartChanges}
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="終わり"
-                                    value={timeEnd}
-                                    onChange={handleEndChanges}
-                                />
-                            </div>
+                            <input
+                                type="time"
+                                placeholder="始め"
+                                value={timeStart}
+                                onChange={handleStartChanges}
+                            />
+                            <input
+                                type="time"
+                                placeholder="終わり"
+                                value={timeEnd}
+                                onChange={handleEndChanges}
+                            />
                             <button
                                 type="submit"
                                 className="saveBtn"
