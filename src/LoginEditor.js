@@ -131,7 +131,7 @@ export default function LoginEditor(prop) {
               value={wallpaperUrl}
               onChange={(w) => setWallpaperUrl(w.target.value)}
             ></input>
-            <button type="submit" className="standardBtn greenBtn">保存</button>
+            <button type="submit" className="standardBtn greenBtn" onClick={() => setSettingsSideBar({ display: 'none' })}>保存</button>
           </form>
           {/* <h3>テーマの変更</h3>
           <div className="alignItems">

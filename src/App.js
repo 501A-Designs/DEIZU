@@ -77,8 +77,8 @@ function App() {
     <div className="App">
       {user ? <Dashboard /> : <Home />}
       <footer>
-        <img src={logo} style={{ width: '80px', height: '58px' }}></img>
-        <h4>Designed & Developed By 501A</h4>
+        <a href="https://www.notion.so/About-DEIZU-687747c356924e13ad96b981161d3cd3" target="_blank"><img src={logo} style={{ width: '80px', height: '58px' }}/></a>
+        <h4><a href="https://501a.netlify.app/" target="_blank">Designed & Developed By 501A</a></h4>
       </footer>
     </div>
   );

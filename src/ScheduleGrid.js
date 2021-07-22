@@ -34,11 +34,13 @@ export default function ScheduleGrid(props) {
         const saveTime = async (e) => {
             e.preventDefault();
             dataRef.doc(user.uid).set({
-                time: {
+                sheets: {
                     [sheetTitle]: {
-                        [displayPeriod]: {
-                            start: timeStart,
-                            end: timeEnd
+                        time: {
+                            [displayPeriod]: {
+                                start: timeStart,
+                                end: timeEnd
+                            }
                         }
                     }
                 }
@@ -54,8 +56,8 @@ export default function ScheduleGrid(props) {
         }
         useEffect(() => {
             dataRef.doc(user.uid).get().then((doc) => {
-                const dataObject = doc.data().time[sheetTitle];
-                const jigen = dataObject[displayPeriod];
+                const dataObject = doc.data().sheets[sheetTitle];
+                const jigen = dataObject.time[displayPeriod];
                 const periodStart = jigen.start;
                 const periodEnd = jigen.end;
                 setTimeStart(periodStart);
@@ -102,9 +104,6 @@ export default function ScheduleGrid(props) {
             </div>
         )
     }
-
-
-
     function ScheduleCell(props) {
         const [modalIsOpen, setIsOpen] = useState(false);
         const [subjectName, setSubjectValue] = useState('');
@@ -122,11 +121,13 @@ export default function ScheduleGrid(props) {
             dataRef.doc(user.uid).set({
                 sheets: {
                     [sheetTitle]: {
-                        date:createdAt,
-                        [cellName]: {
-                            [cellName]: subjectName,
-                            [cellLink]: subjectLinkValue,
-                            [cellClr]: cellColor
+                        date: createdAt,
+                        cells: {
+                            [cellName]: {
+                                [cellName]: subjectName,
+                                [cellLink]: subjectLinkValue,
+                                [cellClr]: cellColor
+                            }
                         }
                     }
                 }
@@ -140,11 +141,12 @@ export default function ScheduleGrid(props) {
         const handleLinkChanges = (e) => {
             setSubjectLinkValue(e.target.value);
         }
+
         useEffect(() => {
             dataRef.doc(user.uid).get().then((doc) => {
                 const dataObject = doc.data().sheets[sheetTitle];
                 // const date = dataObject.date;
-                const cellData = dataObject[cellName];
+                const cellData = dataObject.cells[cellName];
                 // Within Cell Data
                 const cellNameData = cellData[cellName];
                 const cellLinkData = cellData[cellLink];

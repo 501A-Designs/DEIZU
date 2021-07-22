@@ -35,7 +35,7 @@ export default function Dashboard() {
             let itemsToRender;
             if (otherSheets) {
                 itemsToRender = otherSheets.map(item => {
-                    return <section onClick={() => { setTitleValue(`${(item)}`); setComponent('bruh'); }}>{item}</section>;
+                    return <section onClick={() => { setTitleValue(`${(item)}`); setComponent('change'); }}>{item}</section>;
                 });
             }else {
                 itemsToRender = "作成した時間割表はありません";
@@ -58,7 +58,7 @@ export default function Dashboard() {
                             <h1 className="classicHeader">ダッシュボード</h1>
                             <p>{fullName}さん、DEIZUへようこそ！<br />こちらが{firstName}さんのDEIZUダッシュボードとなります。下のボタンで新しい時間割表を作成することができます。また、これまで作成した時間割表も閲覧し更新することができます！</p>
                             <br />
-                            <button className="standardBtn greenBtn" onClick={() => { setComponent('bruh'); }}><MdAddCircle className="iconBtn" />新しい表を作成</button>   
+                            <button className="standardBtn greenBtn" onClick={() => { setComponent('change'); }}><MdAddCircle className="iconBtn" />新しい表を作成</button>   
                             <OtherSheet/>
                         </section>
                     </div>
