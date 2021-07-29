@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import {MdAddCircle} from 'react-icons/md';
 import './App.css';
 
-import firebase, { auth,db } from './firebase';
+import { auth,db } from './firebase';
 import LoginEditor from './LoginEditor'
 
 
@@ -35,7 +35,18 @@ export default function Dashboard() {
             let itemsToRender;
             if (otherSheets) {
                 itemsToRender = otherSheets.map(item => {
-                    return <section onClick={() => { setTitleValue(`${(item)}`); setComponent('change'); }}>{item}</section>;
+                    return (
+                        <section
+                            key={item}
+                            onClick={() => {
+                                    setTitleValue(`${(item)}`);
+                                    setComponent('change');
+                                }
+                            }
+                        >
+                            {item}
+                        </section>
+                    );
                 });
             }else {
                 itemsToRender = "作成した時間割表はありません";

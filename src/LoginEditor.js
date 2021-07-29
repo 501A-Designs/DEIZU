@@ -49,6 +49,7 @@ export default function LoginEditor(prop) {
       const titleForOtherSheets = doc.data().sheets;
       const arrayTitle = Object.keys(titleForOtherSheets);
       setOtherSheets(arrayTitle);
+      console.log(arrayTitle);
     }).catch((error) => {
       console.log("Error getting document:", error);
     })
@@ -66,16 +67,13 @@ export default function LoginEditor(prop) {
     let itemsToRender;
     if (otherSheets) {
       itemsToRender = otherSheets.map(item => {
-        return <section onClick={() => { setSheetsSideBar({ display: 'none' }); }}>
-          <span onClick={() => setTitleValue(`${(item)}`)}>{item}</span><MdBackspace className="iconBtn" style={{ float: 'right' }} onClick={() => {
-            alert('bruh');
-            dataRef.doc(user.uid).update({
-              [item]: firebase.firestore.FieldValue.delete()
-            });
-        }}/></section>;
-      });
-    } else {
-        itemsToRender = "作成した時間割表はありません";
+        return <section key={item} onClick={() => {
+                setSheetsSideBar({ display: 'none' });
+                setTitleValue(`${(item)}`);
+                }}>{item}</section>;
+              });
+        } else {
+      itemsToRender = "作成した時間割表はありません";
     }
     return <div>{itemsToRender}</div>;
   }
@@ -94,7 +92,7 @@ export default function LoginEditor(prop) {
               value={titleName}
               onChange={(e) => setTitleValue(e.target.value)}
             />
-            <button className="standardBtn greyBtn" onClick={() => { setSheetsSideBar({ display: 'block' }); getSheetTitles();}} dataTitle="他の表を閲覧">
+            <button className="standardBtn greyBtn" onClick={() => { setSheetsSideBar({ display: 'block' }); getSheetTitles();}} datatitle="他の表を閲覧">
               <MdList className="btnIcon" />
             </button>
             
@@ -103,7 +101,7 @@ export default function LoginEditor(prop) {
             <div className="closeBtn">
               <button type="submit" onClick={() => setSheetsSideBar({ display: 'none' })}></button>
             </div>
-              <button className="standardBtn greenBtn" dataTitle="新しい表を作成しても現在ある時間割は保存されるのでご安心下さい" onClick={() => { setTitleValue(''); setSheetsSideBar({ display: 'none' });}}><MdAddCircle className="iconBtn"/>新しい表</button>
+              <button className="standardBtn greenBtn" datatitle="新しい表を作成しても現在ある時間割は保存されるのでご安心下さい" onClick={() => { setTitleValue(''); setSheetsSideBar({ display: 'none' });}}><MdAddCircle className="iconBtn"/>新しい表</button>
               <OtherSheet/>
           </div>
         </div>

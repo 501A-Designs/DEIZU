@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { MdReportProblem,MdPerson, MdDescription } from 'react-icons/md';
@@ -10,13 +10,11 @@ import Dashboard from './Dashboard'
 
 function App() {
   const [user] = useAuthState(auth);
-  const [state, setState] = useState('home');
 
   function Home() {
     const signInWithGoogle = () => {
       const provider = new firebase.auth.GoogleAuthProvider();
       auth.signInWithPopup(provider);
-      setState('loginEditor');
     }
 
     return (
@@ -25,7 +23,7 @@ function App() {
         <section className="duoGrid">
           <div>
             <img className="logo" src={logo} alt="Logo" />
-            <h2 className="versionBadge">Beta v2</h2>
+            <h2 className="versionBadge">Beta v2.5</h2>
           </div>
           <div>
             <section className="card">
@@ -77,8 +75,8 @@ function App() {
     <div className="App">
       {user ? <Dashboard /> : <Home />}
       <footer>
-        <a href="https://www.notion.so/About-DEIZU-687747c356924e13ad96b981161d3cd3" target="_blank"><img src={logo} style={{ width: '80px', height: '58px' }}/></a>
-        <h4><a href="https://501a.netlify.app/" target="_blank">Designed & Developed By 501A</a></h4>
+        <a href="https://www.notion.so/About-DEIZU-687747c356924e13ad96b981161d3cd3" target="_blank" rel="noreferrer"><img src={logo} style={{ width: '80px', height: '58px' }} alt="no img found"/></a>
+        <h4><a href="https://501a.netlify.app/" target="_blank" rel="noreferrer">Designed & Developed By 501A</a></h4>
       </footer>
     </div>
   );

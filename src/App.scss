@@ -184,10 +184,7 @@ a {
 	grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
 	div {
-		margin: $margin/3;
 		font-weight: bold;
-		padding: 10px;
-		border-radius: $r5;
 		text-align: center;
 	}
 	.periodLabel {
@@ -197,9 +194,8 @@ a {
 		padding: $padding / 3;
 		margin: 0;
 		cursor: pointer;
-		transition: $transitionSpeed;
+		transition: $transitionSpeed/5;
 		&:hover {
-			border: $glassBorder;
 			transform: $scale;
 			box-shadow: $lightBoxShadow;
 		}
@@ -235,18 +231,13 @@ a {
 		justify-content: center;
 		flex-direction: column;
 		align-items: center;
-		text-align: left;
-		@include blurEffect;
-		background: $lightGrey;
-		border: $border;
 		cursor: pointer;
 		border-radius: $r5;
-		outline: none;
-		text-align: center;
 		font-weight: bold;
-		line-height: 27px;
 		height: 100%;
-		transition: $transitionSpeed/2;
+		// @include blurEffect;
+		background-color: $veryLightGrey;
+		transition: $transitionSpeed/5;
 
 		h2 {
 			margin: 0;
@@ -355,7 +346,7 @@ input {
 		font-size: 20px;
 		outline: none;
 		border: none;
-		border-radius: 50%;
+		border-radius: $r5;
 		padding: 0px 5px;
 		width: 30px;
 		height: 30px;
@@ -365,8 +356,8 @@ input {
 			content: "✕";
 		}
 		&:hover {
-			color: $red;
-			background-color: $lightRed;
+			color: grey;
+			background-color: $lightGrey;
 		}
 	}
 }
@@ -665,9 +656,9 @@ input {
 		right: calc(35% - 25px);
 	}
 	.cell:hover {
+		background-color: var(--systemWhite);
 		box-shadow: $heavyBoxShadow;
 		transform: $scale;
-		@include blurEffect;
 	}
 	.loginEditor {
 		padding: 3% 13% 0% 13%;
@@ -697,9 +688,9 @@ input {
 		right: calc(40% - 25px);
 	}
 	.cell:hover {
+		background-color: var(--systemWhite);
 		box-shadow: $heavyBoxShadow;
 		transform: $scale;
-		@include blurEffect;
 	}
 	#titleInput {
 		width: 80%;
@@ -783,14 +774,15 @@ form div {
 	height: 100vh;
 }
 
-[dataTitle]:hover:after {
+[datatitle]:hover:after {
 	opacity: 1;
 	transition: all 0.1s ease 0.5s;
 	transform: scale3d(1.07, 1.07, 1.07);
+	box-shadow: $floatBoxShadow;
 	visibility: visible;
 }
 
-[dataTitle] {
+[datatitle] {
 	position: relative;
 	&:after {
 		content: attr(dataTitle);
@@ -809,6 +801,7 @@ form div {
 		visibility: hidden;
 	}
 }
+
 .dashboardOthersheets {
 	padding: $padding * 2;
 	max-height: 250px;
@@ -848,19 +841,22 @@ form div {
 	section {
 		display: flex;
 		align-items: center;
-		-webkit-justify-content: space-between;
-		justify-content: space-between;
+		// -webkit-justify-content: space-between;
+		// justify-content: space-between;
 		padding: $padding;
 		margin-top: $margin/3;
 		margin-bottom: $margin/3;
 		border-radius: $r5;
 		transition: $transitionSpeed/2;
-
 		&:hover {
 			cursor: pointer;
 			background-color: white;
 			box-shadow: $floatBoxShadow;
 			transform: $scale;
+			font-weight: bold;
+			&::before {
+				content: "→";
+			}
 		}
 		span:hover {
 			cursor: pointer;

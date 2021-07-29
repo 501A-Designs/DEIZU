@@ -184,10 +184,7 @@ a {
 }
 
 .scheduleGrid div {
-  margin: 5px;
   font-weight: bold;
-  padding: 10px;
-  border-radius: 5px;
   text-align: center;
 }
 
@@ -200,12 +197,11 @@ a {
   padding: 5px;
   margin: 0;
   cursor: pointer;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
 }
 
 .scheduleGrid .periodLabel:hover {
-  border: 1px solid rgba(228, 228, 228, 0.3);
   -webkit-transform: scale3d(1.05, 1.05, 1.05);
           transform: scale3d(1.05, 1.05, 1.05);
   -webkit-box-shadow: 0px 5px 10px lightgray;
@@ -270,21 +266,13 @@ a {
       -ms-flex-direction: column;
           flex-direction: column;
   align-items: center;
-  text-align: left;
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
-  background: #e2e2e2;
-  border: 1px solid lightgray;
   cursor: pointer;
   border-radius: 5px;
-  outline: none;
-  text-align: center;
   font-weight: bold;
-  line-height: 27px;
   height: 100%;
-  -webkit-transition: 0.25s;
-  transition: 0.25s;
+  background-color: #f3f3f3;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
 }
 
 .scheduleGrid .cell h2 {
@@ -425,7 +413,7 @@ input:focus {
   font-size: 20px;
   outline: none;
   border: none;
-  border-radius: 50%;
+  border-radius: 5px;
   padding: 0px 5px;
   width: 30px;
   height: 30px;
@@ -437,8 +425,8 @@ input:focus {
 }
 
 .closeBtn button:hover {
-  color: #720000;
-  background-color: #e3a7a7;
+  color: grey;
+  background-color: #e2e2e2;
 }
 
 .saveBtn {
@@ -787,13 +775,11 @@ input:focus {
     right: calc(35% - 25px);
   }
   .cell:hover {
+    background-color: var(--systemWhite);
     -webkit-box-shadow: 0px 7px 10px #b3b3b3;
             box-shadow: 0px 7px 10px #b3b3b3;
     -webkit-transform: scale3d(1.05, 1.05, 1.05);
             transform: scale3d(1.05, 1.05, 1.05);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-    background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
   }
   .loginEditor {
     padding: 3% 13% 0% 13%;
@@ -820,13 +806,11 @@ input:focus {
     right: calc(40% - 25px);
   }
   .cell:hover {
+    background-color: var(--systemWhite);
     -webkit-box-shadow: 0px 7px 10px #b3b3b3;
             box-shadow: 0px 7px 10px #b3b3b3;
     -webkit-transform: scale3d(1.05, 1.05, 1.05);
             transform: scale3d(1.05, 1.05, 1.05);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-    background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
   }
   #titleInput {
     width: 80%;
@@ -955,20 +939,22 @@ form div {
   height: 100vh;
 }
 
-[dataTitle]:hover:after {
+[datatitle]:hover:after {
   opacity: 1;
   -webkit-transition: all 0.1s ease 0.5s;
   transition: all 0.1s ease 0.5s;
   -webkit-transform: scale3d(1.07, 1.07, 1.07);
           transform: scale3d(1.07, 1.07, 1.07);
+  -webkit-box-shadow: 0px 1px 20px #e6e6e6;
+          box-shadow: 0px 1px 20px #e6e6e6;
   visibility: visible;
 }
 
-[dataTitle] {
+[datatitle] {
   position: relative;
 }
 
-[dataTitle]:after {
+[datatitle]:after {
   content: attr(dataTitle);
   position: absolute;
   bottom: -1.1em;
@@ -1038,9 +1024,6 @@ form div {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   padding: 15px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -1056,6 +1039,11 @@ form div {
           box-shadow: 0px 1px 20px #e6e6e6;
   -webkit-transform: scale3d(1.05, 1.05, 1.05);
           transform: scale3d(1.05, 1.05, 1.05);
+  font-weight: bold;
+}
+
+.othersCard section:hover::before {
+  content: "→";
 }
 
 .othersCard section span:hover {
