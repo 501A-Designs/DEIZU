@@ -92,16 +92,19 @@ footer {
 	@include blurEffect;
 	border: $glassBorder;
 	position: sticky;
+	box-shadow: $floatBoxShadow;
 	// box-shadow: 0px -5px 10px -4px rgb(230, 230, 230);
-	border-radius: $r10 * 2 $r10 * 2 0px 0px;
-	width: 100%;
-	bottom: 1px;
+	border-radius: $r10;
+	width: auto;
+	bottom: $margin;
+	margin: 1em;
 	z-index: 20;
 	padding: $padding/4 $padding;
 	box-sizing: border-box;
 	display: flex;
 	-webkit-justify-content: space-between;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .startMenu {
@@ -153,6 +156,8 @@ a {
 
 	&:hover {
 		transform: $scale;
+		filter: brightness(105%);
+		box-shadow: $floatBoxShadow;
 	}
 }
 .btnIcon {
@@ -166,7 +171,7 @@ a {
 	display: flex;
 	-webkit-align-items: center;
 	align-items: center;
-	gap: 5px;
+	gap: $margin/2;
 
 	h1 {
 		margin-right: $margin;
@@ -290,6 +295,7 @@ input {
 	min-width: 300px;
 	max-width: 600px;
 }
+
 .blue {
 	background-color: $lightBlue;
 }
@@ -351,6 +357,7 @@ input {
 		width: 30px;
 		height: 30px;
 		float: right;
+		transition: $transitionSpeed;
 
 		&::before {
 			content: "✕";
@@ -554,9 +561,6 @@ input {
 		padding: 5px;
 		transform: translateY(-15%);
 	}
-	footer {
-		display: none;
-	}
 
 	.cell {
 		div {
@@ -596,9 +600,7 @@ input {
 		padding: 5px;
 		transform: translateY(-18%);
 	}
-	footer {
-		display: none;
-	}
+
 	.cell {
 		div {
 			padding-top: 2px;
@@ -803,9 +805,11 @@ form div {
 }
 
 .dashboardOthersheets {
-	padding: $padding * 2;
+	margin-top: $margin;
+	padding: $padding * 1.7;
 	max-height: 250px;
 	overflow-y: scroll;
+	border-radius: $r10;
 	section {
 		padding: $padding;
 		border-radius: $r5;
@@ -922,4 +926,23 @@ form div {
 	border: $r10 solid rgba(228, 228, 228, 0.3);
 	width: 130px;
 	height: 130px;
+}
+details {
+	cursor: pointer;
+}
+.selectorDiv {
+	cursor: pointer;
+	border-radius: $r10;
+	border: $border;
+	padding: $padding;
+	margin: $margin/3;
+	transition: $transitionSpeed;
+	h3 {
+		margin-bottom: 0;
+	}
+	&:hover {
+		// border: $glassBorder;
+		box-shadow: $floatBoxShadow;
+		border: 1px solid $blue;
+	}
 }

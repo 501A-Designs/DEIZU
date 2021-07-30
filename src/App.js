@@ -76,7 +76,7 @@ function App() {
       {user ? <Dashboard /> : <Home />}
       <footer>
         <a href="https://www.notion.so/About-DEIZU-687747c356924e13ad96b981161d3cd3" target="_blank" rel="noreferrer"><img src={logo} style={{ width: '80px', height: '58px' }} alt="no img found"/></a>
-        <h4><a href="https://501a.netlify.app/" target="_blank" rel="noreferrer">Designed & Developed By 501A</a></h4>
+        <a href="https://501a.netlify.app/" target="_blank" rel="noreferrer"><img src="https://501a.netlify.app/img/eminent-logo.png" style={{ width: '40px', height: '40px' }} alt="no img found"/></a>
       </footer>
     </div>
   );

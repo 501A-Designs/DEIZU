@@ -49,6 +49,9 @@ export default function TimeLabel(props) {
     }
     useEffect(() => {
         dataRef.doc(user.uid).get().then((doc) => {
+            setTimeStart(null);
+            setTimeEnd(null);
+
             const dataObject = doc.data().sheets[sheetTitle];
             const jigen = dataObject.time[displayPeriod];
             const periodStart = jigen.start;
@@ -58,7 +61,7 @@ export default function TimeLabel(props) {
         }).catch((error) => {
             console.log("Error getting document:", error);
         });
-    }, [])
+    },[sheetTitle])
 
     return (
         <div className="periodLabel" onClick={() => { setIsOpen(true) }}>

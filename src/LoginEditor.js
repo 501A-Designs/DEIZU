@@ -83,19 +83,20 @@ export default function LoginEditor(prop) {
     {wallpaperUrl ? <img className="backgroundImg" src={wallpaperUrl} alt="壁紙は指定されていません" /> : null}
     <div className="loginEditor">
       {/* <Menu /> */}
-      <section className="alignItems spaceBetween">
+      <section className="alignItems spaceBetween printNull">
         <div className="alignItems">
-            <input
-              id="titleInput"
-              type="text"
-              placeholder="⚡スーパーインプット"
-              value={titleName}
-              onChange={(e) => setTitleValue(e.target.value)}
+          <input
+            id="titleInput"
+            type="text"
+            placeholder="⚡スーパーインプット"
+            value={titleName}
+            onChange={(e) => setTitleValue(e.target.value)}
             />
-            <button className="standardBtn greyBtn" onClick={() => { setSheetsSideBar({ display: 'block' }); getSheetTitles();}} datatitle="他の表を閲覧">
-              <MdList className="btnIcon" />
-            </button>
-            
+          
+          <button className="standardBtn greyBtn" onClick={() => { setSheetsSideBar({ display: 'block' }); getSheetTitles();}} datatitle="他の表を閲覧">
+            <MdList className="btnIcon" />
+          </button>
+
           {/* CARD MODALS */}
           <div className="othersCard leftOthersCard" style={sheetsSideBar}>
             <div className="closeBtn">
@@ -163,7 +164,7 @@ export default function LoginEditor(prop) {
         </div>
       </section>
         
-        <section className="alignItems spaceBetween">
+        <section className="alignItems spaceBetween printNull">
           <h1>{titleName ? titleName : "タイトル追加・表を検索"}</h1>
           {titleName ? 
             <div style={{ display: 'flex', gap: '5px' }}>

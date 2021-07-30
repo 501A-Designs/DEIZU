@@ -58,6 +58,9 @@ export default function ScheduleCell(props) {
 
     useEffect(() => {
         dataRef.doc(user.uid).get().then((doc) => {
+            setSubjectValue(null);
+            setSubjectLinkValue(null);
+            setCellColor(null);
             const dataObject = doc.data().sheets[sheetTitle];
             // const date = dataObject.date;
             const cellData = dataObject.cells[cellName];
@@ -70,9 +73,9 @@ export default function ScheduleCell(props) {
             setSubjectLinkValue(cellLinkData);
             setCellColor(cellColorData);
         }).catch((error) => {
-            // console.log("Error getting document:", error);
+            console.log("Error getting document:", error);
         });
-    }, [sheetTitle])
+    },[sheetTitle])
 
     return (
         <div style={{ margin: '0px', padding: '0px' }}>
