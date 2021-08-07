@@ -1,4 +1,4 @@
-# DEIZU
+![DEIZU logo](./src/deizuBanner.png)
 
 ## 👋 ようこそ！
 

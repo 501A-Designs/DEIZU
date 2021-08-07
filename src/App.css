@@ -319,12 +319,32 @@ input:focus {
           box-shadow: 0px 5px 10px lightgray;
 }
 
+select {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
+  cursor: pointer;
+  border: 1px solid lightgray;
+  padding: 10px;
+  outline: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+
+select:hover {
+  -webkit-box-shadow: 0px 5px 10px lightgray;
+          box-shadow: 0px 5px 10px lightgray;
+}
+
 .duoGrid {
   display: -ms-grid;
   display: grid;
 }
 
-.duoGrid div {
+.duoGrid .centerDiv {
+  overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1150,8 +1170,8 @@ details {
   border: 1px solid lightgray;
   padding: 15px;
   margin: 5px;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
 }
 
 .selectorDiv h3 {
@@ -1159,8 +1179,39 @@ details {
 }
 
 .selectorDiv:hover {
+  -webkit-transform: scale3d(1.05, 1.05, 1.05);
+          transform: scale3d(1.05, 1.05, 1.05);
   -webkit-box-shadow: 0px 1px 20px #e6e6e6;
           box-shadow: 0px 1px 20px #e6e6e6;
   border: 1px solid #006372;
+}
+
+.templateSelector {
+  -webkit-animation: templateSelectorAni 0.5s;
+          animation: templateSelectorAni 0.5s;
+}
+
+@-webkit-keyframes templateSelectorAni {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(100px);
+            transform: translateX(100px);
+  }
+  100% {
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
+}
+
+@keyframes templateSelectorAni {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(100px);
+            transform: translateX(100px);
+  }
+  100% {
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
 }
 /*# sourceMappingURL=App.css.map */

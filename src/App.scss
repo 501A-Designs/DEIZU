@@ -271,15 +271,29 @@ input {
 	transition: 0.5s;
 	border-radius: $r5;
 	transition: $transitionSpeed;
-
 	&:focus {
+		box-shadow: $lightBoxShadow;
+	}
+}
+select {
+	@include blurEffect;
+	cursor: pointer;
+	border: $border;
+	padding: 10px;
+	outline: none;
+	transition: 0.5s;
+	border-radius: $r5;
+	transition: $transitionSpeed;
+
+	&:hover {
 		box-shadow: $lightBoxShadow;
 	}
 }
 
 .duoGrid {
 	display: grid;
-	div {
+	.centerDiv {
+		overflow: hidden;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -936,13 +950,26 @@ details {
 	border: $border;
 	padding: $padding;
 	margin: $margin/3;
-	transition: $transitionSpeed;
+	transition: $transitionSpeed/2;
 	h3 {
 		margin-bottom: 0;
 	}
 	&:hover {
-		// border: $glassBorder;
+		transform: $scale;
 		box-shadow: $floatBoxShadow;
 		border: 1px solid $blue;
+	}
+}
+
+.templateSelector {
+	animation: templateSelectorAni $transitionSpeed;
+}
+@keyframes templateSelectorAni {
+	0% {
+		opacity: 0;
+		transform: translateX(100px);
+	}
+	100% {
+		transform: translateX(0px);
 	}
 }

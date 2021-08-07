@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
+
 import firebase, { auth, dataRef } from './firebase';
 import Modal from 'react-modal';
 // Modal.setAppElement('#root');
@@ -75,7 +77,53 @@ export default function ScheduleCell(props) {
         }).catch((error) => {
             console.log("Error getting document:", error);
         });
-    },[sheetTitle])
+    }, [sheetTitle])
+
+
+    function ShowSuggested() {
+        const items = [
+            {
+                id: 0,
+                name: 'Cobol'
+            },
+            {
+                id: 1,
+                name: 'JavaScript'
+            },
+            {
+                id: 2,
+                name: 'Basic'
+            },
+            {
+                id: 3,
+                name: 'PHP'
+            },
+            {
+                id: 4,
+                name: 'Java'
+            }
+        ]
+    
+        const formatResult = (item) => {
+        return item;
+        // return (<p dangerouslySetInnerHTML={{__html: '<strong>'+item+'</strong>'}}></p>); //To format result as html
+        }
+    
+        return (
+            <div style={{ width: 400 }}>
+                <ReactSearchAutocomplete
+                    styling={{
+                        searchIconMargin: "10px 12px 0 11px",
+                        clearIconMargin: "10px 0 8px 0"
+                    }}
+                    items={items}
+                    showIcon={false}
+                    formatResult={formatResult}
+                />
+            </div>
+        )
+    }
+    
 
     return (
         <div style={{ margin: '0px', padding: '0px' }}>
@@ -121,7 +169,7 @@ export default function ScheduleCell(props) {
                         <button id="orange" onClick={() => { setCellColor('orange') }}>柑</button>
                         <button id="" onClick={() => { setCellColor('') }}>無</button>
                     </div>
-                    {/* CELL SUBJECT & LINK INPUT */}
+                    {/* CELL SUBJECT & LINK INPUT */} 
                     <form onSubmit={saveSubject}>
                         <div>
                             <input
@@ -142,8 +190,10 @@ export default function ScheduleCell(props) {
                             className="saveBtn"
                         ></button>
                     </form>
+                    <ShowSuggested/>
                 </div>
             </Modal>
         </div>
     );
 }
+  

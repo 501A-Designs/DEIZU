@@ -21,7 +21,7 @@ function App() {
       <div className="startMenu">
 
         <section className="duoGrid">
-          <div>
+          <div className="centerDiv">
             <img className="logo" src={logo} alt="Logo" />
             <h2 className="versionBadge">Beta v2.5</h2>
           </div>
