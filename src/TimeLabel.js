@@ -27,7 +27,7 @@ export default function TimeLabel(props) {
     const saveTime = async (e) => {
         e.preventDefault();
         dataRef.doc(user.uid).set({
-            sheets: {
+            sheets:{
                 [sheetTitle]: {
                     time: {
                         [displayPeriod]: {
@@ -51,7 +51,6 @@ export default function TimeLabel(props) {
         dataRef.doc(user.uid).get().then((doc) => {
             setTimeStart(null);
             setTimeEnd(null);
-
             const dataObject = doc.data().sheets[sheetTitle];
             const jigen = dataObject.time[displayPeriod];
             const periodStart = jigen.start;
@@ -75,27 +74,25 @@ export default function TimeLabel(props) {
                 isOpen={modalIsOpen}
                 className="popup"
             >
-                <div className="centerAll">
-                    <h2>時間を設定</h2>
-                    <form onSubmit={saveTime}>
-                        <input
-                            type="time"
-                            placeholder="始め"
-                            value={timeStart}
-                            onChange={handleStartChanges}
-                        />
-                        <input
-                            type="time"
-                            placeholder="終わり"
-                            value={timeEnd}
-                            onChange={handleEndChanges}
-                        />
-                        <button
-                            type="submit"
-                            className="saveBtn"
-                        ></button>
-                    </form>
-                </div>
+                <form className="modalForm" onSubmit={saveTime}>
+                <h2>時間を設定</h2>
+                    <input
+                        type="time"
+                        placeholder="始め"
+                        value={timeStart}
+                        onChange={handleStartChanges}
+                    />
+                    <input
+                        type="time"
+                        placeholder="終わり"
+                        value={timeEnd}
+                        onChange={handleEndChanges}
+                    />
+                    <button
+                        type="submit"
+                        className="saveBtn"
+                    ></button>
+                </form>
             </Modal>
         </div>
     )

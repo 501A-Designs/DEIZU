@@ -88,7 +88,7 @@ export default function ScheduleGrid(props) {
                 <ScheduleCell cellId="f7" sTitle={sheetTitle}/>
             </section>
             <h5 className="waterMark">
-                Made by {user.displayName.split(" ")[0]} with ❤️ from DEIZU
+                Made by {user.displayName.split(" ")[0]} with DEIZU
             </h5>
         </div>
     )
