@@ -604,11 +604,11 @@ select {
 
 // Media Queries
 @media screen and (max-width: 400px) {
+	footer {
+		display: none;
+	}
 	.duoGrid {
 		grid-template-columns: 1fr;
-	}
-	.cautionBanner {
-		display: none;
 	}
 	.popup {
 		right: calc(25% - 25px);
@@ -637,11 +637,11 @@ select {
 	}
 }
 @media screen and (min-width: 401px) and (max-width: 500px) {
+	footer {
+		display: none;
+	}
 	.duoGrid {
 		grid-template-columns: 1fr;
-	}
-	.cautionBanner {
-		display: none;
 	}
 	.popup {
 		right: calc(25% - 25px);
@@ -673,11 +673,11 @@ select {
 	}
 }
 @media screen and (min-width: 501px) and (max-width: 1000px) {
+	footer {
+		display: none;
+	}
 	.duoGrid {
 		grid-template-columns: 1fr;
-	}
-	.cautionBanner {
-		display: none;
 	}
 	.popup {
 		right: calc(25% - 25px);
@@ -699,9 +699,6 @@ select {
 	}
 	.duoGrid {
 		grid-template-columns: 1fr 1fr;
-	}
-	.cautionBanner {
-		display: none;
 	}
 	.popup {
 		right: calc(35% - 25px);
@@ -725,9 +722,7 @@ select {
 	.duoGrid {
 		grid-template-columns: 1fr 1fr;
 	}
-	.cautionBanner {
-		display: none;
-	}
+
 	.popup {
 		right: calc(40% - 25px);
 	}

@@ -753,12 +753,12 @@ select:hover {
 }
 
 @media screen and (max-width: 400px) {
+  footer {
+    display: none;
+  }
   .duoGrid {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-  }
-  .cautionBanner {
-    display: none;
   }
   .popup {
     right: calc(25% - 25px);
@@ -787,12 +787,12 @@ select:hover {
 }
 
 @media screen and (min-width: 401px) and (max-width: 500px) {
+  footer {
+    display: none;
+  }
   .duoGrid {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-  }
-  .cautionBanner {
-    display: none;
   }
   .popup {
     right: calc(25% - 25px);
@@ -824,12 +824,12 @@ select:hover {
 }
 
 @media screen and (min-width: 501px) and (max-width: 1000px) {
+  footer {
+    display: none;
+  }
   .duoGrid {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-  }
-  .cautionBanner {
-    display: none;
   }
   .popup {
     right: calc(25% - 25px);
@@ -853,9 +853,6 @@ select:hover {
   .duoGrid {
     -ms-grid-columns: 1fr 1fr;
         grid-template-columns: 1fr 1fr;
-  }
-  .cautionBanner {
-    display: none;
   }
   .popup {
     right: calc(35% - 25px);
@@ -882,9 +879,6 @@ select:hover {
   .duoGrid {
     -ms-grid-columns: 1fr 1fr;
         grid-template-columns: 1fr 1fr;
-  }
-  .cautionBanner {
-    display: none;
   }
   .popup {
     right: calc(40% - 25px);

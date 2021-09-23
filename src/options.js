@@ -1,0 +1,71 @@
+export const options = [
+    // Standard Subjects
+        //国語
+        { value: '国語', label: '国語' },
+        { value: '古典', label: '古典' },
+        { value: '現代文', label: '現代文' },
+        //歴史
+        { value: '地理', label: '地理' },
+        { value: '歴史', label: '歴史' },
+        { value: '世界史', label: '世界史' },
+        { value: '日本史', label: '日本史' },
+        //数学
+        { value: '数学', label: '数学' },
+        { value: '解析', label: '解析' },
+        { value: '幾何', label: '幾何' },
+        { value: '代数', label: '代数' },
+        { value: '代数', label: '代数' },
+        //英語
+        { value: '英語', label: '英語' },
+        { value: '英会話', label: '英会話' },
+        { value: '英語①', label: '英語①' },
+        { value: '英語②', label: '英語②' },
+        //社会
+        { value: '公民', label: '公民' },
+        { value: '社会', label: '社会' },
+        { value: '現代社会', label: '現代社会' },
+        { value: '倫理', label: '倫理' },
+        { value: '道徳', label: '道徳' },
+        { value: '政治', label: '政治' },
+        { value: '経済', label: '経済' },
+        //科学
+        { value: '理科', label: '理科' },
+        { value: '理科①', label: '理科①' },
+        { value: '理科②', label: '理科②' },
+        { value: '化学', label: '化学' },
+        { value: '生物', label: '生物' },
+        { value: '物理', label: '物理' },
+
+    // IBDP　Subjects
+    { value: 'TOK', label: 'TOK' },
+    { value: 'CAS', label: 'CAS' },
+    { value: 'EE', label: 'EE' },
+    { value: '数学SL', label: '数学SL' },
+    { value: '数学HL', label: '数学HL' },
+    { value: '現文SL', label: '現文SL' },
+    { value: '現文HL', label: '現文HL' },
+    { value: '英語SL', label: '英語SL' },
+    { value: '英語HL', label: '英語HL' },
+    { value: '生物SL', label: '生物SL' },
+    { value: '生物HL', label: '生物HL' },
+    { value: '化学SL', label: '化学SL' },
+    { value: '化学HL', label: '化学HL' },
+    { value: '物理SL', label: '物理SL' },
+    { value: '物理HL', label: '物理HL' },
+    { value: '地理SL', label: '地理SL' },
+    { value: '地理HL', label: '地理HL' },
+    { value: 'アートSL', label: 'アートSL' },
+    { value: 'アートHL', label: 'アートHL' },
+    { value: 'ビジネスSL', label: 'ビジネスSL' },
+    { value: 'ビジネスHL', label: 'ビジネスHL' },
+
+    // General
+    { value: 'SHR', label: 'SHR' },
+    { value: 'LHR', label: 'LHR' },
+    { value: '自習', label: '自習' },
+    { value: '体育', label: '体育' },
+    { value: '芸術', label: '芸術' },
+    { value: '音楽', label: '音楽' },
+    { value: '書道', label: '書道' },
+    { value: '家庭科', label: '家庭科' },
+]

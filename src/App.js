@@ -23,14 +23,14 @@ function App() {
         <section className="duoGrid">
           <div className="centerDiv">
             <img className="logo" src={logo} alt="Logo" />
-            <h2 className="versionBadge">Beta v2.5</h2>
+            <h2 className="versionBadge">v{require('../package.json').version}</h2>
           </div>
           <div>
             <section className="card">
               <div className="cautionBanner">
                 <strong className="alignItems" style={{marginBottom: '10px'}}><MdReportProblem className="largeIcon" />注意</strong>
                 <ul style={{ marginLeft: '-20px' }}>
-                  <li>Schedule CreatorからDEIZUへと改名しました。</li>
+                  <li><code>schedule-creator-site.web.app</code>から<code>deizu-site.web.app</code>へと変わりました。</li>
                   <li>ベータ版ですので、機能の追加・切り替えによってデータの損失があるかも知れません。</li>
                   <li>スマートフォンまた小さいディスプレイご利用の場合は、時間割表作成に置いて画角における不具合がございます。ご了承下さい。</li>
                 </ul>

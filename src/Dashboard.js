@@ -73,7 +73,7 @@ export default function Dashboard() {
                                 <br />
                                     <span className="alignItems">
                                         <button className="standardBtn greenBtn" onClick={() => { setComponent('change'); }}><MdAddCircle className="iconBtn" />新しい表を作成</button>
-                                        <button className="standardBtn blueBtn" onClick={() => { setTemplateBtn('change'); }}><MdPhotoFilter className="iconBtn" />テンプレートで表を作成</button>
+                                        {/* <button className="standardBtn blueBtn" onClick={() => { setTemplateBtn('change'); }}><MdPhotoFilter className="iconBtn" />テンプレートで表を作成</button> */}
                                     </span>
                                 <OtherSheet/>
                             </section>

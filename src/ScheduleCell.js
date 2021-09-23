@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import Select from 'react-select';
+import {options} from './options';
 
 
 import CreatableSelect from 'react-select/creatable';
@@ -28,7 +28,7 @@ export default function ScheduleCell(props) {
     const sheetTitle = props.sTitle;
 
     const [modalIsOpen, setIsOpen] = useState(false);
-    // const [subjectName, setSubjectValue] = useState('');
+    const [subjectName, setSubjectName] = useState('');
     const [subjectLinkValue, setSubjectLinkValue] = useState('');
     const [subjectDescription, setSubjectDescription] = useState('');
     const createdAt = firebase.firestore.FieldValue.serverTimestamp();
@@ -78,53 +78,22 @@ export default function ScheduleCell(props) {
             },
         })
     ]
-    const options = [
-        // IBDP　Subjects
-        { value: 'TOK', label: 'TOK' },
-        { value: 'CAS', label: 'CAS' },
-        { value: 'EE', label: 'EE' },
-        { value: '数学SL', label: '数学SL' },
-        { value: '数学HL', label: '数学HL' },
-        { value: '現文SL', label: '現文SL' },
-        { value: '現文HL', label: '現文HL' },
-        { value: '英語SL', label: '英語SL' },
-        { value: '英語HL', label: '英語HL' },
-        { value: '生物SL', label: '生物SL' },
-        { value: '生物HL', label: '生物HL' },
-        { value: '物理SL', label: '物理SL' },
-        { value: '物理HL', label: '物理HL' },
-        { value: '地理SL', label: '地理SL' },
-        { value: '地理HL', label: '地理HL' },
-        { value: 'アートSL', label: 'アートSL' },
-        { value: 'アートHL', label: 'アートHL' },
-        { value: 'LHR', label: 'LHR' },
-        { value: '自習', label: '自習' },
-        { value: '体育', label: '体育' },
-        { value: '芸術', label: '芸術' },
-        { value: '音楽', label: '音楽' },
 
-        // Standard Subjects
-        { value: '英会話', label: '英会話' },
-        { value: '古典', label: '古典' },
-        { value: '世界史', label: '世界史' },
-        { value: '日本史', label: '日本史' },
-        { value: '数学', label: '数学' },
-        { value: '現代文', label: '現代文' },
-        { value: '英語', label: '英語' },
-    ]
 
+    const handleSelectChange = (inputValue) => {
+        const sValue = Object.values(inputValue)[0];
+        // console.log("input change" + inputValue);
+        setSubjectName(sValue);
+    };
     const handleLinkChanges = (e) => {
         setSubjectLinkValue(e.target.value);
     }
     const handleDescriptionChanges = (e) => {
         setSubjectDescription(e.target.value);
     }
-
     const handleColorValuesChanges = (e) => {
         setCellColor(e.target.value);
     }
-    const bruh = JSON.stringify(selectedOption);
-    console.log(bruh);
 
     const saveSubject = async (e) => {
         e.preventDefault();
@@ -134,7 +103,7 @@ export default function ScheduleCell(props) {
                     date: createdAt,
                     cells: {
                         [cellName]: {
-                            [cellName]: bruh,
+                            [cellName]: subjectName,
                             [cellLink]: subjectLinkValue,
                             [cellDscrp]: subjectDescription,
                             [cellClr]: cellColor
@@ -150,7 +119,7 @@ export default function ScheduleCell(props) {
     
     useEffect(() => {
         dataRef.doc(user.uid).get().then((doc) => {
-            setSelectedOption('');
+            setSubjectName('');
             setSubjectLinkValue('');
             setSubjectDescription('');
             setCellColor('');
@@ -164,7 +133,7 @@ export default function ScheduleCell(props) {
             const cellColorData = cellData[cellClr];
             console.log(cellNameData);
             
-            setSelectedOption(cellNameData);
+            setSubjectName(cellNameData);
             setSubjectLinkValue(cellLinkData);
             setSubjectDescription(cellDscrpData);
             setCellColor(cellColorData);
@@ -175,10 +144,7 @@ export default function ScheduleCell(props) {
     
 
     // SELECT INPUT
-    function MyComponent(){
-        const handleSelectChange = (inputValue) => {
-            console.log("input change" + inputValue);
-        };
+    function SubjectSelector(){
         return (
             <CreatableSelect
                 isClearable
@@ -186,8 +152,7 @@ export default function ScheduleCell(props) {
                 styles={selectorStyle}
                 theme={selectorTheme}
                 placeholder="科目を選択"
-
-                defaultValue={selectedOption}
+                defaultValue={subjectName}
                 onChange={handleSelectChange}
                 options={options}
             />
@@ -202,17 +167,17 @@ export default function ScheduleCell(props) {
     return (
         <div style={{ margin: '0px', padding: '0px' }}>
             <section
-                className={selectedOption ? 'cell': 'cellHover'}
+                className={subjectName ? 'cell': 'cellHover'}
                 style={{ background: cellColor, border: `1px solid ${cellColor ? cellColor: 'transparent'}`}}
-                onClick={selectedOption ? null: () => setIsOpen(true) }
+                onClick={subjectName ? null: () => setIsOpen(true) }
             >
                 <div>
                     <h2
-                        onClick={selectedOption ? () => setIsOpen(true) : null}
-                        className={selectedOption ? 'cellNameHover' : null}
-                        datatitle={selectedOption ? 'セルを編集' : null}
+                        onClick={subjectName ? () => setIsOpen(true) : null}
+                        className={subjectName ? 'cellNameHover' : null}
+                        datatitle={subjectName ? 'セルを編集' : null}
                     >
-                        {selectedOption}
+                        {subjectName}
                     </h2>
                     {subjectLinkValue ? <a href={subjectLinkValue} target="_blank"><span className="eraseOnMobile">リンク</span>↗</a> : null}
                     {subjectDescription ? <h6 className="displayDescription">{subjectDescription}</h6> : null}
@@ -232,7 +197,7 @@ export default function ScheduleCell(props) {
                     <div
                         className="displayTitle"
                         style={{ background: cellColor, border: `1px solid ${cellColor ? cellColor: 'transparent'}`}}>
-                        {selectedOption ? <h2 style={{ margin: '0px' }}>{selectedOption}</h2> : <h2 style={{ margin: '0px' }}>科目名</h2>}
+                        {subjectName ? <h2 style={{ margin: '0px' }}>{subjectName}</h2> : <h2 style={{ margin: '0px' }}>科目名</h2>}
                         <h6 className="displayLink">{subjectLinkValue ? subjectLinkValue : "<リンクURL>"}</h6>
                         <h5 className="displayDescription">{subjectDescription ? subjectDescription : "概要・教師・教室"}</h5>
                     </div>
@@ -258,7 +223,7 @@ export default function ScheduleCell(props) {
 
                     {/* CELL SUBJECT & LINK INPUT */} 
                     <form className="modalForm" onSubmit={saveSubject}>
-                        <MyComponent/>
+                        <SubjectSelector/>
                         <input
                             className="deizuInput"
                             type="url"
