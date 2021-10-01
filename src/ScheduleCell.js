@@ -142,7 +142,6 @@ export default function ScheduleCell(props) {
         });
     }, [sheetTitle])
     
-
     // SELECT INPUT
     function SubjectSelector(){
         return (
@@ -163,6 +162,17 @@ export default function ScheduleCell(props) {
 
     //     />
     // )
+
+    function ColorButton(props) {
+        return (
+            <button
+                style={{backgroundColor: `${props.btnColor}`, border: `1px solid ${props.btnColor}`}}
+                onClick={() => { setCellColor(`${props.btnColor}`) }}
+            >
+                {props.btnName}
+            </button>
+        )
+    }
 
     return (
         <div style={{ margin: '0px', padding: '0px' }}>
@@ -203,18 +213,18 @@ export default function ScheduleCell(props) {
                     </div>
                     {/* CELL COLOR SELECTOR */}
                     <div className="colors">
-                        <button onClick={() => { setCellColor('#f3f3f3') }}>無</button>
-                        <button id="red" onClick={() => { setCellColor('rgb(255, 153, 153)') }}>赤</button>
-                        <button id="blue" onClick={() => { setCellColor('lightblue') }}>青</button>
-                        <button id="yellow" onClick={() => { setCellColor('yellow') }}>黄</button>
-                        <button id="green" onClick={() => { setCellColor('lightgreen') }}>緑</button>
-                        <button id="peach" onClick={() => { setCellColor('pink') }}>桃</button>
-                        <button id="purple" onClick={() => { setCellColor('rgb(228, 151, 228)') }}>紫</button>
-                        <button id="mugi" onClick={() => { setCellColor('rgb(228, 201, 151)') }}>麦</button>
-                        <button id="teal" onClick={() => { setCellColor('rgb(151, 228, 192)') }}>淡</button>
-                        <button id="navy" onClick={() => { setCellColor('rgb(128, 160, 228)') }}>流</button>
-                        <button id="orange" onClick={() => { setCellColor('rgb(255, 199, 78)') }}>柑</button>
-                        <button id="limeYellow" onClick={() => { setCellColor('#e0ff6f') }}>臭</button>
+                        <ColorButton btnColor="#f3f3f3" btnName="無" />
+                        <ColorButton btnColor="rgb(255, 153, 153)" btnName="赤"/>
+                        <ColorButton btnColor="lightblue" btnName="青"/>
+                        <ColorButton btnColor="#ffde88" btnName="黄"/>
+                        <ColorButton btnColor="lightgreen" btnName="緑" />
+                        <ColorButton btnColor="pink" btnName="桃" />
+                        <ColorButton btnColor="rgb(228, 151, 228)" btnName="紫"/>
+                        <ColorButton btnColor="rgb(228, 201, 151)" btnName="麦"/>
+                        <ColorButton btnColor="rgb(151, 228, 192)" btnName="淡"/>
+                        <ColorButton btnColor="rgb(128, 160, 228)" btnName="流"/>
+                        <ColorButton btnColor="rgb(255, 199, 78)" btnName="柑"/>
+                        <ColorButton btnColor="#e0ff6f" btnName="香"/>
                         <div>
                             <input type="color" value={cellColor} onChange={handleColorValuesChanges}></input>
                             <label>自分で指定</label>
@@ -249,4 +259,3 @@ export default function ScheduleCell(props) {
         </div>
     );
 }
-  

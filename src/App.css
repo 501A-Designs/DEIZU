@@ -43,7 +43,11 @@ h4 a {
 }
 
 .classicHeader {
-  font-family: Arial, Helvetica, sans-serif;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
+  border-radius: 5px;
+  padding: 15px;
 }
 
 header,
@@ -182,7 +186,6 @@ a {
 }
 
 .scheduleGrid {
-  padding: 7.5px;
   display: -ms-grid;
   display: grid;
   gap: 5px;
@@ -209,10 +212,8 @@ a {
 }
 
 .scheduleGrid .periodLabel:hover {
-  -webkit-transform: scale3d(1.05, 1.05, 1.05);
-          transform: scale3d(1.05, 1.05, 1.05);
-  -webkit-box-shadow: 0px 5px 10px #e2e2e2;
-          box-shadow: 0px 5px 10px #e2e2e2;
+  border: 1px solid lightgray;
+  background-color: #fffefc;
 }
 
 .scheduleGrid .periodLabel .periodAlign {
@@ -256,6 +257,16 @@ a {
   width: -moz-fit-content;
   width: fit-content;
   padding: 10px 15px;
+}
+
+.scheduleGrid #dayLabelToday {
+  cursor: pointer;
+  background-color: #fffefc;
+  border: 1px solid lightgray;
+}
+
+.scheduleGrid #dayLabelToday::before {
+  content: "今日：";
 }
 
 .scheduleGrid .cell,
@@ -306,6 +317,12 @@ a {
 
 .scheduleGrid .cell .cellNameHover {
   cursor: pointer;
+}
+
+.scheduleGrid .cellHover:hover,
+.scheduleGrid .cellNameHover:hover .cell {
+  cursor: pointer;
+  background-color: #fffefc;
 }
 
 .deizuInput,
@@ -383,11 +400,6 @@ select:hover {
 
 .blue {
   background-color: #c1dde1;
-}
-
-.yellow {
-  border: 1px solid #ffde88;
-  background-color: #ffde88;
 }
 
 .centerBtn {
@@ -634,61 +646,6 @@ select:hover {
   margin: 5px;
 }
 
-#red {
-  background-color: #ff9999;
-  border: 1px solid #ff9999;
-}
-
-#blue {
-  background-color: lightblue;
-  border: 1px solid lightblue;
-}
-
-#yellow {
-  background-color: #ffde88;
-  border: 1px solid #ffde88;
-}
-
-#green {
-  background-color: lightgreen;
-  border: 1px solid lightgreen;
-}
-
-#peach {
-  background-color: pink;
-  border: 1px solid pink;
-}
-
-#purple {
-  background-color: #e497e4;
-  border: 1px solid #e497e4;
-}
-
-#mugi {
-  background-color: #e4c997;
-  border: 1px solid #e4c997;
-}
-
-#teal {
-  background-color: #97e4c0;
-  border: 1px solid #97e4c0;
-}
-
-#navy {
-  background-color: #80a0e4;
-  border: 1px solid #80a0e4;
-}
-
-#orange {
-  background-color: #ffc74e;
-  border: 1px solid #ffc74e;
-}
-
-#limeYellow {
-  background-color: #e0ff6f;
-  border: 1px solid #e0ff6f;
-}
-
 .cautionBanner {
   padding: 30px;
   border: 1px solid #e89191;
@@ -702,9 +659,7 @@ select:hover {
 }
 
 .screenshotMode {
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
+  background-color: #fffefc;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -857,15 +812,6 @@ select:hover {
   .popup {
     right: calc(35% - 25px);
   }
-  .cellHover:hover,
-  .cellNameHover:hover .cell {
-    cursor: pointer;
-    background-color: var(--systemWhite);
-    -webkit-box-shadow: 0px 7px 15px #e2e2e2;
-            box-shadow: 0px 7px 15px #e2e2e2;
-    -webkit-transform: scale3d(1.05, 1.05, 1.05);
-            transform: scale3d(1.05, 1.05, 1.05);
-  }
   .loginEditor {
     padding: 3% 13% 0% 13%;
   }
@@ -882,15 +828,6 @@ select:hover {
   }
   .popup {
     right: calc(40% - 25px);
-  }
-  .cellHover:hover,
-  .cellNameHover:hover .cell {
-    cursor: pointer;
-    background-color: var(--systemWhite);
-    -webkit-box-shadow: 0px 7px 15px #e2e2e2;
-            box-shadow: 0px 7px 15px #e2e2e2;
-    -webkit-transform: scale3d(1.05, 1.05, 1.05);
-            transform: scale3d(1.05, 1.05, 1.05);
   }
   #titleInput {
     width: 80%;

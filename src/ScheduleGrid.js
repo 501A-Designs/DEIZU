@@ -13,16 +13,23 @@ export default function ScheduleGrid(props) {
     const [user] = useAuthState(auth);
     const sheetTitle = props.sheetTitle;
 
+    const date = new Date();
+    const day = date.getDay();
+    const hinichi = date.getDate();
+
+    const months = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
+    const currentDay = months[date.getMonth()]+hinichi+"日";
+    
     return (
         <div>
             <section className="scheduleGrid">
                 <br />
-                <div className="dayLabel">月</div>
-                <div className="dayLabel">火</div>
-                <div className="dayLabel">水</div>
-                <div className="dayLabel">木</div>
-                <div className="dayLabel">金</div>
-                <div className="dayLabel">土</div>
+                {day === 1 ? <div className="dayLabel" id="dayLabelToday" datatitle={currentDay}>月</div>:<div className="dayLabel">月</div>}
+                {day === 2 ? <div className="dayLabel" id="dayLabelToday" datatitle={currentDay}>火</div>:<div className="dayLabel">火</div>}
+                {day === 3 ? <div className="dayLabel" id="dayLabelToday" datatitle={currentDay}>水</div>:<div className="dayLabel">水</div>}
+                {day === 4 ? <div className="dayLabel" id="dayLabelToday" datatitle={currentDay}>木</div>:<div className="dayLabel">木</div>}
+                {day === 5 ? <div className="dayLabel" id="dayLabelToday" datatitle={currentDay}>金</div>:<div className="dayLabel">金</div>}
+                {day === 6 ? <div className="dayLabel" id="dayLabelToday" datatitle={currentDay}>土</div>:<div className="dayLabel">土</div>}
 
                 {/* 1st Row */}
                 <TimeLabel num="1" sTitle={sheetTitle}/>

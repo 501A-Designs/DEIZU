@@ -69,9 +69,6 @@ h4 a {
 	font-family: "Sawarabi Gothic", sans-serif;
 	// font-family: Arial, Helvetica, sans-serif;
 }
-.classicHeader {
-	font-family: Arial, Helvetica, sans-serif;
-}
 
 @mixin blurEffect {
 	-webkit-backdrop-filter: blur(16px);
@@ -82,6 +79,13 @@ h4 a {
 		rgba(255, 255, 255, 0.5) 100%
 	);
 	// border: $border;
+}
+
+.classicHeader {
+	@include blurEffect;
+	// border: $glassBorder;
+	border-radius: $r5;
+	padding: $padding;
 }
 
 header,
@@ -179,7 +183,7 @@ a {
 }
 
 .scheduleGrid {
-	padding: $padding / 2;
+	// padding: $padding / 2;
 	display: grid;
 	gap: 5px;
 	grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -197,8 +201,8 @@ a {
 		cursor: pointer;
 		transition: $transitionSpeed/5;
 		&:hover {
-			transform: $scale;
-			box-shadow: $lightBoxShadow;
+			border: $border;
+			background-color: $systemWhite;
 		}
 		.periodAlign {
 			margin: 0;
@@ -225,6 +229,15 @@ a {
 		border-radius: $r10 * 3;
 		width: fit-content;
 		padding: 10px $padding;
+	}
+	#dayLabelToday {
+		cursor: pointer;
+		background-color: $systemWhite;
+		border: $border;
+		// box-shadow: $lightBoxShadow;
+		&::before {
+			content: "今日：";
+		}
 	}
 
 	.cell,
@@ -259,6 +272,11 @@ a {
 		.cellNameHover {
 			cursor: pointer;
 		}
+	}
+	.cellHover:hover,
+	.cellNameHover:hover .cell {
+		cursor: pointer;
+		background-color: $systemWhite;
 	}
 }
 
@@ -320,10 +338,10 @@ select {
 .blue {
 	background-color: $lightBlue;
 }
-.yellow {
-	border: 1px solid $lightYellow;
-	background-color: $lightYellow;
-}
+// .yellow {
+// 	border: 1px solid $lightYellow;
+// 	background-color: $lightYellow;
+// }
 
 .centerBtn {
 	display: flex;
@@ -509,51 +527,6 @@ select {
 	margin: $margin/3;
 }
 
-#red {
-	background-color: rgb(255, 153, 153);
-	border: 1px solid rgb(255, 153, 153);
-}
-#blue {
-	background-color: lightblue;
-	border: 1px solid lightblue;
-}
-#yellow {
-	background-color: $lightYellow;
-	border: 1px solid $lightYellow;
-}
-#green {
-	background-color: lightgreen;
-	border: 1px solid lightgreen;
-}
-#peach {
-	background-color: pink;
-	border: 1px solid pink;
-}
-#purple {
-	background-color: rgb(228, 151, 228);
-	border: 1px solid rgb(228, 151, 228);
-}
-#mugi {
-	background-color: rgb(228, 201, 151);
-	border: 1px solid rgb(228, 201, 151);
-}
-#teal {
-	background-color: rgb(151, 228, 192);
-	border: 1px solid rgb(151, 228, 192);
-}
-#navy {
-	background-color: rgb(128, 160, 228);
-	border: 1px solid rgb(128, 160, 228);
-}
-#orange {
-	background-color: rgb(255, 199, 78);
-	border: 1px solid rgb(255, 199, 78);
-}
-#limeYellow {
-	background-color: #e0ff6f;
-	border: 1px solid #e0ff6f;
-}
-
 .cautionBanner {
 	padding: $padding * 2;
 	border: 1px solid rgb(232, 145, 145);
@@ -568,7 +541,8 @@ select {
 }
 
 .screenshotMode {
-	@include blurEffect;
+	// @include blurEffect;
+	background-color: $systemWhite;
 	user-select: none;
 	z-index: 4;
 	overflow-x: scroll;
@@ -703,13 +677,6 @@ select {
 	.popup {
 		right: calc(35% - 25px);
 	}
-	.cellHover:hover,
-	.cellNameHover:hover .cell {
-		cursor: pointer;
-		background-color: var(--systemWhite);
-		box-shadow: $heavyBoxShadow;
-		transform: $scale;
-	}
 	.loginEditor {
 		padding: 3% 13% 0% 13%;
 	}
@@ -726,13 +693,6 @@ select {
 	.popup {
 		right: calc(40% - 25px);
 	}
-	.cellHover:hover,
-	.cellNameHover:hover .cell {
-		cursor: pointer;
-		background-color: var(--systemWhite);
-		box-shadow: $heavyBoxShadow;
-		transform: $scale;
-	}
 	#titleInput {
 		width: 80%;
 		max-width: 200px;
@@ -741,39 +701,6 @@ select {
 		padding: 3% 16% 0% 16%;
 	}
 }
-
-// #sideBar {
-// 	position: absolute;
-// 	width: 330px;
-// 	z-index: 3;
-// 	border-radius: $r10;
-// 	padding: $padding;
-// 	background-color: white;
-// 	box-shadow: $heavyBoxShadow;
-// 	border: $border;
-// 	animation: sideBarAni $transitionSpeed;
-// }
-// @keyframes sideBarAni {
-// 	0% {
-// 		opacity: 0;
-// 		box-shadow: $lightBoxShadow;
-// 	}
-// 	35% {
-// 		transform: translateY(40px);
-// 	}
-// }
-// .loginStatus {
-// 	cursor: pointer;
-// 	transition: $transitionSpeed;
-// 	&:hover {
-// 		filter: brightness(80%);
-// 	}
-// }
-// .loginStatus {
-// 	border-radius: $r5;
-// 	width: 44px;
-// 	height: 44px;
-// }
 
 .centerAll {
 	margin-top: $margin * 2;
@@ -860,48 +787,6 @@ select {
 		}
 	}
 }
-
-// .othersCard {
-// 	-moz-border-radius: $r10;
-// 	-webkit-border-radius: $r10;
-// 	border-radius: $r10;
-// 	width: 300px;
-// 	max-height: 500px;
-// 	transform: translateY(50%);
-// 	padding: $padding;
-// 	position: absolute;
-// 	z-index: 3;
-// 	// @include blurEffect;
-// 	// border: $glassBorder;
-// 	background-color: white;
-// 	box-shadow: $heavyBoxShadow;
-// 	animation: othersCardAni $transitionSpeed;
-// 	section {
-// 		display: flex;
-// 		align-items: center;
-// 		// -webkit-justify-content: space-between;
-// 		// justify-content: space-between;
-// 		padding: $padding/1.2;
-// 		margin-top: $margin/3;
-// 		margin-bottom: $margin/3;
-// 		border-radius: $r5;
-// 		transition: $transitionSpeed/2;
-// 		&:hover {
-// 			cursor: pointer;
-// 			background-color: $veryLightGrey;
-// 			// box-shadow: $floatBoxShadow;
-// 			transform: $scale;
-// 			font-weight: bold;
-// 		}
-// 		span:hover {
-// 			cursor: pointer;
-// 			font-weight: bold;
-// 			&::before {
-// 				content: "→";
-// 			}
-// 		}
-// 	}
-// }
 
 @keyframes othersCardAni {
 	0% {

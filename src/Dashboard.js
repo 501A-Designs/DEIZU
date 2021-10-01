@@ -6,6 +6,7 @@ import './App.css';
 
 import { auth,db } from './firebase';
 import LoginEditor from './LoginEditor'
+import DeizuButton from './DeizuButton'
 
 
 
@@ -72,7 +73,12 @@ export default function Dashboard() {
                                 <p>{fullName}さん、DEIZUへようこそ！<br />こちらが{firstName}さんのDEIZUダッシュボードとなります。下のボタンで新しい時間割表を作成することができます。また、これまで作成した時間割表も閲覧し更新することができます！</p>
                                 <br />
                                     <span className="alignItems">
-                                        <button className="standardBtn greenBtn" onClick={() => { setComponent('change'); }}><MdAddCircle className="iconBtn" />新しい表を作成</button>
+                                        <DeizuButton
+                                            btnClass="greenBtn"
+                                            btnClick={() => {setComponent('change')}}
+                                            btnIcon={<MdAddCircle className="iconBtn" />}
+                                            btnName="新しい表を作成"
+                                        />
                                         {/* <button className="standardBtn blueBtn" onClick={() => { setTemplateBtn('change'); }}><MdPhotoFilter className="iconBtn" />テンプレートで表を作成</button> */}
                                     </span>
                                 <OtherSheet/>

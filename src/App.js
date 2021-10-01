@@ -7,6 +7,7 @@ import logo from './deizu.png';
 
 import firebase, { auth } from './firebase';
 import Dashboard from './Dashboard'
+import DeizuButton from './DeizuButton'
 
 function App() {
   const [user] = useAuthState(auth);
@@ -46,23 +47,19 @@ function App() {
                 <br />
               </p>
               <div className="centerBtn">
-                <button
-                  className="standardBtn greenBtn"
-                  onClick={signInWithGoogle}
-                >
-                  <MdPerson className="btnIcon" />
-                  Googleでログイン
-                </button>
-                <button
-                  className="standardBtn blueBtn"
-                  onClick={(e) => {
+                <DeizuButton
+                  btnClass="greenBtn"
+                  btnClick={signInWithGoogle}
+                  btnIcon={<MdPerson className="btnIcon" />}
+                  btnName="Googleでログイン" />
+                <DeizuButton
+                  btnClass="blueBtn"
+                  btnClick={(e) => {
                     e.preventDefault();
                     window.location.href = 'https://www.notion.so/Schedule-Creator-687747c356924e13ad96b981161d3cd3';
                   }}
-                >
-                  <MdDescription className="btnIcon" />
-                  サイトについて
-                </button>
+                  btnIcon={<MdDescription className="btnIcon" />}
+                  btnName="サイトについて" />
               </div>
             </section>
           </div>

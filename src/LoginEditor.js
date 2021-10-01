@@ -255,7 +255,7 @@ export default function LoginEditor(prop) {
       {/* <Menu /> */}
       <section className="alignItems spaceBetween printNull">
         <div className="alignItems">
-          <h1>{titleName ? titleName : `${firstName}さんの時間割表`}</h1>
+          <h1 className="classicHeader">{titleName ? titleName : `${firstName}さんの時間割表`}</h1>
         </div>
           
         <div className="alignItems" style={{alignItems:'stretch'}}>
