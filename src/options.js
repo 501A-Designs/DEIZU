@@ -2,8 +2,14 @@ export const options = [
     // Standard Subjects
         //国語
         { value: '国語', label: '国語' },
+        { value: '国語表現', label: '国語表現' },
         { value: '古典', label: '古典' },
+        { value: '古典A', label: '古典A' },
+        { value: '古典B', label: '古典B' },
         { value: '現代文', label: '現代文' },
+        { value: '現代文A', label: '現代文A' },
+        { value: '現代文B', label: '現代文B' },
+    
         //歴史
         { value: '地理', label: '地理' },
         { value: '歴史', label: '歴史' },
@@ -11,6 +17,9 @@ export const options = [
         { value: '日本史', label: '日本史' },
         //数学
         { value: '数学', label: '数学' },
+        { value: '数学I', label: '数学I' },
+        { value: '数学II', label: '数学II' },
+        { value: '数学III', label: '数学III' },    
         { value: '解析', label: '解析' },
         { value: '幾何', label: '幾何' },
         { value: '代数', label: '代数' },
@@ -32,6 +41,9 @@ export const options = [
         { value: '理科', label: '理科' },
         { value: '理科①', label: '理科①' },
         { value: '理科②', label: '理科②' },
+        { value: '化学基礎', label: '化学基礎' },
+        { value: '生物基礎', label: '生物基礎' },
+        { value: '物理基礎', label: '物理基礎' },
         { value: '化学', label: '化学' },
         { value: '生物', label: '生物' },
         { value: '物理', label: '物理' },
@@ -64,8 +76,13 @@ export const options = [
     { value: 'LHR', label: 'LHR' },
     { value: '自習', label: '自習' },
     { value: '体育', label: '体育' },
+    { value: '保険', label: '保険' },
     { value: '芸術', label: '芸術' },
+    { value: '美術', label: '美術' },
     { value: '音楽', label: '音楽' },
     { value: '書道', label: '書道' },
     { value: '家庭科', label: '家庭科' },
+    { value: '情報', label: '情報' },
+    { value: '技術', label: '技術' },
+    
 ]
