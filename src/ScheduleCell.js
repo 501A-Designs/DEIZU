@@ -14,6 +14,7 @@ import Modal from 'react-modal';
 // Modal.setAppElement('#root');
 
 export default function ScheduleCell(props) {
+    const cornerProp = props.corner;
     const [user] = useAuthState(auth);
     const modalStyle = {
         overlay: {
@@ -61,7 +62,7 @@ export default function ScheduleCell(props) {
             fontSize:14,
             padding: 1,
             outline: 'none',
-            borderRadius: 5,
+            borderRadius: `${cornerProp}`,
             border: '0px solid transparent',
             boxShadow: state.isFocused ? '0px 5px 10px lightgray' : 0,
             backgroundColor: state.isFocused ? 'white':'#ebebeb',

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { MdAddCircle,MdPerson,MdPalette,MdInfo,MdSettings, MdBackspace, MdList, MdCropFree, MdReplay, MdDirectionsRun, MdCode, MdKeyboardArrowUp,MdKeyboardArrowRight,MdKeyboardArrowLeft } from 'react-icons/md';
+import { MdAddCircle,MdPerson,MdPalette,MdInfo,MdSettings, MdBackspace, MdList, MdCropFree, MdReplay, MdDirectionsRun, MdCode, MdKeyboardArrowUp,MdKeyboardArrowRight,MdKeyboardArrowLeft,MdSave } from 'react-icons/md';
 
 import firebase,{ auth, db } from './firebase';
 import ScheduleGrid from './ScheduleGrid'
+import DeizuButton from './DeizuButton'
+import ThemeButton from './ThemeButton'
+
 
 
 export default function LoginEditor(prop) {
@@ -31,25 +34,53 @@ export default function LoginEditor(prop) {
   const [titleName, setTitleValue] = useState(prop.dashSheetTitle);
   const [screenshotFrame, setScreenshotFrame] = useState('');
 
+  // Custom Cutouts
+  const [smallCornerStyle, setSmallCornerStyle] = useState('5px');
+  const [largeCornerStyle, setLargeCornerStyle] = useState('10px');
+  const root = document.documentElement;
+
+
+
+  function rDefault() { setSmallCornerStyle('5px'); setLargeCornerStyle('10px'); };
+  function r20() {setSmallCornerStyle('20px');setLargeCornerStyle('30px'); };
+  function r0() {setSmallCornerStyle('0px');setLargeCornerStyle('0px'); };
+  function rUnique() {setSmallCornerStyle('0px 15px 10px 30px');setLargeCornerStyle('30px'); };
+  function rCut() { setSmallCornerStyle('10% / 50%'); setLargeCornerStyle('30px'); };
+  function rUnique() { setSmallCornerStyle('0px 15px 10px 30px'); setLargeCornerStyle('30px'); };
+  function rArt() { setSmallCornerStyle('37% 63% 41% 59% / 67% 54% 46% 33%'); setLargeCornerStyle('30px'); };
+
   // Fetch data
   const saveWallpaper = (w) => {
     w.preventDefault();
     dataRef.doc(user.uid).set({
-        url: wallpaperUrl
+      url: wallpaperUrl
     }, { merge: true });
+    alert('壁紙を保存できました');
     // setWallpaperUrl('');
   }
+  const saveTheme = () => {
+    dataRef.doc(user.uid).set({
+      theme: smallCornerStyle+"$"+largeCornerStyle
+    }, { merge: true });
+    alert('テーマを保存できました');
+  }
+
   function SignOut() {
     return auth.currentUser && (
-      <button
-        className="standardBtn redBtn"
-        onClick={() => {
+      <DeizuButton
+        btnClass="redBtn"
+        btnIcon={<MdDirectionsRun className="iconBtn" />}
+        btnName="ログアウト"
+        btnClick={() => {
           auth.signOut();
-        }}>
-        <MdDirectionsRun className="btnIcon" />
-        ログアウト</button>
+        }}
+      />
     )
   }
+  useEffect(() => {
+    root?.style.setProperty("--r5", smallCornerStyle);
+    root?.style.setProperty("--r10", largeCornerStyle);
+  })
 
   const showProfile = () => {
     setActiveMenu({ display: 'block' })
@@ -84,8 +115,14 @@ export default function LoginEditor(prop) {
       console.log("Error getting document:", error);
     })
   }
-  useEffect(()=>{
+  useEffect(() => {
     dataRef.doc(user.uid).get().then((doc) => {
+      const themeData = doc.data().theme;
+      const smallCorners = themeData.split('$')[0];
+      const largeCorners = themeData.split('$')[1];
+      console.log(smallCorners + " - " + largeCorners);
+      setSmallCornerStyle(smallCorners);
+      setLargeCornerStyle(largeCorners);
       const wallUrl = doc.data().url;
       setWallpaperUrl(wallUrl);
     }).catch((error) => {
@@ -99,7 +136,7 @@ export default function LoginEditor(prop) {
         <button
           datatitle={props.tip}
           className="standardBtn greyBtn"
-          style={{ fontSize: 'large' }}
+          style={{ fontSize: 'large'}}
           onClick={props.onClick}
         >
           {props.icon}
@@ -113,7 +150,7 @@ export default function LoginEditor(prop) {
         <button
           datatitle='設定'
           className="standardBtn greyBtn"
-          style={{ fontSize: 'large', backgroundColor:`${openSettingsDropdown && 'white'}` }}
+          style={{ fontSize: 'large', backgroundColor:`${openSettingsDropdown && 'white'}`}}
           onClick={() => {
             setOpenSheetsDropdown(false);
             setOpenSettingsDropdown(!openSettingsDropdown);
@@ -131,7 +168,7 @@ export default function LoginEditor(prop) {
         <button
           datatitle='他の表'
           className="standardBtn greyBtn"
-          style={{ fontSize: 'large', backgroundColor:`${openSheetsDropdown && 'white'}` }}
+          style={{ fontSize: 'large', backgroundColor:`${openSheetsDropdown && 'white'}`}}
           onClick={(e) => {
             e.preventDefault();
             setOpenSettingsDropdown(false);
@@ -148,7 +185,10 @@ export default function LoginEditor(prop) {
   function DropdownSettings() {
     function DropdownItem(props) {
       return (
-          <a className="dropdownItem" href={props.link} onClick={props.click}>
+        <a
+          className="dropdownItem"
+          href={props.link}
+          onClick={props.click}>
           <span className="dropdownLeftIcon">{props.leftIcon}</span>
           {props.children}
           <span className="dropdownRightIcon">{props.rightIcon}</span>
@@ -188,8 +228,58 @@ export default function LoginEditor(prop) {
                 value={wallpaperUrl}
                 onChange={(w) => setWallpaperUrl(w.target.value)}
               />
-              <button type="submit" className="standardBtn greenBtn">保存</button>
+              <DeizuButton
+                btnClass="greenBtn"
+                btnIcon={<MdSave className="iconBtn" />}
+                btnName="保存"
+                btnType={"submit"}
+              />
+              {/* <button type="submit" className="standardBtn greenBtn">保存</button> */}
             </form>
+          </div>
+          <div className="submenuBox">
+            <div>
+              <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
+                <h3>テーマの変更</h3>
+                <DeizuButton
+                    btnClass="greenBtn"
+                    btnClick={saveTheme}
+                    btnIcon={<MdSave className="iconBtn" />}
+                    btnName="保存"
+                    />
+              </div>
+              <p>自分の好みにあった形状を選ぶことができます。</p>
+            </div>
+            <ThemeButton
+                btnClick={rDefault}
+                btnImg={null}
+                btnName="デフォルト"
+            />
+            <ThemeButton
+                btnClick={r20}
+                btnImg={null}
+                btnName="真ん丸"
+            />
+            <ThemeButton
+                btnClick={r0}
+                btnImg={null}
+                btnName="しかく"
+            />
+            <ThemeButton
+                btnClick={rCut}
+                btnImg={null}
+                btnName="切り抜き"
+            />
+            <ThemeButton
+                btnClick={rUnique}
+                btnImg={null}
+                btnName="ティアドロップ"
+            />
+            <ThemeButton
+                btnClick={rArt}
+                btnImg={null}
+                btnName="アブストラクト"
+            />
           </div>
         </div>
       </div>
@@ -303,7 +393,7 @@ export default function LoginEditor(prop) {
         </div>
         <section className={screenshotFrame} style={{overflowX: 'scroll', borderRadius:'20px'}}>
           <h1 className="screenshotTitle">{titleName}</h1>
-          {titleName ? <ScheduleGrid sheetTitle={titleName} /> : <p>［スーパーインプット］でタイトルを指定する必要がございます。<br/>なお、タイトルは一度指定すると変更することができませんのでご了承下さい。<br/>スーパーインプットはタイトルの指定以外にも、他の表のタイトルを入力すると時間割表が表示されので検索バーとしても使用できます。</p>}
+          {titleName ? <ScheduleGrid corner={smallCornerStyle} sheetTitle={titleName} /> : <p>［スーパーインプット］でタイトルを指定する必要がございます。<br/>なお、タイトルは一度指定すると変更することができませんのでご了承下さい。<br/>スーパーインプットはタイトルの指定以外にも、他の表のタイトルを入力すると時間割表が表示されので検索バーとしても使用できます。</p>}
         </section>
       </div>
     </>

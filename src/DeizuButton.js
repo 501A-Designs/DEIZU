@@ -6,6 +6,7 @@ export default function DeizuButton(props) {
             className={`standardBtn ${props.btnClass}`}
             onClick={props.btnClick}
             href={props.btnHref}
+            type={props.btnType}
         >
             {props.btnIcon}
             {props.btnName}
