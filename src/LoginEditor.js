@@ -3,10 +3,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { MdAddCircle,MdPerson,MdPalette,MdInfo,MdSettings, MdBackspace, MdList, MdCropFree, MdReplay, MdDirectionsRun, MdCode, MdKeyboardArrowUp,MdKeyboardArrowRight,MdKeyboardArrowLeft,MdSave } from 'react-icons/md';
 
-import firebase,{ auth, db } from './firebase';
+import { auth, db, root } from './firebase';
 import ScheduleGrid from './ScheduleGrid'
 import DeizuButton from './DeizuButton'
 import ThemeButton from './ThemeButton'
+import ThemeColorButton from './ThemeColorButton'
+import {Colors} from './themeColors'
+
 
 
 
@@ -34,12 +37,111 @@ export default function LoginEditor(prop) {
   const [titleName, setTitleValue] = useState(prop.dashSheetTitle);
   const [screenshotFrame, setScreenshotFrame] = useState('');
 
-  // Custom Cutouts
-  const [smallCornerStyle, setSmallCornerStyle] = useState('5px');
-  const [largeCornerStyle, setLargeCornerStyle] = useState('10px');
-  const root = document.documentElement;
+  // Theme State From Dashboard
+  const [smallCornerStyle, setSmallCornerStyle] = useState(prop.dSCS);
+  const [largeCornerStyle, setLargeCornerStyle] = useState(prop.dLCS);
+  const [systemColorStyle, setSystemColorStyle] = useState(prop.systemColorProp);
 
-
+  // Theme Color
+  const cDefault = () => {
+    setSystemColorStyle(
+      [
+        Colors.default.system0,
+        Colors.default.system1,
+        Colors.default.system3,
+        Colors.default.system3,
+        Colors.default.txtColor0
+      ]
+    );
+  }
+  const cYellowGrey = () => {
+      setSystemColorStyle(
+        [
+          Colors.yellowGrey.system0,
+          Colors.yellowGrey.system1,
+          Colors.yellowGrey.system3,
+          Colors.yellowGrey.system3,
+          Colors.yellowGrey.txtColor0
+        ]
+      );
+  }
+  const cGreyBlack = () => {
+      setSystemColorStyle(
+        [
+          Colors.greyBlack.system0,
+          Colors.greyBlack.system1,
+          Colors.greyBlack.system2,
+          Colors.greyBlack.system3,
+          Colors.greyBlack.txtColor0
+        ]
+      );
+  }
+  const cBrown = () => {
+      setSystemColorStyle(
+        [
+          Colors.brown.system0,
+          Colors.brown.system1,
+          Colors.brown.system2,
+          Colors.brown.system3,
+          Colors.brown.txtColor0
+        ]
+      );
+  }
+  const cBlueWhite = () => {
+    setSystemColorStyle(
+      [
+        Colors.blueWhite.system0,
+        Colors.blueWhite.system1,
+        Colors.blueWhite.system2,
+        Colors.blueWhite.system3,
+        Colors.blueWhite.txtColor0
+      ]
+    );
+  }
+  const cLightGreen = () => {
+    setSystemColorStyle(
+      [
+        Colors.lightGreen.system0,
+        Colors.lightGreen.system1,
+        Colors.lightGreen.system2,
+        Colors.lightGreen.system3,
+        Colors.lightGreen.txtColor0
+      ]
+    );
+  }
+  const cDeepOrange = () => {
+    setSystemColorStyle(
+      [
+        Colors.deepOrange.system0,
+        Colors.deepOrange.system1,
+        Colors.deepOrange.system2,
+        Colors.deepOrange.system3,
+        Colors.deepOrange.txtColor0
+      ]
+    );
+  }
+  const cBlueGrey = () => {
+    setSystemColorStyle(
+      [
+        Colors.blueGrey.system0,
+        Colors.blueGrey.system1,
+        Colors.blueGrey.system2,
+        Colors.blueGrey.system3,
+        Colors.blueGrey.txtColor0
+      ]
+    );
+  }
+  const cDeepPurple = () => {
+    setSystemColorStyle(
+      [
+        Colors.deepPurple.system0,
+        Colors.deepPurple.system1,
+        Colors.deepPurple.system2,
+        Colors.deepPurple.system3,
+        Colors.deepPurple.txtColor0
+      ]
+    );
+  }
 
   function rDefault() { setSmallCornerStyle('5px'); setLargeCornerStyle('10px'); };
   function r20() {setSmallCornerStyle('20px');setLargeCornerStyle('30px'); };
@@ -64,6 +166,12 @@ export default function LoginEditor(prop) {
     }, { merge: true });
     alert('テーマを保存できました');
   }
+  const saveThemeColor = () => {
+    dataRef.doc(user.uid).set({
+      themeColor: systemColorStyle
+    }, { merge: true });
+    alert('色を保存できました');
+  }
 
   function SignOut() {
     return auth.currentUser && (
@@ -78,8 +186,14 @@ export default function LoginEditor(prop) {
     )
   }
   useEffect(() => {
+    document.title=`${titleName}`
     root?.style.setProperty("--r5", smallCornerStyle);
     root?.style.setProperty("--r10", largeCornerStyle);
+    root?.style.setProperty("--system0", systemColorStyle[0]);
+    root?.style.setProperty("--system1", systemColorStyle[1]);
+    root?.style.setProperty("--system2", systemColorStyle[2]);
+    root?.style.setProperty("--system3", systemColorStyle[3]);
+    root?.style.setProperty("--txtColor0", systemColorStyle[4]);
   })
 
   const showProfile = () => {
@@ -117,12 +231,12 @@ export default function LoginEditor(prop) {
   }
   useEffect(() => {
     dataRef.doc(user.uid).get().then((doc) => {
-      const themeData = doc.data().theme;
-      const smallCorners = themeData.split('$')[0];
-      const largeCorners = themeData.split('$')[1];
-      console.log(smallCorners + " - " + largeCorners);
-      setSmallCornerStyle(smallCorners);
-      setLargeCornerStyle(largeCorners);
+      // const themeData = doc.data().theme;
+      // const smallCorners = themeData.split('$')[0];
+      // const largeCorners = themeData.split('$')[1];
+      // console.log(smallCorners + " - " + largeCorners);
+      // setSmallCornerStyle(smallCorners);
+      // setLargeCornerStyle(largeCorners);
       const wallUrl = doc.data().url;
       setWallpaperUrl(wallUrl);
     }).catch((error) => {
@@ -135,8 +249,7 @@ export default function LoginEditor(prop) {
       <>
         <button
           datatitle={props.tip}
-          className="standardBtn greyBtn"
-          style={{ fontSize: 'large'}}
+          className="standardBtn greyBtn iconBtn"
           onClick={props.onClick}
         >
           {props.icon}
@@ -149,8 +262,8 @@ export default function LoginEditor(prop) {
       <>
         <button
           datatitle='設定'
-          className="standardBtn greyBtn"
-          style={{ fontSize: 'large', backgroundColor:`${openSettingsDropdown && 'white'}`}}
+          className="standardBtn greyBtn iconBtn"
+          style={{backgroundColor:`${openSettingsDropdown && 'var(--system1)'}`}}
           onClick={() => {
             setOpenSheetsDropdown(false);
             setOpenSettingsDropdown(!openSettingsDropdown);
@@ -167,8 +280,8 @@ export default function LoginEditor(prop) {
       <>
         <button
           datatitle='他の表'
-          className="standardBtn greyBtn"
-          style={{ fontSize: 'large', backgroundColor:`${openSheetsDropdown && 'white'}`}}
+          className="standardBtn greyBtn iconBtn"
+          style={{backgroundColor:`${openSheetsDropdown && 'var(--system1)'}`}}
           onClick={(e) => {
             e.preventDefault();
             setOpenSettingsDropdown(false);
@@ -281,6 +394,86 @@ export default function LoginEditor(prop) {
                 btnName="アブストラクト"
             />
           </div>
+          <div className="submenuBox">
+            <div>
+              <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
+                <h3>色の変更</h3>
+                <DeizuButton
+                    btnClass="greenBtn"
+                    btnClick={saveThemeColor}
+                    btnIcon={<MdSave className="iconBtn" />}
+                    btnName="保存"
+                    />
+              </div>
+              <p>自分の好みにあった色を選ぶことができます。</p>
+            </div>
+            <div className="slideSide">
+              <ThemeColorButton
+                btnClick={cDefault}
+                btnTabColor0={Colors.default.system0}
+                btnTabColor1={Colors.default.system1}
+                btnTabColor2={Colors.default.system2}
+                btnTabColor3={Colors.default.system3}
+              />
+              <ThemeColorButton
+                btnClick={cGreyBlack}
+                btnTabColor0={Colors.greyBlack.system0}
+                btnTabColor1={Colors.greyBlack.system1}
+                btnTabColor2={Colors.greyBlack.system2}
+                btnTabColor3={Colors.greyBlack.system3}
+              />
+              <ThemeColorButton
+                btnClick={cBlueWhite}
+                btnTabColor0={Colors.blueWhite.system0}
+                btnTabColor1={Colors.blueWhite.system1}
+                btnTabColor2={Colors.blueWhite.system2}
+                btnTabColor3={Colors.blueWhite.system3}
+              />
+              <ThemeColorButton
+                btnClick={cYellowGrey}
+                btnTabColor0={Colors.yellowGrey.system0}
+                btnTabColor1={Colors.yellowGrey.system1}
+                btnTabColor2={Colors.yellowGrey.system2}
+                btnTabColor3={Colors.yellowGrey.system3}
+              />
+              <ThemeColorButton
+                btnClick={cBrown}
+                btnTabColor0={Colors.brown.system0}
+                btnTabColor1={Colors.brown.system1}
+                btnTabColor2={Colors.brown.system2}
+                btnTabColor3={Colors.brown.system3}
+              />
+              <ThemeColorButton
+                btnClick={cLightGreen}
+                btnTabColor0={Colors.lightGreen.system0}
+                btnTabColor1={Colors.lightGreen.system1}
+                btnTabColor2={Colors.lightGreen.system2}
+                btnTabColor3={Colors.lightGreen.system3}
+              />
+              <ThemeColorButton
+                btnClick={cDeepOrange}
+                btnTabColor0={Colors.deepOrange.system0}
+                btnTabColor1={Colors.deepOrange.system1}
+                btnTabColor2={Colors.deepOrange.system2}
+                btnTabColor3={Colors.deepOrange.system3}
+              />
+              <ThemeColorButton
+                btnClick={cBlueGrey}
+                btnTabColor0={Colors.blueGrey.system0}
+                btnTabColor1={Colors.blueGrey.system1}
+                btnTabColor2={Colors.blueGrey.system2}
+                btnTabColor3={Colors.blueGrey.system3}
+              />
+              <ThemeColorButton
+                btnClick={cDeepPurple}
+                btnTabColor0={Colors.deepPurple.system0}
+                btnTabColor1={Colors.deepPurple.system1}
+                btnTabColor2={Colors.deepPurple.system2}
+                btnTabColor3={Colors.deepPurple.system3}
+              />
+              
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -302,7 +495,7 @@ export default function LoginEditor(prop) {
               </section>;
             });
           } else {
-        itemsToRender = <p><h3>作成した時間割表はありません。</h3>作成表が表示されない場合更新ボタンを押して下さい</p>;
+        itemsToRender = <p style={{color:'var(--txtColor0'}}><h3>作成した時間割表はありません。</h3>作成表が表示されない場合更新ボタンを押して下さい</p>;
       }
       return <>{itemsToRender}</>;
     }
@@ -393,7 +586,7 @@ export default function LoginEditor(prop) {
         </div>
         <section className={screenshotFrame} style={{overflowX: 'scroll', borderRadius:'20px'}}>
           <h1 className="screenshotTitle">{titleName}</h1>
-          {titleName ? <ScheduleGrid corner={smallCornerStyle} sheetTitle={titleName} /> : <p>［スーパーインプット］でタイトルを指定する必要がございます。<br/>なお、タイトルは一度指定すると変更することができませんのでご了承下さい。<br/>スーパーインプットはタイトルの指定以外にも、他の表のタイトルを入力すると時間割表が表示されので検索バーとしても使用できます。</p>}
+          {titleName ? <ScheduleGrid corner={smallCornerStyle} selectorColor={systemColorStyle} sheetTitle={titleName} /> : <p>［スーパーインプット］でタイトルを指定する必要がございます。<br/>なお、タイトルは一度指定すると変更することができませんのでご了承下さい。<br/>スーパーインプットはタイトルの指定以外にも、他の表のタイトルを入力すると時間割表が表示されので検索バーとしても使用できます。</p>}
         </section>
       </div>
     </>

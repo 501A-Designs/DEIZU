@@ -84,5 +84,6 @@ export const options = [
     { value: '家庭科', label: '家庭科' },
     { value: '情報', label: '情報' },
     { value: '技術', label: '技術' },
+    { value: '', label: '' },
     
 ]

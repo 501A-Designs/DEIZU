@@ -75,7 +75,7 @@ export default function TimeLabel(props) {
                 className="popup"
             >
                 <form className="modalForm" onSubmit={saveTime}>
-                <h2>時間を設定</h2>
+                <h2 style={{color:'var(--txtColor0'}}>時間を設定</h2>
                     <input
                         type="time"
                         placeholder="始め"

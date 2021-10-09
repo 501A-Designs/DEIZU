@@ -4,15 +4,66 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import {MdAddCircle,MdPhotoFilter,MdArrowBack} from 'react-icons/md';
 import './App.css';
 
-import { auth,db } from './firebase';
+import { auth,db,root } from './firebase';
 import LoginEditor from './LoginEditor'
 import DeizuButton from './DeizuButton'
 
 
 
 export default function Dashboard() {
+    const [user] = useAuthState(auth);
+    const dataRef = db.collection('users');
     const [component, setComponent] = useState(null);
     const [titleName, setTitleValue] = useState('');
+
+    // Theme State
+    const [dashSmallCornerStyle, setDashSmallCornerStyle] = useState('5px');
+    const [dashLargeCornerStyle, setDashLargeCornerStyle] = useState('10px');
+    // system1, system2, highlight0
+    const [dashSystemColorStyle, setDashSystemColorStyle] = useState(
+        [
+            'white',
+            '#ffecfc',
+            '#f3f3f3',
+            '#e2e2e2',
+            'black'
+        ]);
+
+    useEffect(() => {
+        root?.style.setProperty("--r5", dashSmallCornerStyle);
+        root?.style.setProperty("--r10", dashLargeCornerStyle);
+        root?.style.setProperty("--system0", dashSystemColorStyle[0]);
+        root?.style.setProperty("--system1", dashSystemColorStyle[1]);
+        root?.style.setProperty("--system2", dashSystemColorStyle[2]);
+        root?.style.setProperty("--system3", dashSystemColorStyle[3]);
+        root?.style.setProperty("--txtColor0", dashSystemColorStyle[4]);
+    })
+    useEffect(() => {
+        dataRef.doc(user.uid).get().then((doc) => {
+            const themeData = doc.data().theme;
+            const themeColorData = doc.data().themeColor;
+            const themeColor1 = themeColorData[0];
+            const themeColor2 = themeColorData[1];
+            const themeColor3 = themeColorData[2];
+            const themeColor4 = themeColorData[3];
+            const themeColor5 = themeColorData[4];
+            const smallCorners = themeData.split('$')[0];
+            const largeCorners = themeData.split('$')[1];
+            setDashSmallCornerStyle(smallCorners);
+            setDashLargeCornerStyle(largeCorners);
+            setDashSystemColorStyle(
+                [
+                    themeColor1,
+                    themeColor2,
+                    themeColor3,
+                    themeColor4,
+                    themeColor5
+                ]);
+            // console.log(dashSystemColorStyle)
+        }).catch((error) => {
+          console.log("Error getting document:", error);
+        });
+      },[dashSmallCornerStyle])
     
     function DashboardMenu() {
         const [user] = useAuthState(auth);
@@ -62,12 +113,12 @@ export default function Dashboard() {
                 <section className="duoGrid" style={{gap: '3em'}}>
                     <div className="centerDiv">
                         <img alt="no profile img found" className="profileImg" src={auth.currentUser.photoURL}/>
-                        <h1 style={{ fontSize: '3.5em', marginBottom:'15px' }}>{firstName}さん</h1>
-                            <h1>👋 こんにちわ</h1>
+                        <h1 style={{ fontSize: '3.5em', marginBottom:'15px', color:'var(--txtColor0' }}>{firstName}さん</h1>
+                        <h1 style={{ color:'var(--txtColor0'}}>👋 こんにちわ</h1>
                     </div>
                     <div className="centerDiv">
                         <section className="card">
-                            <h1 className="classicHeader">ダッシュボード</h1>
+                            <h1>ダッシュボード</h1>
                             <p>{fullName}さん、DEIZUへようこそ！<br />こちらが{firstName}さんのDEIZUダッシュボードとなります。下のボタンで新しい時間割表を作成することができます。また、これまで作成した時間割表も閲覧し更新することができます！</p>
                             <br />
                                 <span className="alignItems">
@@ -90,7 +141,14 @@ export default function Dashboard() {
 
     return (
         <>
-            {component ? <LoginEditor dashSheetTitle={titleName} />: <DashboardMenu />}
+            {component ?
+                <LoginEditor
+                    dSCS={dashSmallCornerStyle}
+                    dLCS={dashLargeCornerStyle}
+                    systemColorProp={dashSystemColorStyle}
+                    dashSheetTitle={titleName}
+                /> : <DashboardMenu />
+            }
         </>
     )
 }

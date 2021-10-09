@@ -15,12 +15,16 @@ import Modal from 'react-modal';
 
 export default function ScheduleCell(props) {
     const cornerProp = props.corner;
+    const selectorColorProp = props.selectorColor;
+    // const selectorBackgroundColor = selectorColorProp[1];
+    // const selectorBorderColor = selectorColorProp[3];
+
     const [user] = useAuthState(auth);
     const modalStyle = {
         overlay: {
             background: `radial-gradient(
                 86.36% 107.55% at 6.49% 12.32%,
-                rgba(255, 255, 255, 0.5) 0%,
+                ${selectorColorProp[3]} 0%,
                 rgba(255, 255, 255, 0.5) 100%
             )`,
             backdropFilter: `blur(16px)`
@@ -52,6 +56,8 @@ export default function ScheduleCell(props) {
             paddingLeft: 15,
             width: '95%',
             marginRight: 5,
+            backgroundColor: state.isFocused ? `${selectorColorProp[2]}` : 0,
+            color: state.isFocused ? `${selectorColorProp[4]}` : 0,
             boxShadow: state.isFocused ? '0px 1px 3px lightgray' : 0,
             fontWeight: state.isFocused ? 'bold' : 0,
             cursor: 'pointer',
@@ -63,9 +69,10 @@ export default function ScheduleCell(props) {
             padding: 1,
             outline: 'none',
             borderRadius: `${cornerProp}`,
-            border: '0px solid transparent',
-            boxShadow: state.isFocused ? '0px 5px 10px lightgray' : 0,
-            backgroundColor: state.isFocused ? 'white':'#ebebeb',
+            // border: '0px solid transparent',
+            border: 0,
+            boxShadow: 0,
+            backgroundColor: state.isFocused ? 'white' : `${selectorColorProp[2]}`,
             transition: '0.5s',
         }),
         menuPortal: base => ({ ...base, zIndex: 100 })
@@ -74,8 +81,8 @@ export default function ScheduleCell(props) {
         theme => ({
             ...theme,
             colors: {
-              ...theme.colors,
-              primary: 'lightgray',
+                ...theme.colors,
+              primary: `${selectorColorProp[3]}`,
             },
         })
     ]

@@ -1,11 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap");
-$border: 1px solid lightgray;
-$glassBorder: 1px solid rgba(228, 228, 228, 0.3);
 
 :root {
 	--r10: 10px;
 	--r5: 5px;
+	// Colors
+	--system0: white;
+	--system1: #f5f5f5;
+	--system2: #f3f3f3;
+	--system3: #e2e2e2;
+	// --system3: #e2e2e2;
+
+	// --system0: rgb(255, 254, 252);
+	// --system1: white;
+	// --light0: rgb(226, 226, 226);
+	// --highlight1: rgb(243, 243, 243);
+	--txtColor0: black;
 }
+$border: 2px solid var(--system3);
+$glassBorder: 1px solid rgba(228, 228, 228, 0.3);
 
 $btnMargin: 5px;
 $btnPadding: 8px 12px 8px 12px;
@@ -13,8 +25,6 @@ $miniBtnPadding: 0.5em 1em 0.5em 1em;
 $padding: 15px;
 $margin: 15px;
 
-$veryLightGrey: rgb(243, 243, 243);
-$lightGrey: rgb(226, 226, 226);
 $lightBlue: #c1dde1;
 $blue: #006372;
 $lightGreen: #bae3a7;
@@ -23,17 +33,21 @@ $lightYellow: #ffde88;
 $yellow: #6f5000;
 $red: #720000;
 $lightRed: #e3a7a7;
-$systemWhite: rgb(255, 254, 252);
 
-$lightBorder: 1px solid $lightGrey;
-$floatBoxShadow: 0px 1px 20px rgb(230, 230, 230);
+$lightBorder: 1px solid var(--system3);
+// $floatBoxShadow: 0px 1px 20px rgb(230, 230, 230);
+$floatBoxShadow: 0px 1px 20px var(--system2);
 
-$lightBoxShadow: 0px 5px 10px $lightGrey;
-$heavyBoxShadow: 0px 7px 15px $lightGrey;
+$lightBoxShadow: 0px 5px 10px var(--system2);
+$heavyBoxShadow: 0px 7px 15px var(--system2);
 
 $scale: scale3d(1.05, 1.05, 1.05);
 
 $transitionSpeed: 0.5s;
+
+body {
+	background-color: var(--system0);
+}
 
 ::-webkit-scrollbar {
 	width: 5px;
@@ -41,7 +55,7 @@ $transitionSpeed: 0.5s;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: $lightGrey;
+	background: var(--system3);
 	border-radius: 10px 0px 0px 10px;
 }
 
@@ -55,7 +69,7 @@ $transitionSpeed: 0.5s;
 .versionBadge {
 	user-select: none;
 	border-radius: var(--r10);
-	background-color: $lightGrey;
+	background-color: var(--system2);
 	color: grey;
 	padding: $padding/2 $padding;
 }
@@ -65,7 +79,7 @@ h1 {
 	font-weight: bold;
 }
 h4 a {
-	color: black;
+	color: var(--txtColor0);
 	text-decoration: none;
 }
 * {
@@ -97,7 +111,7 @@ footer {
 }
 footer {
 	@include blurEffect;
-	border: $glassBorder;
+	border: $border;
 	position: sticky;
 	box-shadow: $floatBoxShadow;
 	// box-shadow: 0px -5px 10px -4px rgb(230, 230, 230);
@@ -185,11 +199,33 @@ a {
 	}
 	&:hover {
 		cursor: pointer;
-		background-color: $veryLightGrey;
+		background-color: var(--system3);
 	}
 }
-.largeIcon {
-	font-size: 25px;
+.themeColorBtn {
+	border: 2px solid transparent;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	width: auto;
+	width: min-content;
+	gap: $margin/5;
+	padding: $padding/2;
+	border-radius: var(--r5);
+	div {
+		width: 15px;
+		height: 15px;
+		border-radius: var(--r5);
+	}
+	&:hover {
+		cursor: pointer;
+		border: $border;
+	}
+}
+// .largeIcon {
+// 	font-size: 25px;
+// }
+.iconBtn {
+	font-size: large;
 }
 
 .alignItems {
@@ -218,7 +254,7 @@ a {
 	}
 	.periodLabel {
 		@include blurEffect;
-		border: 1px solid transparent;
+		border: 2px solid transparent;
 		border-radius: var(--r5);
 		padding: $padding / 3;
 		margin: 0;
@@ -226,7 +262,7 @@ a {
 		transition: $transitionSpeed/5;
 		&:hover {
 			border: $border;
-			background-color: $systemWhite;
+			background-color: var(--system0);
 		}
 		.periodAlign {
 			margin: 0;
@@ -239,9 +275,10 @@ a {
 				margin: 0;
 			}
 			time {
-				color: rgb(87, 87, 87);
+				// color: rgb(87, 87, 87);
+				color: var(--txtColor0);
 				border-radius: var(--r5);
-				background-color: $veryLightGrey;
+				background-color: var(--system3);
 				padding: 2px 5px;
 			}
 		}
@@ -252,11 +289,12 @@ a {
 		@include blurEffect;
 		border-radius: var(--r10);
 		width: fit-content;
+		height: fit-content;
 		padding: 10px $padding;
 	}
 	#dayLabelToday {
 		cursor: pointer;
-		background-color: $systemWhite;
+		background-color: var(--system2);
 		border: $border;
 		// box-shadow: $lightBoxShadow;
 		&::before {
@@ -274,8 +312,7 @@ a {
 		border-radius: var(--r5);
 		font-weight: bold;
 		height: 100%;
-		// @include blurEffect;
-		background-color: $veryLightGrey;
+		background-color: var(--system2);
 		transition: $transitionSpeed/5;
 
 		h2 {
@@ -300,7 +337,7 @@ a {
 	.cellHover:hover,
 	.cellNameHover:hover .cell {
 		cursor: pointer;
-		background-color: $systemWhite;
+		background-color: var(--system1);
 	}
 }
 
@@ -311,17 +348,17 @@ a {
 .deizuInput,
 input[type="time"] {
 	@include blurEffect;
-	background-color: lightgray;
-	border: 1px solid transparent;
+	background-color: var(--system3);
+	border: 2px solid transparent;
 	padding: 10px;
 	outline: none;
 	transition: 0.5s;
 	border-radius: var(--r5);
 	transition: $transitionSpeed;
 	&:focus {
-		// border: $border;
-		background-color: white;
-		box-shadow: $lightBoxShadow;
+		border: $border;
+		background-color: var(--system0);
+		// box-shadow: $lightBoxShadow;
 	}
 }
 select {
@@ -351,12 +388,17 @@ select {
 }
 
 .card {
+	color: var(--txtColor0);
 	padding: $padding * 2;
 	margin: $margin;
 	border-radius: var(--r10);
 	box-shadow: $floatBoxShadow;
+	// border: $border;
 	min-width: 300px;
 	max-width: 600px;
+	h1 {
+		padding: $padding;
+	}
 }
 
 .blue {
@@ -382,28 +424,28 @@ select {
 // Button Colors
 .greenBtn {
 	background-color: $lightGreen;
-	border: 1px solid $lightGreen;
+	border: 2px solid $lightGreen;
 	color: $green;
 }
 .blueBtn {
 	background-color: $lightBlue;
-	border: 1px solid $lightBlue;
+	border: 2px solid $lightBlue;
 	color: $blue;
 }
 .yellowBtn {
 	background-color: $lightYellow;
-	border: 1px solid $lightYellow;
+	border: 2px solid $lightYellow;
 	color: $yellow;
 }
 .redBtn {
 	background-color: $lightRed;
-	border: 1px solid $lightRed;
+	border: 2px solid $lightRed;
 	color: $red;
 }
 .greyBtn {
-	background-color: $lightGrey;
-	border: 1px solid $lightGrey;
-	color: rgb(90, 90, 90);
+	background-color: var(--system3);
+	border: 2px solid var(--system3);
+	color: var(--txtColor0);
 }
 
 .closeBtn {
@@ -426,8 +468,8 @@ select {
 			content: "✕";
 		}
 		&:hover {
-			color: grey;
-			background-color: $lightGrey;
+			color: var(--txtColor0);
+			background-color: var(--system2);
 		}
 	}
 }
@@ -447,11 +489,28 @@ select {
 	}
 }
 
+@mixin slideSide {
+	display: flex;
+	justify-content: right;
+	flex-direction: row;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	&::-webkit-scrollbar-thumb {
+		background: var(--system3);
+		border-radius: 10px 10px 0px 0px;
+	}
+}
+.slideSide {
+	@include slideSide;
+	padding-bottom: $padding * 3;
+	gap: $margin/3;
+}
+
 //Popup
 .popup {
 	border-radius: var(--r10);
 	padding: $padding;
-	background-color: white;
+	background-color: var(--system0);
 	box-shadow: $heavyBoxShadow;
 	border: $border;
 	// width: 80%;
@@ -490,10 +549,10 @@ select {
 			display: flex;
 			flex-direction: row;
 			align-items: center;
-			background-color: $veryLightGrey;
-			margin: $btnMargin;
 			border-radius: var(--r5);
 			width: min-content;
+			background-color: var(--system3);
+			margin: $btnMargin;
 			input[type="color"] {
 				border-radius: var(--r5);
 				width: 40px;
@@ -529,7 +588,7 @@ select {
 		margin: 5px 0px 0px 0px;
 		overflow-x: auto;
 		&::-webkit-scrollbar-thumb {
-			background: $lightGrey;
+			background: var(--system3);
 			border-radius: 10px 10px 0px 0px;
 		}
 	}
@@ -545,7 +604,8 @@ select {
 	}
 }
 .displayDescription {
-	background-color: $veryLightGrey;
+	color: var(--txtColor0);
+	background-color: var(--system3);
 	border-radius: var(--r5);
 	padding: $padding/3;
 	margin: $margin/3;
@@ -553,7 +613,7 @@ select {
 
 .cautionBanner {
 	padding: $padding * 2;
-	border: 1px solid rgb(232, 145, 145);
+	border: 2px solid rgb(232, 145, 145);
 	border-radius: var(--r5);
 	background-color: rgb(255, 204, 204);
 	margin: 0;
@@ -566,7 +626,7 @@ select {
 
 .screenshotMode {
 	// @include blurEffect;
-	background-color: $systemWhite;
+	background-color: var(--system0);
 	user-select: none;
 	z-index: 4;
 	overflow-x: scroll;
@@ -730,18 +790,11 @@ select {
 	margin-top: $margin * 2;
 }
 .colors {
+	@include slideSide;
 	padding: $padding;
 	margin: 0 $margin;
-	display: flex;
 	gap: 5px;
-	justify-content: right;
-	flex-direction: row;
-	overflow-x: scroll;
 	margin-bottom: $margin;
-	&::-webkit-scrollbar-thumb {
-		background: $lightGrey;
-		border-radius: 10px 10px 0px 0px;
-	}
 }
 .modalForm {
 	padding: $padding;
@@ -784,12 +837,12 @@ select {
 		bottom: -2.5em;
 		left: 50%;
 		padding: $padding/3 $padding/2;
-		color: black;
 		white-space: nowrap;
 		-moz-border-radius: var(--r5);
 		-webkit-border-radius: var(--r5);
 		border-radius: var(--r5);
-		background-color: white;
+		color: var(--txtColor0);
+		background-color: var(--system0);
 		// @include blurEffect;
 		opacity: 0;
 		visibility: hidden;
@@ -802,12 +855,13 @@ select {
 	overflow-y: scroll;
 	border-radius: var(--r10);
 	section {
+		// background-color: var(--system0);
 		padding: $padding;
 		border-radius: var(--r5);
 		transition: $transitionSpeed/2;
 		&:hover {
 			cursor: pointer;
-			background-color: $veryLightGrey;
+			background-color: var(--system3);
 			font-weight: bold;
 		}
 	}
@@ -852,8 +906,10 @@ select {
 .profileImg {
 	margin-top: 5%;
 	// border-radius: 37% 63% 41% 59% / 67% 54% 46% 33%;
-	border-radius: 40px;
-	border: 5px solid rgba(228, 228, 228, 0.3);
+	// border-radius: 40px;
+	border-radius: var(--r10);
+	// border: 5px solid rgba(228, 228, 228, 0.3);
+	border: $border;
 	width: 130px;
 	height: 130px;
 }
@@ -893,63 +949,62 @@ details {
 
 .dropdown {
 	position: absolute;
-	// top: 140px;
 	transform: translateX(-5%) translateY(20%);
-	// transform: translateY(50%);
-
 	border-radius: var(--r10);
 	width: 300px;
-	// min-height: 200px;
 	height: 240px;
 	border: $border;
 	padding: $padding;
 	overflow-y: auto;
 	overflow-x: hidden;
-	background-color: white;
 	z-index: 10;
+	background-color: var(--system0);
 	box-shadow: $heavyBoxShadow;
 	animation: othersCardAni $transitionSpeed;
 	.dropdownLeftIcon {
+		color: var(--txtColor0);
+		background-color: var(--system3);
 		border-radius: var(--r5);
 		font-size: large;
 		padding: $padding/3 $padding/1.5;
 		margin-right: $margin;
 		margin-left: $margin/2;
-		background-color: lightgray;
 	}
 	.dropdownRightIcon {
+		color: var(--system3);
 		margin-left: auto;
 		padding-right: $padding;
 	}
 }
 .dropdownItem,
 .dropdownItemSheet {
+	color: var(--txtColor0);
+
 	text-decoration: none;
 	cursor: pointer;
-	color: black;
 	height: 50px;
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
 	border-radius: var(--border-radius);
 	transition: background var(--speed);
 	padding: $padding/3;
 	&:hover {
-		background-color: $veryLightGrey;
+		background-color: var(--system1);
 		border-radius: var(--r5);
 	}
 }
 .dropdownItemSheet {
 	padding-left: $padding;
-	display: flex;
-	justify-content: space-between;
 	time {
+		color: var(--txtColor0);
 		font-size: 12px;
 		float: right;
 		border-radius: var(--r5);
 		padding: $padding/3 $padding/1.5;
 		margin-right: $margin/2;
 		margin-left: $margin;
-		background-color: lightgray;
+		background-color: var(--system3);
 		transition: $transitionSpeed;
 	}
 }
@@ -957,12 +1012,13 @@ details {
 .submenuBox {
 	margin-top: $margin;
 	border-radius: var(--r5);
-	border: $border;
+	// border: $border;
+	color: var(--txtColor0);
+	background-color: var(--system1);
 	padding: $padding;
 }
 .profileSectionFlex {
 	border-radius: var(--r5);
-	// border: $border;
 	padding: $padding;
 	display: flex;
 	gap: $margin;
@@ -974,7 +1030,8 @@ details {
 		border-radius: var(--r10);
 	}
 	h3,
-	p {
+	small {
+		color: var(--txtColor0);
 		margin: 0;
 	}
 }
