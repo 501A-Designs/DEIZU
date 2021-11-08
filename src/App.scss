@@ -28,7 +28,7 @@ $margin: 15px;
 $lightBlue: #c1dde1;
 $blue: #006372;
 $lightGreen: #bae3a7;
-$green: #266300;
+$green: #72db30de;
 $lightYellow: #ffde88;
 $yellow: #6f5000;
 $red: #720000;
@@ -73,6 +73,11 @@ body {
 	color: grey;
 	padding: $padding/2 $padding;
 }
+hr {
+	margin: 0 $padding * -2;
+	background-color: var(--system3);
+	border: $glassBorder;
+}
 
 h1 {
 	font-size: 2em;
@@ -85,6 +90,15 @@ h4 a {
 * {
 	font-family: "Sawarabi Gothic", sans-serif;
 	// font-family: Arial, Helvetica, sans-serif;
+}
+
+.versionSegment {
+	box-sizing: border-box;
+	display: flex;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: $padding * -1.7;
 }
 
 @mixin blurEffect {
@@ -105,27 +119,8 @@ h4 a {
 	padding: $padding;
 }
 
-header,
-footer {
+header {
 	user-select: none;
-}
-footer {
-	@include blurEffect;
-	border: $border;
-	position: sticky;
-	box-shadow: $floatBoxShadow;
-	// box-shadow: 0px -5px 10px -4px rgb(230, 230, 230);
-	border-radius: var(--r10);
-	width: auto;
-	bottom: $margin;
-	margin: 1em;
-	z-index: 20;
-	padding: $padding/4 $padding;
-	box-sizing: border-box;
-	display: flex;
-	-webkit-justify-content: space-between;
-	justify-content: space-between;
-	align-items: center;
 }
 
 .startMenu {
@@ -140,11 +135,6 @@ footer {
 	}
 	button {
 		margin-bottom: 10px;
-		&:hover {
-			&::after {
-				content: " →";
-			}
-		}
 	}
 }
 
@@ -173,10 +163,9 @@ a {
 	outline: none;
 	cursor: pointer;
 	transition: $transitionSpeed / 2;
-
 	&:hover {
 		transform: $scale;
-		filter: brightness(105%);
+		// filter: brightness(105%);
 		box-shadow: $floatBoxShadow;
 	}
 }
@@ -275,7 +264,6 @@ a {
 				margin: 0;
 			}
 			time {
-				// color: rgb(87, 87, 87);
 				color: var(--txtColor0);
 				border-radius: var(--r5);
 				background-color: var(--system3);
@@ -341,13 +329,10 @@ a {
 	}
 }
 
-// width: 70%;
-// max-width: 300px;
-// font-size: 30px;
-
 .deizuInput,
 input[type="time"] {
 	@include blurEffect;
+	background: none;
 	background-color: var(--system3);
 	border: 2px solid transparent;
 	padding: 10px;
@@ -396,9 +381,9 @@ select {
 	// border: $border;
 	min-width: 300px;
 	max-width: 600px;
-	h1 {
-		padding: $padding;
-	}
+	// h1 {
+	// 	padding: $padding;
+	// }
 }
 
 .blue {
@@ -414,33 +399,12 @@ select {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	margin: 2.2em 0;
 
 	button {
 		width: 200px;
 		// min-width: 100px;
 	}
-}
-
-// Button Colors
-.greenBtn {
-	background-color: $lightGreen;
-	border: 2px solid $lightGreen;
-	color: $green;
-}
-.blueBtn {
-	background-color: $lightBlue;
-	border: 2px solid $lightBlue;
-	color: $blue;
-}
-.yellowBtn {
-	background-color: $lightYellow;
-	border: 2px solid $lightYellow;
-	color: $yellow;
-}
-.redBtn {
-	background-color: $lightRed;
-	border: 2px solid $lightRed;
-	color: $red;
 }
 .greyBtn {
 	background-color: var(--system3);
@@ -633,6 +597,7 @@ select {
 	transition: $transitionSpeed * 2;
 	box-shadow: $heavyBoxShadow;
 	transform: translateY(-15%);
+	padding: 2px;
 
 	.screenshotTitle {
 		text-align: center;
@@ -662,9 +627,6 @@ select {
 
 // Media Queries
 @media screen and (max-width: 400px) {
-	footer {
-		display: none;
-	}
 	.duoGrid {
 		grid-template-columns: 1fr;
 	}
@@ -695,9 +657,6 @@ select {
 	}
 }
 @media screen and (min-width: 401px) and (max-width: 500px) {
-	footer {
-		display: none;
-	}
 	.duoGrid {
 		grid-template-columns: 1fr;
 	}
@@ -731,9 +690,6 @@ select {
 	}
 }
 @media screen and (min-width: 501px) and (max-width: 1000px) {
-	footer {
-		display: none;
-	}
 	.duoGrid {
 		grid-template-columns: 1fr;
 	}

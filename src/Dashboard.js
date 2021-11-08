@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import {MdAddCircle,MdPhotoFilter,MdArrowBack} from 'react-icons/md';
+import {MdAddCircle,MdArrowBack} from 'react-icons/md';
 import './App.css';
 
 import { auth,db,root } from './firebase';
@@ -106,15 +106,21 @@ export default function Dashboard() {
             return <section className="dashboardOthersheets">{itemsToRender}</section>;
         }
 
+        const date = new Date();
+        const day = date.getDay();
+        const hinichi = date.getDate();
+        const months = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
+        const currentDay = months[date.getMonth()]+hinichi+"日";
+
         return (
             <>
             <div className="dashMenu">
                 <img alt="no" className="profileBackgroundImg" src={auth.currentUser.photoURL}/>
                 <section className="duoGrid" style={{gap: '3em'}}>
                     <div className="centerDiv">
-                        <img alt="no profile img found" className="profileImg" src={auth.currentUser.photoURL}/>
-                        <h1 style={{ fontSize: '3.5em', marginBottom:'15px', color:'var(--txtColor0' }}>{firstName}さん</h1>
-                        <h1 style={{ color:'var(--txtColor0'}}>👋 こんにちわ</h1>
+                        {/* <img alt="no profile img found" className="profileImg" src={auth.currentUser.photoURL}/> */}
+                        <h1 style={{ fontSize: '5.5em', margin: '0', color: 'var(--txtColor0' }}>{firstName}</h1>
+                        <h2 style={{color: 'var(--txtColor0' }}>本日は{ currentDay}</h2>
                     </div>
                     <div className="centerDiv">
                         <section className="card">
@@ -123,7 +129,6 @@ export default function Dashboard() {
                             <br />
                                 <span className="alignItems">
                                     <DeizuButton
-                                        btnClass="greenBtn"
                                         btnClick={() => {setComponent('change')}}
                                         btnIcon={<MdAddCircle className="iconBtn" />}
                                         btnName="新しい表を作成"

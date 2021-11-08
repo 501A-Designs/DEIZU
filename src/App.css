@@ -42,6 +42,12 @@ body {
   padding: 7.5px 15px;
 }
 
+hr {
+  margin: 0 -30px;
+  background-color: var(--system3);
+  border: 1px solid rgba(228, 228, 228, 0.3);
+}
+
 h1 {
   font-size: 2em;
   font-weight: bold;
@@ -56,37 +62,7 @@ h4 a {
   font-family: "Sawarabi Gothic", sans-serif;
 }
 
-.classicHeader {
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
-  border-radius: var(--r5);
-  padding: 15px;
-}
-
-header,
-footer {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
-footer {
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
-  border: 2px solid var(--system3);
-  position: -webkit-sticky;
-  position: sticky;
-  -webkit-box-shadow: 0px 1px 20px var(--system2);
-          box-shadow: 0px 1px 20px var(--system2);
-  border-radius: var(--r10);
-  width: auto;
-  bottom: 15px;
-  margin: 1em;
-  z-index: 20;
-  padding: 3.75px 15px;
+.versionSegment {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   display: -webkit-box;
@@ -98,6 +74,22 @@ footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-bottom: -25.5px;
+}
+
+.classicHeader {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
+  border-radius: var(--r5);
+  padding: 15px;
+}
+
+header {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .startMenu {
@@ -119,10 +111,6 @@ footer {
 
 .startMenu button {
   margin-bottom: 10px;
-}
-
-.startMenu button:hover::after {
-  content: " →";
 }
 
 .dashMenu {
@@ -169,8 +157,6 @@ a {
 .standardBtn:hover {
   -webkit-transform: scale3d(1.05, 1.05, 1.05);
           transform: scale3d(1.05, 1.05, 1.05);
-  -webkit-filter: brightness(105%);
-          filter: brightness(105%);
   -webkit-box-shadow: 0px 1px 20px var(--system2);
           box-shadow: 0px 1px 20px var(--system2);
 }
@@ -403,6 +389,7 @@ input[type="time"] {
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
+  background: none;
   background-color: var(--system3);
   border: 2px solid transparent;
   padding: 10px;
@@ -471,10 +458,6 @@ select:hover {
   max-width: 600px;
 }
 
-.card h1 {
-  padding: 15px;
-}
-
 .blue {
   background-color: #c1dde1;
 }
@@ -493,34 +476,11 @@ select:hover {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  margin: 2.2em 0;
 }
 
 .centerBtn button {
   width: 200px;
-}
-
-.greenBtn {
-  background-color: #bae3a7;
-  border: 2px solid #bae3a7;
-  color: #266300;
-}
-
-.blueBtn {
-  background-color: #c1dde1;
-  border: 2px solid #c1dde1;
-  color: #006372;
-}
-
-.yellowBtn {
-  background-color: #ffde88;
-  border: 2px solid #ffde88;
-  color: #6f5000;
-}
-
-.redBtn {
-  background-color: #e3a7a7;
-  border: 2px solid #e3a7a7;
-  color: #720000;
 }
 
 .greyBtn {
@@ -772,6 +732,7 @@ select:hover {
           box-shadow: 0px 7px 15px var(--system2);
   -webkit-transform: translateY(-15%);
           transform: translateY(-15%);
+  padding: 2px;
 }
 
 .screenshotMode .screenshotTitle {
@@ -808,9 +769,6 @@ select:hover {
 }
 
 @media screen and (max-width: 400px) {
-  footer {
-    display: none;
-  }
   .duoGrid {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
@@ -842,9 +800,6 @@ select:hover {
 }
 
 @media screen and (min-width: 401px) and (max-width: 500px) {
-  footer {
-    display: none;
-  }
   .duoGrid {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
@@ -879,9 +834,6 @@ select:hover {
 }
 
 @media screen and (min-width: 501px) and (max-width: 1000px) {
-  footer {
-    display: none;
-  }
   .duoGrid {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;

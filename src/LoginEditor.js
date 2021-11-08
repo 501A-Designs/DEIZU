@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { MdAddCircle,MdPerson,MdPalette,MdInfo,MdSettings, MdBackspace, MdList, MdCropFree, MdReplay, MdDirectionsRun, MdCode, MdKeyboardArrowUp,MdKeyboardArrowRight,MdKeyboardArrowLeft,MdSave } from 'react-icons/md';
+import { MdAddCircle,MdPerson,MdPalette,MdInfo,MdSettings, MdOutlineBugReport, MdList, MdCropFree, MdReplay, MdDirectionsRun, MdCode, MdKeyboardArrowUp,MdKeyboardArrowRight,MdKeyboardArrowLeft,MdSave } from 'react-icons/md';
 
 import { auth, db, root } from './firebase';
 import ScheduleGrid from './ScheduleGrid'
@@ -9,9 +9,6 @@ import DeizuButton from './DeizuButton'
 import ThemeButton from './ThemeButton'
 import ThemeColorButton from './ThemeColorButton'
 import {Colors} from './themeColors'
-
-
-
 
 export default function LoginEditor(prop) {
   // User related
@@ -176,7 +173,6 @@ export default function LoginEditor(prop) {
   function SignOut() {
     return auth.currentUser && (
       <DeizuButton
-        btnClass="redBtn"
         btnIcon={<MdDirectionsRun className="iconBtn" />}
         btnName="ログアウト"
         btnClick={() => {
@@ -313,8 +309,9 @@ export default function LoginEditor(prop) {
         <div style={unActiveMenu}>
           <DropdownItem leftIcon={<MdPerson/>} rightIcon={<MdKeyboardArrowRight/>} click={()=>showProfile()}>{firstName}のプロフィール</DropdownItem>
           <DropdownItem leftIcon={<MdPalette/>} rightIcon={<MdKeyboardArrowRight/>} click={() => showCustomize()}>カスタマイズ</DropdownItem>
-          <DropdownItem leftIcon={<MdInfo />} link={'https://www.notion.so/About-DEIZU-687747c356924e13ad96b981161d3cd3'}>DEIZUについて</DropdownItem>
-          <DropdownItem leftIcon={<MdCode/>} link={'https://501a.netlify.app/'}>開発者について</DropdownItem>
+          <DropdownItem leftIcon={<MdInfo />} link={'https://deizu.vercel.app/'}>DEIZUについて</DropdownItem>
+          <DropdownItem leftIcon={<MdOutlineBugReport/>} link={'https://github.com/501A-Designs/DEIZU'}>DEIZUのGitHub</DropdownItem>
+          <DropdownItem leftIcon={<MdCode />} link={'https://501a.netlify.app/'}>開発者について</DropdownItem>
         </div>
         <div style={activeMenu}>
           <DropdownItem leftIcon={<MdKeyboardArrowLeft />} click={() => hideProfile()}>戻る</DropdownItem>
@@ -342,7 +339,6 @@ export default function LoginEditor(prop) {
                 onChange={(w) => setWallpaperUrl(w.target.value)}
               />
               <DeizuButton
-                btnClass="greenBtn"
                 btnIcon={<MdSave className="iconBtn" />}
                 btnName="保存"
                 btnType={"submit"}
@@ -355,7 +351,6 @@ export default function LoginEditor(prop) {
               <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
                 <h3>テーマの変更</h3>
                 <DeizuButton
-                    btnClass="greenBtn"
                     btnClick={saveTheme}
                     btnIcon={<MdSave className="iconBtn" />}
                     btnName="保存"
@@ -399,7 +394,6 @@ export default function LoginEditor(prop) {
               <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
                 <h3>色の変更</h3>
                 <DeizuButton
-                    btnClass="greenBtn"
                     btnClick={saveThemeColor}
                     btnIcon={<MdSave className="iconBtn" />}
                     btnName="保存"
@@ -504,7 +498,7 @@ export default function LoginEditor(prop) {
         <div className="alignItems" style={{marginBottom:'10px'}}>
           <button
             style={{ fontSize: 'large' }}
-            className="standardBtn greenBtn"
+            className="standardBtn greyBtn"
             datatitle="時間割表を作成"
             onClick={
               () => {
@@ -516,7 +510,7 @@ export default function LoginEditor(prop) {
           </button>
           <button
             style={{ fontSize: 'large' }}
-            className="standardBtn blueBtn"
+            className="standardBtn greyBtn"
             datatitle="更新"
             onClick={
               () => {

@@ -3,7 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { MdReportProblem,MdPerson, MdDescription } from 'react-icons/md';
 import './App.css';
-import logo from './deizu.png';
+import logo from './deizuAppIconUpdated.png';
 
 import firebase, { auth } from './firebase';
 import Dashboard from './Dashboard'
@@ -24,42 +24,41 @@ function App() {
         <section className="duoGrid">
           <div className="centerDiv">
             <img className="logo" src={logo} alt="Logo" />
-            <h2 className="versionBadge">v{require('../package.json').version}</h2>
           </div>
           <div>
             <section className="card">
-              <div className="cautionBanner">
+              {/* <div className="cautionBanner">
                 <strong className="alignItems" style={{marginBottom: '10px'}}><MdReportProblem className="largeIcon" />注意</strong>
                 <ul style={{ marginLeft: '-20px' }}>
                   <li><code>schedule-creator-site.web.app</code>から<code>deizu-site.web.app</code>へと変わりました。</li>
                   <li>ベータ版ですので、機能の追加・切り替えによってデータの損失があるかも知れません。</li>
                   <li>スマートフォンまた小さいディスプレイご利用の場合は、時間割表作成に置いて画角における不具合がございます。ご了承下さい。</li>
                 </ul>
-              </div>
-              <h1 className="classicHeader">時間割表をすばやく作成</h1>
+              </div> */}
+              <h1>時間割表をすばやく作成</h1>
               <p>
                 DEIZUへようこそ！
-                <br /><br />
-                無登録の場合はログイン！
-                <br />
-                アカウント無しで使用したい場合はウェブエディターの使用をおすすめします。
                 <br />
                 <br />
+                時間割表の作りづらさを改善しようと考えられ開発されたソフトです。シンプルなデザインと共に紙で作成するマニュアルなプロセスやスプレッドシートやExcelを使用する際にテンプレートを作成する作業を全て排除します！
               </p>
               <div className="centerBtn">
                 <DeizuButton
-                  btnClass="greenBtn"
                   btnClick={signInWithGoogle}
                   btnIcon={<MdPerson className="btnIcon" />}
                   btnName="Googleでログイン" />
                 <DeizuButton
-                  btnClass="blueBtn"
                   btnClick={(e) => {
                     e.preventDefault();
-                    window.location.href = 'https://www.notion.so/Schedule-Creator-687747c356924e13ad96b981161d3cd3';
+                    window.location.href = 'https://github.com/501A-Designs/DEIZU';
                   }}
                   btnIcon={<MdDescription className="btnIcon" />}
                   btnName="サイトについて" />
+              </div>
+              <hr/>
+              <div className="versionSegment">
+                <h3 className="versionBadge">v{require('../package.json').version}</h3>
+                <a href="https://501a.netlify.app/" target="_blank" rel="noreferrer"><img src="https://501a.netlify.app/images/profileLogo.png" style={{ width: '40px', height: '40px' }} alt="no img found"/></a>
               </div>
             </section>
           </div>
@@ -71,13 +70,6 @@ function App() {
   return (
     <div className="App">
       {user ? <Dashboard /> : <Home />}
-      {user ?
-        null :
-        <footer>
-          <a href="https://www.notion.so/About-DEIZU-687747c356924e13ad96b981161d3cd3" target="_blank" rel="noreferrer"><img src={logo} style={{ width: '80px', height: '58px' }} alt="no img found"/></a>
-          <a href="https://501a.netlify.app/" target="_blank" rel="noreferrer"><img src="https://501a.netlify.app/img/eminent-logo.png" style={{ width: '40px', height: '40px' }} alt="no img found"/></a>
-        </footer>
-      }
     </div>
   );
 }
