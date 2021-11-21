@@ -50,7 +50,7 @@ function App() {
                 <DeizuButton
                   btnClick={(e) => {
                     e.preventDefault();
-                    window.location.href = 'https://github.com/501A-Designs/DEIZU';
+                    window.location.href = 'https://deizu.vercel.app/';
                   }}
                   btnIcon={<MdDescription className="btnIcon" />}
                   btnName="サイトについて" />

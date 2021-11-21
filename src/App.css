@@ -546,9 +546,9 @@ select:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: right;
-      -ms-flex-pack: right;
-          justify-content: right;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -611,9 +611,11 @@ select:hover {
 }
 
 .popup .colors div {
+  padding: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  gap: 5px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -650,7 +652,7 @@ select:hover {
 
 .popup .colors div label {
   font-size: 14px;
-  width: 100px;
+  width: 80px;
 }
 
 .popup .displayTitle {
@@ -702,8 +704,11 @@ select:hover {
   color: var(--txtColor0);
   background-color: var(--system3);
   border-radius: var(--r5);
-  padding: 5px;
-  margin: 5px;
+  padding: 5px 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 5px auto;
 }
 
 .cautionBanner {
@@ -898,9 +903,9 @@ select:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: right;
-      -ms-flex-pack: right;
-          justify-content: right;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -932,7 +937,6 @@ select:hover {
 }
 
 .modalForm .deizuInput {
-  -webkit-flex: 1;
   min-width: none;
   max-width: none;
 }
@@ -995,18 +999,6 @@ select:hover {
   cursor: pointer;
   background-color: var(--system3);
   font-weight: bold;
-}
-
-@-webkit-keyframes othersCardAni {
-  0% {
-    opacity: 0;
-  }
-}
-
-@keyframes othersCardAni {
-  0% {
-    opacity: 0;
-  }
 }
 
 .backgroundImg {
@@ -1108,8 +1100,8 @@ details {
 
 .dropdown {
   position: absolute;
-  -webkit-transform: translateX(-5%) translateY(20%);
-          transform: translateX(-5%) translateY(20%);
+  -webkit-transform: translateX(13%) translateY(20%);
+          transform: translateX(13%) translateY(20%);
   border-radius: var(--r10);
   width: 300px;
   height: 240px;
@@ -1121,8 +1113,6 @@ details {
   background-color: var(--system0);
   -webkit-box-shadow: 0px 7px 15px var(--system2);
           box-shadow: 0px 7px 15px var(--system2);
-  -webkit-animation: othersCardAni 0.5s;
-          animation: othersCardAni 0.5s;
 }
 
 .dropdown .dropdownLeftIcon {

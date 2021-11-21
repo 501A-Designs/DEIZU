@@ -3,11 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 import {options} from './options';
 
-
 import CreatableSelect from 'react-select/creatable';
-// import { colourOptions } from '../data';
-
-
 
 import firebase, { auth, dataRef } from './firebase';
 import Modal from 'react-modal';
@@ -16,8 +12,6 @@ import Modal from 'react-modal';
 export default function ScheduleCell(props) {
     const cornerProp = props.corner;
     const selectorColorProp = props.selectorColor;
-    // const selectorBackgroundColor = selectorColorProp[1];
-    // const selectorBorderColor = selectorColorProp[3];
 
     const [user] = useAuthState(auth);
     const modalStyle = {
@@ -68,7 +62,7 @@ export default function ScheduleCell(props) {
             fontSize:14,
             padding: 1,
             outline: 'none',
-            borderRadius: `${cornerProp}`,
+            borderRadius: `${cornerProp[0]}`,
             // border: '0px solid transparent',
             border: 0,
             boxShadow: 0,
@@ -235,7 +229,7 @@ export default function ScheduleCell(props) {
                         <ColorButton btnColor="#e0ff6f" btnName="香"/>
                         <div>
                             <input type="color" value={cellColor} onChange={handleColorValuesChanges}></input>
-                            <label>自分で指定</label>
+                            <label style={{color:'var(--txtColor0)'}}>自分で指定</label>
                         </div>
                     </div>
 

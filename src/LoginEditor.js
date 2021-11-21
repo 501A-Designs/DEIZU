@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { MdAddCircle,MdPerson,MdPalette,MdInfo,MdSettings, MdOutlineBugReport, MdList, MdCropFree, MdReplay, MdDirectionsRun, MdCode, MdKeyboardArrowUp,MdKeyboardArrowRight,MdKeyboardArrowLeft,MdSave } from 'react-icons/md';
+import { MdAddCircle,MdPerson,MdPalette,MdInfo,MdSettings, MdOutlineBugReport, MdList, MdCropFree, MdReplay,MdDelete, MdDirectionsRun, MdCode, MdKeyboardArrowUp,MdKeyboardArrowRight,MdKeyboardArrowLeft,MdSave } from 'react-icons/md';
 
-import { auth, db, root } from './firebase';
+import firebase, { auth, db, root } from './firebase';
 import ScheduleGrid from './ScheduleGrid'
 import DeizuButton from './DeizuButton'
 import ThemeButton from './ThemeButton'
@@ -35,8 +35,7 @@ export default function LoginEditor(prop) {
   const [screenshotFrame, setScreenshotFrame] = useState('');
 
   // Theme State From Dashboard
-  const [smallCornerStyle, setSmallCornerStyle] = useState(prop.dSCS);
-  const [largeCornerStyle, setLargeCornerStyle] = useState(prop.dLCS);
+  const [systemCornerStyle, setSystemCornerStyle] = useState(prop.systemCornerProp);
   const [systemColorStyle, setSystemColorStyle] = useState(prop.systemColorProp);
 
   // Theme Color
@@ -140,13 +139,13 @@ export default function LoginEditor(prop) {
     );
   }
 
-  function rDefault() { setSmallCornerStyle('5px'); setLargeCornerStyle('10px'); };
-  function r20() {setSmallCornerStyle('20px');setLargeCornerStyle('30px'); };
-  function r0() {setSmallCornerStyle('0px');setLargeCornerStyle('0px'); };
-  function rUnique() {setSmallCornerStyle('0px 15px 10px 30px');setLargeCornerStyle('30px'); };
-  function rCut() { setSmallCornerStyle('10% / 50%'); setLargeCornerStyle('30px'); };
-  function rUnique() { setSmallCornerStyle('0px 15px 10px 30px'); setLargeCornerStyle('30px'); };
-  function rArt() { setSmallCornerStyle('37% 63% 41% 59% / 67% 54% 46% 33%'); setLargeCornerStyle('30px'); };
+  function rDefault() { setSystemCornerStyle(['5px','10px'])};
+  function r20() {setSystemCornerStyle(['20px','30px'])};
+  function r0() {setSystemCornerStyle(['0px','0px'])};
+  function rUnique() {setSystemCornerStyle(['0px 15px 10px 30px','30px'])};
+  function rCut() { setSystemCornerStyle(['10% / 50%','30px'])};
+  function rUnique() { setSystemCornerStyle(['0px 15px 10px 30px','30px'])};
+  function rArt() { setSystemCornerStyle(['37% 63% 41% 59% / 67% 54% 46% 33%','30px'])};
 
   // Fetch data
   const saveWallpaper = (w) => {
@@ -159,7 +158,7 @@ export default function LoginEditor(prop) {
   }
   const saveTheme = () => {
     dataRef.doc(user.uid).set({
-      theme: smallCornerStyle+"$"+largeCornerStyle
+      theme: systemCornerStyle
     }, { merge: true });
     alert('テーマを保存できました');
   }
@@ -183,8 +182,8 @@ export default function LoginEditor(prop) {
   }
   useEffect(() => {
     document.title=`${titleName}`
-    root?.style.setProperty("--r5", smallCornerStyle);
-    root?.style.setProperty("--r10", largeCornerStyle);
+    root?.style.setProperty("--r5", systemCornerStyle[0]);
+    root?.style.setProperty("--r10", systemCornerStyle[1]);
     root?.style.setProperty("--system0", systemColorStyle[0]);
     root?.style.setProperty("--system1", systemColorStyle[1]);
     root?.style.setProperty("--system2", systemColorStyle[2]);
@@ -218,27 +217,38 @@ export default function LoginEditor(prop) {
 
       for (let i = 0; i < arrayTitle.length; i++) {
         const firestoreTime = Object.values(titleForOtherSheets)[i].date.toDate().toDateString();
-        otherSheetsArray.push(arrayTitle[i] + "/" + firestoreTime);
+        otherSheetsArray.push(arrayTitle[i] + '$' + firestoreTime);
       }
       setOtherSheets(otherSheetsArray);
     }).catch((error) => {
       console.log("Error getting document:", error);
     })
   }
+  // useEffect(() => {
+  //   console.log("fetch");
+  //   dataRef.doc(user.uid).get().then((doc) => {
+  //     const titleForOtherSheets = doc.data().sheets;
+  //     const arrayTitle = Object.keys(titleForOtherSheets);
+
+  //     for (let i = 0; i < arrayTitle.length; i++) {
+  //       const firestoreTime = Object.values(titleForOtherSheets)[i].date.toDate().toDateString();
+  //       otherSheetsArray.push(arrayTitle[i] + '$' + firestoreTime);
+  //     }
+  //     setOtherSheets(otherSheetsArray);
+  //   }).catch((error) => {
+  //     console.log("Error getting document:", error);
+  //   })
+  // }, [openSheetsDropdown])
+  
   useEffect(() => {
     dataRef.doc(user.uid).get().then((doc) => {
-      // const themeData = doc.data().theme;
-      // const smallCorners = themeData.split('$')[0];
-      // const largeCorners = themeData.split('$')[1];
-      // console.log(smallCorners + " - " + largeCorners);
-      // setSmallCornerStyle(smallCorners);
-      // setLargeCornerStyle(largeCorners);
       const wallUrl = doc.data().url;
       setWallpaperUrl(wallUrl);
     }).catch((error) => {
       console.log("Error getting document:", error);
     });
-  }, [])
+    console.log("fetch");
+  },[])
   
   function NavItem(props) {
     return (
@@ -282,7 +292,8 @@ export default function LoginEditor(prop) {
             e.preventDefault();
             setOpenSettingsDropdown(false);
             setOpenSheetsDropdown(!openSheetsDropdown);
-            {openSheetsDropdown && getSheetTitles()}
+            getSheetTitles();
+            // {openSheetsDropdown && getSheetTitles()}
           }}
         >
           {openSheetsDropdown ? <MdKeyboardArrowUp/>:<MdList/>}
@@ -477,48 +488,41 @@ export default function LoginEditor(prop) {
       let itemsToRender;
       if (otherSheets) {
         itemsToRender = otherSheets.map(item => {
-              return <section
-                      className="dropdownItemSheet"
-                      key={item}
-                onClick={() => {
-                  setTitleValue(`${(item.split('/')[0])}`);
-                  setOpenSheetsDropdown(false);
-                }}>
-                {item.split('/')[0]}
-                <time>{item.split('/')[1]}</time>
+            return <section
+                    className="dropdownItemSheet"
+                    key={item}
+                    onClick={() => {
+                      setTitleValue(`${(item.split('$')[0])}`);
+                      setOpenSheetsDropdown(false);
+                    }}>{item.split('$')[0]}
+                <time>{item.split('$')[1]}</time>
               </section>;
             });
           } else {
-        itemsToRender = <p style={{color:'var(--txtColor0'}}><h3>作成した時間割表はありません。</h3>作成表が表示されない場合更新ボタンを押して下さい</p>;
+        itemsToRender = <p style={{color:'var(--txtColor0'}}><h3>作成した時間割表はありません。</h3>作成した表が表示されない場合更新ボタンを押して下さい</p>;
       }
       return <>{itemsToRender}</>;
     }
     return (
       <div className="dropdown">
-        <div className="alignItems" style={{marginBottom:'10px'}}>
-          <button
-            style={{ fontSize: 'large' }}
-            className="standardBtn greyBtn"
-            datatitle="時間割表を作成"
-            onClick={
-              () => {
-                setTitleValue('');
-                setOpenSheetsDropdown(false);
-              }
-            }>
-            <MdAddCircle />
-          </button>
-          <button
-            style={{ fontSize: 'large' }}
-            className="standardBtn greyBtn"
-            datatitle="更新"
-            onClick={
-              () => {
-                getSheetTitles();
-              }
-            }>
-            <MdReplay />
-          </button>
+        <div className="alignItems" style={{ marginBottom: '10px' }}>
+          <DeizuButton
+            btnIcon={<MdAddCircle className="iconBtn" />}
+            btnName=""
+            btnTitle="時間割表を作成"
+            btnClick={() => {
+              setTitleValue('');
+              setOpenSheetsDropdown(false);
+            }}
+          />
+          <DeizuButton
+            btnIcon={<MdReplay className="iconBtn" />}
+            btnName=""
+            btnTitle="更新"
+            btnClick={() => {
+              getSheetTitles();
+            }}
+          />
         </div>
         <OtherSheet/>
       </div>
@@ -550,23 +554,42 @@ export default function LoginEditor(prop) {
           />
           
             <OtherSheetButton/>
-          {titleName ?
-              <NavItem
-              tip={'スクショモード'}
-              icon={<MdCropFree />}
-              onClick={
-                () => {
-                  alert("「CTRL & -」または「Command & -」 でズームアウト")
-                  setStyle({ display: 'block' });
-                  setScreenshotFrame('screenshotMode');
-                  setOpenSettingsDropdown(false);
-                  setOpenSheetsDropdown(false);
-                }
-              }
-          /> : null}
+            {titleName ?
+              <>
+                <NavItem
+                  tip={'スクショモード'}
+                  icon={<MdCropFree />}
+                  onClick={
+                    () => {
+                      alert("「CTRL & -」または「Command & -」 でズームアウト")
+                      setStyle({ display: 'block' });
+                      setScreenshotFrame('screenshotMode');
+                      setOpenSettingsDropdown(false);
+                      setOpenSheetsDropdown(false);
+                    }
+                  }
+                />
+                <NavItem
+                  tip={'時間割表を消去'}
+                  icon={<MdDelete />}
+                  onClick={
+                    () => {
+                      var resault = window.confirm("今開いている時間割表を消去したいですか？一度消去すると復旧することはできません。");
+                      if (resault == true) {
+                        dataRef.doc(user.uid).set({
+                          sheets:{
+                            [titleName]: firebase.firestore.FieldValue.delete()
+                          }
+                        }, { merge: true })
+                        setTitleValue('');
+                      }
+                    }
+                  }
+                />
+              </>
+              : null}
             <SettingButton />
         </div>
-          
       </section>
 
         <div
@@ -580,7 +603,7 @@ export default function LoginEditor(prop) {
         </div>
         <section className={screenshotFrame} style={{overflowX: 'scroll', borderRadius:'20px'}}>
           <h1 className="screenshotTitle">{titleName}</h1>
-          {titleName ? <ScheduleGrid corner={smallCornerStyle} selectorColor={systemColorStyle} sheetTitle={titleName} /> : <p>［スーパーインプット］でタイトルを指定する必要がございます。<br/>なお、タイトルは一度指定すると変更することができませんのでご了承下さい。<br/>スーパーインプットはタイトルの指定以外にも、他の表のタイトルを入力すると時間割表が表示されので検索バーとしても使用できます。</p>}
+          {titleName ? <ScheduleGrid corner={systemCornerStyle} selectorColor={systemColorStyle} sheetTitle={titleName} /> : <p>［スーパーインプット］でタイトルを指定する必要がございます。<br/>なお、タイトルは一度指定すると変更することができませんのでご了承下さい。<br/>スーパーインプットはタイトルの指定以外にも、他の表のタイトルを入力すると時間割表が表示されので検索バーとしても使用できます。</p>}
         </section>
       </div>
     </>

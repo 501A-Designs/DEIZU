@@ -17,9 +17,7 @@ export default function Dashboard() {
     const [titleName, setTitleValue] = useState('');
 
     // Theme State
-    const [dashSmallCornerStyle, setDashSmallCornerStyle] = useState('5px');
-    const [dashLargeCornerStyle, setDashLargeCornerStyle] = useState('10px');
-    // system1, system2, highlight0
+    const [dashSystemCornerStyle, setDashSystemCornerStyle] = useState(['5px','10px'])
     const [dashSystemColorStyle, setDashSystemColorStyle] = useState(
         [
             'white',
@@ -30,8 +28,8 @@ export default function Dashboard() {
         ]);
 
     useEffect(() => {
-        root?.style.setProperty("--r5", dashSmallCornerStyle);
-        root?.style.setProperty("--r10", dashLargeCornerStyle);
+        root?.style.setProperty("--r5", dashSystemCornerStyle[0]);
+        root?.style.setProperty("--r10", dashSystemCornerStyle[1]);
         root?.style.setProperty("--system0", dashSystemColorStyle[0]);
         root?.style.setProperty("--system1", dashSystemColorStyle[1]);
         root?.style.setProperty("--system2", dashSystemColorStyle[2]);
@@ -41,36 +39,26 @@ export default function Dashboard() {
     useEffect(() => {
         dataRef.doc(user.uid).get().then((doc) => {
             const themeData = doc.data().theme;
+            setDashSystemCornerStyle([themeData[0], themeData[1]]);
             const themeColorData = doc.data().themeColor;
-            const themeColor1 = themeColorData[0];
-            const themeColor2 = themeColorData[1];
-            const themeColor3 = themeColorData[2];
-            const themeColor4 = themeColorData[3];
-            const themeColor5 = themeColorData[4];
-            const smallCorners = themeData.split('$')[0];
-            const largeCorners = themeData.split('$')[1];
-            setDashSmallCornerStyle(smallCorners);
-            setDashLargeCornerStyle(largeCorners);
-            setDashSystemColorStyle(
-                [
-                    themeColor1,
-                    themeColor2,
-                    themeColor3,
-                    themeColor4,
-                    themeColor5
-                ]);
-            // console.log(dashSystemColorStyle)
+            console.log(themeColorData[0]);
+            setDashSystemColorStyle([
+                themeColorData[0],
+                themeColorData[1],
+                themeColorData[2],
+                themeColorData[3],
+                themeColorData[4]
+            ]);
         }).catch((error) => {
           console.log("Error getting document:", error);
         });
-      },[dashSmallCornerStyle])
+      },[])
     
     function DashboardMenu() {
         const [user] = useAuthState(auth);
         const fullName = auth.currentUser.displayName;
         const firstName = fullName.split(" ")[0];
         const [otherSheets, setOtherSheets] = useState();
-
         const dataRef = db.collection('users');
 
         useEffect(() => {
@@ -107,7 +95,7 @@ export default function Dashboard() {
         }
 
         const date = new Date();
-        const day = date.getDay();
+        // const day = date.getDay();
         const hinichi = date.getDate();
         const months = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
         const currentDay = months[date.getMonth()]+hinichi+"日";
@@ -118,7 +106,6 @@ export default function Dashboard() {
                 <img alt="no" className="profileBackgroundImg" src={auth.currentUser.photoURL}/>
                 <section className="duoGrid" style={{gap: '3em'}}>
                     <div className="centerDiv">
-                        {/* <img alt="no profile img found" className="profileImg" src={auth.currentUser.photoURL}/> */}
                         <h1 style={{ fontSize: '5.5em', margin: '0', color: 'var(--txtColor0' }}>{firstName}</h1>
                         <h2 style={{color: 'var(--txtColor0' }}>本日は{ currentDay}</h2>
                     </div>
@@ -148,8 +135,7 @@ export default function Dashboard() {
         <>
             {component ?
                 <LoginEditor
-                    dSCS={dashSmallCornerStyle}
-                    dLCS={dashLargeCornerStyle}
+                    systemCornerProp={dashSystemCornerStyle}
                     systemColorProp={dashSystemColorStyle}
                     dashSheetTitle={titleName}
                 /> : <DashboardMenu />

@@ -7,6 +7,7 @@ export default function DeizuButton(props) {
             onClick={props.btnClick}
             href={props.btnHref}
             type={props.btnType}
+            datatitle={props.btnTitle}
         >
             {props.btnIcon}
             {props.btnName}

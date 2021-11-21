@@ -292,6 +292,7 @@ a {
 
 	.cell,
 	.cellHover {
+		// border: 2px solid transparent;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -455,7 +456,7 @@ select {
 
 @mixin slideSide {
 	display: flex;
-	justify-content: right;
+	justify-content: left;
 	flex-direction: row;
 	overflow-x: scroll;
 	overflow-y: hidden;
@@ -510,7 +511,9 @@ select {
 			}
 		}
 		div {
+			padding: 5px;
 			display: flex;
+			gap: 5px;
 			flex-direction: row;
 			align-items: center;
 			border-radius: var(--r5);
@@ -534,7 +537,7 @@ select {
 			}
 			label {
 				font-size: 14px;
-				width: 100px;
+				width: 80px;
 			}
 		}
 	}
@@ -571,8 +574,9 @@ select {
 	color: var(--txtColor0);
 	background-color: var(--system3);
 	border-radius: var(--r5);
-	padding: $padding/3;
-	margin: $margin/3;
+	padding: $padding/3 $padding/1.5;
+	width: fit-content;
+	margin: $margin/3 auto;
 }
 
 .cautionBanner {
@@ -759,7 +763,6 @@ select {
 	flex-direction: column;
 	margin-bottom: $margin;
 	.deizuInput {
-		-webkit-flex: 1;
 		min-width: none;
 		max-width: none;
 	}
@@ -820,12 +823,6 @@ select {
 			background-color: var(--system3);
 			font-weight: bold;
 		}
-	}
-}
-
-@keyframes othersCardAni {
-	0% {
-		opacity: 0;
 	}
 }
 
@@ -905,7 +902,7 @@ details {
 
 .dropdown {
 	position: absolute;
-	transform: translateX(-5%) translateY(20%);
+	transform: translateX(13%) translateY(20%);
 	border-radius: var(--r10);
 	width: 300px;
 	height: 240px;
@@ -916,7 +913,6 @@ details {
 	z-index: 10;
 	background-color: var(--system0);
 	box-shadow: $heavyBoxShadow;
-	animation: othersCardAni $transitionSpeed;
 	.dropdownLeftIcon {
 		color: var(--txtColor0);
 		background-color: var(--system3);
