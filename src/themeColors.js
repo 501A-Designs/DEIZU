@@ -1,21 +1,27 @@
 export const Colors = {
     default: {
-        // dark
+        system0:'white',
+        system1:'#ececec',
+        system2:'#dbdbdb',
+        system3:'black',
+        txtColor0:'black',
+        txtColor1:'white',
+    },
+    light: {
         system0:'white',
         system1:'#f5f5f5',
         system2:'#f3f3f3',
         system3: '#e2e2e2',
-        // light
-        txtColor0:'black',
+        txtColor0: 'black',
+        txtColor1:'black',
     },
     yellowGrey: {
-        // dark
         system0:'#ffe294',
         system1:'#ffd666',
         system2:'#ffc933',
         system3:'#ffba01',
-        // light
         txtColor0:'black',
+        txtColor1:'white',
     },
     greyBlack: {
         // dark
@@ -25,20 +31,23 @@ export const Colors = {
         system3: '#212121',
         // light
         txtColor0:'white',
+        txtColor1:'white',
     },
     brown: {
         system0:'#6D4C41',
         system1:'#5D4037',
         system2:'#4E342E',
         system3:'#3E2723',
-        txtColor0:'white',
+        txtColor0: 'white',
+        txtColor1:'white',
     },
     blueWhite: {
-        system0:'#4ba3c3',
-        system1:'#47afff',
-        system2:'#7cc6fe',
-        system3:'#bae1ff',
-        txtColor0:'#dssera',
+        system0:'#bae1ff',
+        system1:'#7cc6fe',
+        system2:'#47afff',
+        system3:'#4ba3c3',
+        txtColor0: '#dssera',
+        txtColor1:'white',
     },
     lightGreen: {
         system0:'#AED581',
@@ -46,13 +55,15 @@ export const Colors = {
         system2:'#8BC34A',
         system3:'#7CB342',
         txtColor0:'black',
+        txtColor1:'black',
     },
     deepOrange: {
         system0:'#FFAB91',
         system1:'#FF8A65',
         system2:'#FF7043',
         system3:'#FF5722',
-        txtColor0:'black',
+        txtColor0: 'black',
+        txtColor1:'black',
     },
     blueGrey: {
         system0:'#546E7A',
@@ -60,6 +71,7 @@ export const Colors = {
         system2:'#37474F',
         system3:'#263238',
         txtColor0: 'white',
+        txtColor1:'white',
     },
     deepPurple: {
         system0:'#7E57C2',
@@ -67,5 +79,6 @@ export const Colors = {
         system2:'#5E35B1',
         system3:'#512DA8',
         txtColor0: 'white',
+        txtColor1:'white',
     }
 }

@@ -6,7 +6,7 @@ import './App.css';
 
 import { auth,db,root } from './firebase';
 import LoginEditor from './LoginEditor'
-import DeizuButton from './DeizuButton'
+import DeizuButton from './buttons/DeizuButton'
 
 
 
@@ -21,10 +21,11 @@ export default function Dashboard() {
     const [dashSystemColorStyle, setDashSystemColorStyle] = useState(
         [
             'white',
-            '#ffecfc',
-            '#f3f3f3',
-            '#e2e2e2',
-            'black'
+            '#ececec',
+            '#dbdbdb',
+            'black',
+            'black',
+            'white',
         ]);
 
     useEffect(() => {
@@ -35,6 +36,7 @@ export default function Dashboard() {
         root?.style.setProperty("--system2", dashSystemColorStyle[2]);
         root?.style.setProperty("--system3", dashSystemColorStyle[3]);
         root?.style.setProperty("--txtColor0", dashSystemColorStyle[4]);
+        root?.style.setProperty("--txtColor1", dashSystemColorStyle[5]);
     })
     useEffect(() => {
         dataRef.doc(user.uid).get().then((doc) => {
@@ -47,7 +49,8 @@ export default function Dashboard() {
                 themeColorData[1],
                 themeColorData[2],
                 themeColorData[3],
-                themeColorData[4]
+                themeColorData[4],
+                themeColorData[5],
             ]);
         }).catch((error) => {
           console.log("Error getting document:", error);

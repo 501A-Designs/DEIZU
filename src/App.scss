@@ -5,18 +5,13 @@
 	--r5: 5px;
 	// Colors
 	--system0: white;
-	--system1: #f5f5f5;
-	--system2: #f3f3f3;
-	--system3: #e2e2e2;
-	// --system3: #e2e2e2;
-
-	// --system0: rgb(255, 254, 252);
-	// --system1: white;
-	// --light0: rgb(226, 226, 226);
-	// --highlight1: rgb(243, 243, 243);
+	--system1: #ececec;
+	--system2: #dbdbdb;
+	--system3: black;
 	--txtColor0: black;
+	--txtColor1: white;
 }
-$border: 2px solid var(--system3);
+$border: 1px solid var(--system1);
 $glassBorder: 1px solid rgba(228, 228, 228, 0.3);
 
 $btnMargin: 5px;
@@ -34,12 +29,14 @@ $yellow: #6f5000;
 $red: #720000;
 $lightRed: #e3a7a7;
 
-$lightBorder: 1px solid var(--system3);
-// $floatBoxShadow: 0px 1px 20px rgb(230, 230, 230);
-$floatBoxShadow: 0px 1px 20px var(--system2);
+$lightBorder: 1px solid var(--system0);
 
-$lightBoxShadow: 0px 5px 10px var(--system2);
-$heavyBoxShadow: 0px 7px 15px var(--system2);
+$shadowSmallest: 0px 2px 4px rgba(0, 0, 0, 0.1);
+$shadowExtraSmall: 0px 4px 8px rgba(0, 0, 0, 0.12);
+$shadowSmall: 0 5px 10px rgba(0, 0, 0, 0.12);
+$shadowMedium: 0 8px 30px rgba(0, 0, 0, 0.12);
+$shadowLarge: 0 30px 60px rgba(0, 0, 0, 0.12);
+$shadowHover: 0 30px 60px rgba(0, 0, 0, 0.12);
 
 $scale: scale3d(1.05, 1.05, 1.05);
 
@@ -49,13 +46,28 @@ body {
 	background-color: var(--system0);
 }
 
+.gradientText {
+	background-image: -webkit-gradient(
+		linear,
+		left top,
+		right top,
+		from(#00a9e8),
+		to(#24f300)
+	);
+	background-image: -webkit-linear-gradient(left, #00a9e8, #24f300);
+	background-image: linear-gradient(90deg, #00a9e8, #24f300);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
 ::-webkit-scrollbar {
 	width: 5px;
 	height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--system3);
+	background: var(--system2);
 	border-radius: 10px 0px 0px 10px;
 }
 
@@ -69,13 +81,14 @@ body {
 .versionBadge {
 	user-select: none;
 	border-radius: var(--r10);
-	background-color: var(--system2);
-	color: grey;
+	border: $border;
+	background-color: var(--system1);
+	color: var(--txtColor0);
 	padding: $padding/2 $padding;
 }
 hr {
 	margin: 0 $padding * -2;
-	background-color: var(--system3);
+	background-color: var(--system1);
 	border: $glassBorder;
 }
 
@@ -114,7 +127,6 @@ h4 a {
 
 .classicHeader {
 	@include blurEffect;
-	// border: $glassBorder;
 	border-radius: var(--r5);
 	padding: $padding;
 }
@@ -163,15 +175,16 @@ a {
 	outline: none;
 	cursor: pointer;
 	transition: $transitionSpeed / 2;
+	background-color: var(--system3);
+	border: 1px solid var(--system3);
+	color: var(--txtColor1);
 	&:hover {
 		transform: $scale;
-		// filter: brightness(105%);
-		box-shadow: $floatBoxShadow;
+		box-shadow: $shadowSmall;
 	}
 }
 .themeBtn {
-	display: grid;
-	grid-template-columns: 1fr 3.5fr;
+	display: flex;
 	width: auto;
 	height: min-content;
 	gap: $margin;
@@ -179,27 +192,29 @@ a {
 	border-radius: var(--r5);
 	img {
 		border-radius: var(--r5);
-		border: $border;
+		border: 2px solid var(--system1);
+		box-shadow: $shadowSmall;
 		width: 50px;
 	}
 	h4 {
-		padding: auto;
+		padding: 0;
 		margin: auto 0px;
 	}
 	&:hover {
 		cursor: pointer;
+		color: var(--txtColor1);
 		background-color: var(--system3);
 	}
 }
 .themeColorBtn {
-	border: 2px solid transparent;
+	border: 1px solid transparent;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	width: auto;
 	width: min-content;
 	gap: $margin/5;
 	padding: $padding/2;
-	border-radius: var(--r5);
+	border-radius: var(--r10);
 	div {
 		width: 15px;
 		height: 15px;
@@ -208,6 +223,8 @@ a {
 	&:hover {
 		cursor: pointer;
 		border: $border;
+		background-color: var(--system0);
+		box-shadow: $shadowSmallest;
 	}
 }
 // .largeIcon {
@@ -243,7 +260,7 @@ a {
 	}
 	.periodLabel {
 		@include blurEffect;
-		border: 2px solid transparent;
+		border: 1px solid transparent;
 		border-radius: var(--r5);
 		padding: $padding / 3;
 		margin: 0;
@@ -251,7 +268,7 @@ a {
 		transition: $transitionSpeed/5;
 		&:hover {
 			border: $border;
-			background-color: var(--system0);
+			background-color: var(--system1);
 		}
 		.periodAlign {
 			margin: 0;
@@ -264,7 +281,7 @@ a {
 				margin: 0;
 			}
 			time {
-				color: var(--txtColor0);
+				color: var(--txtColor1);
 				border-radius: var(--r5);
 				background-color: var(--system3);
 				padding: 2px 5px;
@@ -282,9 +299,9 @@ a {
 	}
 	#dayLabelToday {
 		cursor: pointer;
-		background-color: var(--system2);
+		background-color: var(--system0);
 		border: $border;
-		// box-shadow: $lightBoxShadow;
+		box-shadow: $shadowSmall;
 		&::before {
 			content: "今日：";
 		}
@@ -292,7 +309,6 @@ a {
 
 	.cell,
 	.cellHover {
-		// border: 2px solid transparent;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -301,7 +317,8 @@ a {
 		border-radius: var(--r5);
 		font-weight: bold;
 		height: 100%;
-		background-color: var(--system2);
+		// background-color: var(--system2);
+		background-color: var(--system1);
 		transition: $transitionSpeed/5;
 
 		h2 {
@@ -326,7 +343,6 @@ a {
 	.cellHover:hover,
 	.cellNameHover:hover .cell {
 		cursor: pointer;
-		background-color: var(--system1);
 	}
 }
 
@@ -334,8 +350,8 @@ a {
 input[type="time"] {
 	@include blurEffect;
 	background: none;
-	background-color: var(--system3);
-	border: 2px solid transparent;
+	background-color: var(--system0);
+	border: $border;
 	padding: 10px;
 	outline: none;
 	transition: 0.5s;
@@ -343,24 +359,23 @@ input[type="time"] {
 	transition: $transitionSpeed;
 	&:focus {
 		border: $border;
-		background-color: var(--system0);
-		// box-shadow: $lightBoxShadow;
+		box-shadow: $shadowExtraSmall;
 	}
 }
-select {
-	@include blurEffect;
-	cursor: pointer;
-	border: $border;
-	padding: 10px;
-	outline: none;
-	transition: 0.5s;
-	border-radius: var(--r5);
-	transition: $transitionSpeed;
+// select {
+// 	@include blurEffect;
+// 	cursor: pointer;
+// 	border: $border;
+// 	padding: 10px;
+// 	outline: none;
+// 	transition: 0.5s;
+// 	border-radius: var(--r5);
+// 	transition: $transitionSpeed;
 
-	&:hover {
-		box-shadow: $lightBoxShadow;
-	}
-}
+// 	&:hover {
+// 		box-shadow: $shadowSmall;
+// 	}
+// }
 
 .duoGrid {
 	display: grid;
@@ -376,9 +391,9 @@ select {
 .card {
 	color: var(--txtColor0);
 	padding: $padding * 2;
-	margin: $margin;
+	margin: $margin * 2;
 	border-radius: var(--r10);
-	box-shadow: $floatBoxShadow;
+	box-shadow: $shadowMedium;
 	// border: $border;
 	min-width: 300px;
 	max-width: 600px;
@@ -407,11 +422,6 @@ select {
 		// min-width: 100px;
 	}
 }
-.greyBtn {
-	background-color: var(--system3);
-	border: 2px solid var(--system3);
-	color: var(--txtColor0);
-}
 
 .closeBtn {
 	margin-bottom: 5px;
@@ -433,7 +443,7 @@ select {
 			content: "✕";
 		}
 		&:hover {
-			color: var(--txtColor0);
+			color: var(--txtColor1);
 			background-color: var(--system2);
 		}
 	}
@@ -461,12 +471,13 @@ select {
 	overflow-x: scroll;
 	overflow-y: hidden;
 	&::-webkit-scrollbar-thumb {
-		background: var(--system3);
+		background: var(--system2);
 		border-radius: 10px 10px 0px 0px;
 	}
 }
 .slideSide {
 	@include slideSide;
+	padding: $padding;
 	padding-bottom: $padding * 3;
 	gap: $margin/3;
 }
@@ -476,7 +487,7 @@ select {
 	border-radius: var(--r10);
 	padding: $padding;
 	background-color: var(--system0);
-	box-shadow: $heavyBoxShadow;
+	box-shadow: $shadowLarge;
 	border: $border;
 	// width: 80%;
 	outline: none;
@@ -507,7 +518,7 @@ select {
 			border-radius: var(--r5);
 			transition: $transitionSpeed;
 			&:hover {
-				box-shadow: $lightBoxShadow;
+				box-shadow: $shadowSmall;
 			}
 		}
 		div {
@@ -538,6 +549,7 @@ select {
 			label {
 				font-size: 14px;
 				width: 80px;
+				color: var(--txtColor1);
 			}
 		}
 	}
@@ -555,7 +567,7 @@ select {
 		margin: 5px 0px 0px 0px;
 		overflow-x: auto;
 		&::-webkit-scrollbar-thumb {
-			background: var(--system3);
+			background: var(--system2);
 			border-radius: 10px 10px 0px 0px;
 		}
 	}
@@ -572,7 +584,7 @@ select {
 }
 .displayDescription {
 	color: var(--txtColor0);
-	background-color: var(--system3);
+	background-color: var(--system1);
 	border-radius: var(--r5);
 	padding: $padding/3 $padding/1.5;
 	width: fit-content;
@@ -581,9 +593,11 @@ select {
 
 .cautionBanner {
 	padding: $padding * 2;
-	border: 2px solid rgb(232, 145, 145);
+	border: 1px solid rgb(245, 187, 187);
 	border-radius: var(--r5);
-	background-color: rgb(255, 204, 204);
+	color: red;
+	background-color: rgb(255, 212, 212);
+	box-shadow: $shadowMedium;
 	margin: 0;
 }
 
@@ -599,7 +613,7 @@ select {
 	z-index: 4;
 	overflow-x: scroll;
 	transition: $transitionSpeed * 2;
-	box-shadow: $heavyBoxShadow;
+	box-shadow: $shadowLarge;
 	transform: translateY(-15%);
 	padding: 2px;
 
@@ -781,7 +795,7 @@ select {
 	z-index: 100;
 	opacity: 1;
 	transition: all 0.1s ease 0.5s;
-	box-shadow: $floatBoxShadow;
+	box-shadow: $shadowSmall;
 	visibility: visible;
 }
 
@@ -812,15 +826,18 @@ select {
 	margin-top: $margin;
 	max-height: 250px;
 	overflow-y: scroll;
-	border-radius: var(--r10);
+	border-radius: var(--r5);
+	padding: $padding/2;
 	section {
-		// background-color: var(--system0);
+		color: var(--txtColor0);
 		padding: $padding;
 		border-radius: var(--r5);
 		transition: $transitionSpeed/2;
 		&:hover {
 			cursor: pointer;
 			background-color: var(--system3);
+			box-shadow: $shadowExtraSmall;
+			color: var(--txtColor1);
 			font-weight: bold;
 		}
 	}
@@ -870,22 +887,22 @@ select {
 details {
 	cursor: pointer;
 }
-.selectorDiv {
-	cursor: pointer;
-	border-radius: var(--r10);
-	border: $border;
-	padding: $padding;
-	margin: $margin/3;
-	transition: $transitionSpeed/2;
-	h3 {
-		margin-bottom: 0;
-	}
-	&:hover {
-		transform: $scale;
-		box-shadow: $floatBoxShadow;
-		border: 1px solid $blue;
-	}
-}
+// .selectorDiv {
+// 	cursor: pointer;
+// 	border-radius: var(--r10);
+// 	border: $border;
+// 	padding: $padding;
+// 	margin: $margin/3;
+// 	transition: $transitionSpeed/2;
+// 	h3 {
+// 		margin-bottom: 0;
+// 	}
+// 	&:hover {
+// 		transform: $scale;
+// 		box-shadow: $floatBoxShadow;
+// 		border: 1px solid $blue;
+// 	}
+// }
 
 .templateSelector {
 	animation: templateSelectorAni $transitionSpeed;
@@ -912,9 +929,10 @@ details {
 	overflow-x: hidden;
 	z-index: 10;
 	background-color: var(--system0);
-	box-shadow: $heavyBoxShadow;
+	// box-shadow: $heavyBoxShadow;
+	box-shadow: $shadowMedium;
 	.dropdownLeftIcon {
-		color: var(--txtColor0);
+		color: var(--txtColor1);
 		background-color: var(--system3);
 		border-radius: var(--r5);
 		font-size: large;
@@ -944,12 +962,15 @@ details {
 	&:hover {
 		background-color: var(--system1);
 		border-radius: var(--r5);
+		time {
+			box-shadow: $shadowExtraSmall;
+		}
 	}
 }
 .dropdownItemSheet {
 	padding-left: $padding;
 	time {
-		color: var(--txtColor0);
+		color: var(--txtColor1);
 		font-size: 12px;
 		float: right;
 		border-radius: var(--r5);

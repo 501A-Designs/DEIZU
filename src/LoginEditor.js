@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { MdAddCircle,MdPerson,MdPalette,MdInfo,MdSettings, MdOutlineBugReport, MdList, MdCropFree, MdReplay,MdDelete, MdDirectionsRun, MdCode, MdKeyboardArrowUp,MdKeyboardArrowRight,MdKeyboardArrowLeft,MdSave } from 'react-icons/md';
+import { MdAddCircle,MdPerson,MdPalette,MdInfo,MdSettings, MdOutlineBugReport, MdList, MdCropFree, MdReplay,MdDelete, MdDirectionsRun, MdCode,MdKeyboardArrowRight,MdKeyboardArrowLeft,MdSave } from 'react-icons/md';
 
 import firebase, { auth, db, root } from './firebase';
 import ScheduleGrid from './ScheduleGrid'
-import DeizuButton from './DeizuButton'
-import ThemeButton from './ThemeButton'
-import ThemeColorButton from './ThemeColorButton'
-import {Colors} from './themeColors'
+import DeizuButton from './buttons/DeizuButton'
+import ToggleButton from './buttons/ToggleButton';
+import ThemeButton from './buttons/ThemeButton'
+import ThemeColorButton from './buttons/ThemeColorButton'
+import { Colors } from './themeColors'
+
+// imgs
+import Default from './img/deizu-default.png'
+import Round from './img/deizu-round.png'
+import Square from './img/deizu-square.png'
+import Cutout from './img/deizu-cutout.png'
+
 
 export default function LoginEditor(prop) {
   // User related
@@ -46,7 +54,20 @@ export default function LoginEditor(prop) {
         Colors.default.system1,
         Colors.default.system3,
         Colors.default.system3,
-        Colors.default.txtColor0
+        Colors.default.txtColor0,
+        Colors.default.txtColor1
+      ]
+    );
+  }
+  const cLight = () => {
+    setSystemColorStyle(
+      [
+        Colors.light.system0,
+        Colors.light.system1,
+        Colors.light.system3,
+        Colors.light.system3,
+        Colors.light.txtColor0,
+        Colors.light.txtColor1
       ]
     );
   }
@@ -57,7 +78,8 @@ export default function LoginEditor(prop) {
           Colors.yellowGrey.system1,
           Colors.yellowGrey.system3,
           Colors.yellowGrey.system3,
-          Colors.yellowGrey.txtColor0
+          Colors.yellowGrey.txtColor0,
+          Colors.yellowGrey.txtColor1
         ]
       );
   }
@@ -68,7 +90,8 @@ export default function LoginEditor(prop) {
           Colors.greyBlack.system1,
           Colors.greyBlack.system2,
           Colors.greyBlack.system3,
-          Colors.greyBlack.txtColor0
+          Colors.greyBlack.txtColor0,
+          Colors.greyBlack.txtColor1
         ]
       );
   }
@@ -79,7 +102,8 @@ export default function LoginEditor(prop) {
           Colors.brown.system1,
           Colors.brown.system2,
           Colors.brown.system3,
-          Colors.brown.txtColor0
+          Colors.brown.txtColor0,
+          Colors.brown.txtColor1
         ]
       );
   }
@@ -90,7 +114,8 @@ export default function LoginEditor(prop) {
         Colors.blueWhite.system1,
         Colors.blueWhite.system2,
         Colors.blueWhite.system3,
-        Colors.blueWhite.txtColor0
+        Colors.blueWhite.txtColor0,
+        Colors.blueWhite.txtColor1
       ]
     );
   }
@@ -101,7 +126,8 @@ export default function LoginEditor(prop) {
         Colors.lightGreen.system1,
         Colors.lightGreen.system2,
         Colors.lightGreen.system3,
-        Colors.lightGreen.txtColor0
+        Colors.lightGreen.txtColor0,
+        Colors.lightGreen.txtColor1
       ]
     );
   }
@@ -112,7 +138,8 @@ export default function LoginEditor(prop) {
         Colors.deepOrange.system1,
         Colors.deepOrange.system2,
         Colors.deepOrange.system3,
-        Colors.deepOrange.txtColor0
+        Colors.deepOrange.txtColor0,
+        Colors.deepOrange.txtColor1
       ]
     );
   }
@@ -123,7 +150,8 @@ export default function LoginEditor(prop) {
         Colors.blueGrey.system1,
         Colors.blueGrey.system2,
         Colors.blueGrey.system3,
-        Colors.blueGrey.txtColor0
+        Colors.blueGrey.txtColor0,
+        Colors.blueGrey.txtColor1
       ]
     );
   }
@@ -134,7 +162,8 @@ export default function LoginEditor(prop) {
         Colors.deepPurple.system1,
         Colors.deepPurple.system2,
         Colors.deepPurple.system3,
-        Colors.deepPurple.txtColor0
+        Colors.deepPurple.txtColor0,
+        Colors.deepPurple.txtColor1
       ]
     );
   }
@@ -189,6 +218,7 @@ export default function LoginEditor(prop) {
     root?.style.setProperty("--system2", systemColorStyle[2]);
     root?.style.setProperty("--system3", systemColorStyle[3]);
     root?.style.setProperty("--txtColor0", systemColorStyle[4]);
+    root?.style.setProperty("--txtColor1", systemColorStyle[5]);
   })
 
   const showProfile = () => {
@@ -224,21 +254,6 @@ export default function LoginEditor(prop) {
       console.log("Error getting document:", error);
     })
   }
-  // useEffect(() => {
-  //   console.log("fetch");
-  //   dataRef.doc(user.uid).get().then((doc) => {
-  //     const titleForOtherSheets = doc.data().sheets;
-  //     const arrayTitle = Object.keys(titleForOtherSheets);
-
-  //     for (let i = 0; i < arrayTitle.length; i++) {
-  //       const firestoreTime = Object.values(titleForOtherSheets)[i].date.toDate().toDateString();
-  //       otherSheetsArray.push(arrayTitle[i] + '$' + firestoreTime);
-  //     }
-  //     setOtherSheets(otherSheetsArray);
-  //   }).catch((error) => {
-  //     console.log("Error getting document:", error);
-  //   })
-  // }, [openSheetsDropdown])
   
   useEffect(() => {
     dataRef.doc(user.uid).get().then((doc) => {
@@ -263,45 +278,7 @@ export default function LoginEditor(prop) {
       </>
     )
   }
-  function SettingButton() {
-    return (
-      <>
-        <button
-          datatitle='設定'
-          className="standardBtn greyBtn iconBtn"
-          style={{backgroundColor:`${openSettingsDropdown && 'var(--system1)'}`}}
-          onClick={() => {
-            setOpenSheetsDropdown(false);
-            setOpenSettingsDropdown(!openSettingsDropdown);
-          }}
-        >
-          {openSettingsDropdown ? <MdKeyboardArrowUp/>:<MdSettings/>}
-        </button>
-        {openSettingsDropdown && <DropdownSettings/>}
-      </>
-    )
-  }
-  function OtherSheetButton() {
-    return (
-      <>
-        <button
-          datatitle='他の表'
-          className="standardBtn greyBtn iconBtn"
-          style={{backgroundColor:`${openSheetsDropdown && 'var(--system1)'}`}}
-          onClick={(e) => {
-            e.preventDefault();
-            setOpenSettingsDropdown(false);
-            setOpenSheetsDropdown(!openSheetsDropdown);
-            getSheetTitles();
-            // {openSheetsDropdown && getSheetTitles()}
-          }}
-        >
-          {openSheetsDropdown ? <MdKeyboardArrowUp/>:<MdList/>}
-        </button>
-        {openSheetsDropdown && <DropdownOthersheets/>}
-      </>
-    )
-  }
+
   function DropdownSettings() {
     function DropdownItem(props) {
       return (
@@ -371,22 +348,22 @@ export default function LoginEditor(prop) {
             </div>
             <ThemeButton
                 btnClick={rDefault}
-                btnImg={null}
+                btnImg={Default}
                 btnName="デフォルト"
             />
             <ThemeButton
                 btnClick={r20}
-                btnImg={null}
+                btnImg={Round}
                 btnName="真ん丸"
             />
             <ThemeButton
                 btnClick={r0}
-                btnImg={null}
+                btnImg={Square}
                 btnName="しかく"
             />
             <ThemeButton
                 btnClick={rCut}
-                btnImg={null}
+                btnImg={Cutout}
                 btnName="切り抜き"
             />
             <ThemeButton
@@ -419,6 +396,13 @@ export default function LoginEditor(prop) {
                 btnTabColor1={Colors.default.system1}
                 btnTabColor2={Colors.default.system2}
                 btnTabColor3={Colors.default.system3}
+              />
+              <ThemeColorButton
+                btnClick={cLight}
+                btnTabColor0={Colors.light.system0}
+                btnTabColor1={Colors.light.system1}
+                btnTabColor2={Colors.light.system2}
+                btnTabColor3={Colors.light.system3}
               />
               <ThemeColorButton
                 btnClick={cGreyBlack}
@@ -553,7 +537,18 @@ export default function LoginEditor(prop) {
               }}
           />
           
-            <OtherSheetButton/>
+            <ToggleButton
+              btnTitle="他の表"
+              btnIcon={<MdList />}
+              dropDownState={openSheetsDropdown}
+              btnClick={(e) => {
+                e.preventDefault();
+                setOpenSettingsDropdown(false);
+                setOpenSheetsDropdown(!openSheetsDropdown);
+                getSheetTitles();
+              }}
+              dropDownComponent={<DropdownOthersheets/>}
+            />
             {titleName ?
               <>
                 <NavItem
@@ -588,7 +583,17 @@ export default function LoginEditor(prop) {
                 />
               </>
               : null}
-            <SettingButton />
+            {/* <SettingButton /> */}
+            <ToggleButton
+              btnTitle="設定"
+              btnIcon={<MdSettings />}
+              dropDownState={openSettingsDropdown}
+              btnClick={() => {
+                setOpenSheetsDropdown(false);
+                setOpenSettingsDropdown(!openSettingsDropdown);
+              }}
+              dropDownComponent={<DropdownSettings/>}
+            />
         </div>
       </section>
 

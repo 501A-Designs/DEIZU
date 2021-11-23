@@ -6,15 +6,17 @@ import { auth, dataRef } from './firebase';
 // Modal.setAppElement('#root');
 
 export default function TimeLabel(props) {
+    const selectorColorProp = props.selectorColor;
+
     const [user] = useAuthState(auth);
     const modalStyle = {
         overlay: {
             background: `radial-gradient(
                 86.36% 107.55% at 6.49% 12.32%,
-                rgba(255, 255, 255, 0.5) 0%,
+                ${selectorColorProp[0]} 0%,
                 rgba(255, 255, 255, 0.5) 100%
             )`,
-            backdropFilter:`blur(16px)`
+            backdropFilter: `blur(5px)`
         }
     };
 

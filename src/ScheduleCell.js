@@ -18,10 +18,10 @@ export default function ScheduleCell(props) {
         overlay: {
             background: `radial-gradient(
                 86.36% 107.55% at 6.49% 12.32%,
-                ${selectorColorProp[3]} 0%,
+                ${selectorColorProp[0]} 0%,
                 rgba(255, 255, 255, 0.5) 100%
             )`,
-            backdropFilter: `blur(16px)`
+            backdropFilter: `blur(5px)`
         }
     };
     const sheetTitle = props.sTitle;
@@ -51,7 +51,7 @@ export default function ScheduleCell(props) {
             width: '95%',
             marginRight: 5,
             backgroundColor: state.isFocused ? `${selectorColorProp[2]}` : 0,
-            color: state.isFocused ? `${selectorColorProp[4]}` : 0,
+            color: state.isFocused ? `${selectorColorProp[5]}` : 0,
             boxShadow: state.isFocused ? '0px 1px 3px lightgray' : 0,
             fontWeight: state.isFocused ? 'bold' : 0,
             cursor: 'pointer',
@@ -66,7 +66,7 @@ export default function ScheduleCell(props) {
             // border: '0px solid transparent',
             border: 0,
             boxShadow: 0,
-            backgroundColor: state.isFocused ? 'white' : `${selectorColorProp[2]}`,
+            backgroundColor: state.isFocused ? selectorColorProp[0] : selectorColorProp[1],
             transition: '0.5s',
         }),
         menuPortal: base => ({ ...base, zIndex: 100 })
@@ -229,7 +229,7 @@ export default function ScheduleCell(props) {
                         <ColorButton btnColor="#e0ff6f" btnName="香"/>
                         <div>
                             <input type="color" value={cellColor} onChange={handleColorValuesChanges}></input>
-                            <label style={{color:'var(--txtColor0)'}}>自分で指定</label>
+                            <label>自分で指定</label>
                         </div>
                     </div>
 

@@ -4,14 +4,23 @@
   --r10: 10px;
   --r5: 5px;
   --system0: white;
-  --system1: #f5f5f5;
-  --system2: #f3f3f3;
-  --system3: #e2e2e2;
+  --system1: #ececec;
+  --system2: #dbdbdb;
+  --system3: black;
   --txtColor0: black;
+  --txtColor1: white;
 }
 
 body {
   background-color: var(--system0);
+}
+
+.gradientText {
+  background-image: -webkit-gradient(linear, left top, right top, from(#00a9e8), to(#24f300));
+  background-image: linear-gradient(90deg, #00a9e8, #24f300);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 ::-webkit-scrollbar {
@@ -20,7 +29,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--system3);
+  background: var(--system2);
   border-radius: 10px 0px 0px 10px;
 }
 
@@ -37,14 +46,15 @@ body {
       -ms-user-select: none;
           user-select: none;
   border-radius: var(--r10);
-  background-color: var(--system2);
-  color: grey;
+  border: 1px solid var(--system1);
+  background-color: var(--system1);
+  color: var(--txtColor0);
   padding: 7.5px 15px;
 }
 
 hr {
   margin: 0 -30px;
-  background-color: var(--system3);
+  background-color: var(--system1);
   border: 1px solid rgba(228, 228, 228, 0.3);
 }
 
@@ -152,20 +162,22 @@ a {
   cursor: pointer;
   -webkit-transition: 0.25s;
   transition: 0.25s;
+  background-color: var(--system3);
+  border: 1px solid var(--system3);
+  color: var(--txtColor1);
 }
 
 .standardBtn:hover {
   -webkit-transform: scale3d(1.05, 1.05, 1.05);
           transform: scale3d(1.05, 1.05, 1.05);
-  -webkit-box-shadow: 0px 1px 20px var(--system2);
-          box-shadow: 0px 1px 20px var(--system2);
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
 }
 
 .themeBtn {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 3.5fr;
-      grid-template-columns: 1fr 3.5fr;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   width: auto;
   height: -webkit-min-content;
   height: -moz-min-content;
@@ -177,22 +189,25 @@ a {
 
 .themeBtn img {
   border-radius: var(--r5);
-  border: 2px solid var(--system3);
+  border: 2px solid var(--system1);
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
   width: 50px;
 }
 
 .themeBtn h4 {
-  padding: auto;
+  padding: 0;
   margin: auto 0px;
 }
 
 .themeBtn:hover {
   cursor: pointer;
+  color: var(--txtColor1);
   background-color: var(--system3);
 }
 
 .themeColorBtn {
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;
@@ -203,7 +218,7 @@ a {
   width: min-content;
   gap: 3px;
   padding: 7.5px;
-  border-radius: var(--r5);
+  border-radius: var(--r10);
 }
 
 .themeColorBtn div {
@@ -214,7 +229,10 @@ a {
 
 .themeColorBtn:hover {
   cursor: pointer;
-  border: 2px solid var(--system3);
+  border: 1px solid var(--system1);
+  background-color: var(--system0);
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .iconBtn {
@@ -258,7 +276,7 @@ a {
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   border-radius: var(--r5);
   padding: 5px;
   margin: 0;
@@ -268,8 +286,8 @@ a {
 }
 
 .scheduleGrid .periodLabel:hover {
-  border: 2px solid var(--system3);
-  background-color: var(--system0);
+  border: 1px solid var(--system1);
+  background-color: var(--system1);
 }
 
 .scheduleGrid .periodLabel .periodAlign {
@@ -293,7 +311,7 @@ a {
 }
 
 .scheduleGrid .periodLabel .periodAlign time {
-  color: var(--txtColor0);
+  color: var(--txtColor1);
   border-radius: var(--r5);
   background-color: var(--system3);
   padding: 2px 5px;
@@ -320,8 +338,10 @@ a {
 
 .scheduleGrid #dayLabelToday {
   cursor: pointer;
-  background-color: var(--system2);
-  border: 2px solid var(--system3);
+  background-color: var(--system0);
+  border: 1px solid var(--system1);
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
 }
 
 .scheduleGrid #dayLabelToday::before {
@@ -347,7 +367,7 @@ a {
   border-radius: var(--r5);
   font-weight: bold;
   height: 100%;
-  background-color: var(--system2);
+  background-color: var(--system1);
   -webkit-transition: 0.1s;
   transition: 0.1s;
 }
@@ -381,7 +401,6 @@ a {
 .scheduleGrid .cellHover:hover,
 .scheduleGrid .cellNameHover:hover .cell {
   cursor: pointer;
-  background-color: var(--system1);
 }
 
 .deizuInput,
@@ -390,8 +409,8 @@ input[type="time"] {
   backdrop-filter: blur(16px);
   background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
   background: none;
-  background-color: var(--system3);
-  border: 2px solid transparent;
+  background-color: var(--system0);
+  border: 1px solid var(--system1);
   padding: 10px;
   outline: none;
   -webkit-transition: 0.5s;
@@ -402,27 +421,9 @@ input[type="time"] {
 
 .deizuInput:focus,
 input[type="time"]:focus {
-  border: 2px solid var(--system3);
-  background-color: var(--system0);
-}
-
-select {
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  background: radial-gradient(86.36% 107.55% at 6.49% 12.32%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
-  cursor: pointer;
-  border: 2px solid var(--system3);
-  padding: 10px;
-  outline: none;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-  border-radius: var(--r5);
-  transition: 0.5s;
-}
-
-select:hover {
-  -webkit-box-shadow: 0px 5px 10px var(--system2);
-          box-shadow: 0px 5px 10px var(--system2);
+  border: 1px solid var(--system1);
+  -webkit-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
 }
 
 .duoGrid {
@@ -450,10 +451,10 @@ select:hover {
 .card {
   color: var(--txtColor0);
   padding: 30px;
-  margin: 15px;
+  margin: 30px;
   border-radius: var(--r10);
-  -webkit-box-shadow: 0px 1px 20px var(--system2);
-          box-shadow: 0px 1px 20px var(--system2);
+  -webkit-box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   min-width: 300px;
   max-width: 600px;
 }
@@ -481,12 +482,6 @@ select:hover {
 
 .centerBtn button {
   width: 200px;
-}
-
-.greyBtn {
-  background-color: var(--system3);
-  border: 2px solid var(--system3);
-  color: var(--txtColor0);
 }
 
 .closeBtn {
@@ -517,7 +512,7 @@ select:hover {
 }
 
 .closeBtn button:hover {
-  color: var(--txtColor0);
+  color: var(--txtColor1);
   background-color: var(--system2);
 }
 
@@ -555,12 +550,13 @@ select:hover {
           flex-direction: row;
   overflow-x: scroll;
   overflow-y: hidden;
+  padding: 15px;
   padding-bottom: 45px;
   gap: 5px;
 }
 
 .slideSide::-webkit-scrollbar-thumb {
-  background: var(--system3);
+  background: var(--system2);
   border-radius: 10px 10px 0px 0px;
 }
 
@@ -568,9 +564,9 @@ select:hover {
   border-radius: var(--r10);
   padding: 15px;
   background-color: var(--system0);
-  -webkit-box-shadow: 0px 7px 15px var(--system2);
-          box-shadow: 0px 7px 15px var(--system2);
-  border: 2px solid var(--system3);
+  -webkit-box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--system1);
   outline: none;
   position: fixed;
   top: calc(15% - 25px);
@@ -606,8 +602,8 @@ select:hover {
 }
 
 .popup .colors button:hover {
-  -webkit-box-shadow: 0px 5px 10px var(--system2);
-          box-shadow: 0px 5px 10px var(--system2);
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
 }
 
 .popup .colors div {
@@ -653,6 +649,7 @@ select:hover {
 .popup .colors div label {
   font-size: 14px;
   width: 80px;
+  color: var(--txtColor1);
 }
 
 .popup .displayTitle {
@@ -672,7 +669,7 @@ select:hover {
 }
 
 .popup .displayLink::-webkit-scrollbar-thumb {
-  background: var(--system3);
+  background: var(--system2);
   border-radius: 10px 10px 0px 0px;
 }
 
@@ -702,7 +699,7 @@ select:hover {
 
 .displayDescription {
   color: var(--txtColor0);
-  background-color: var(--system3);
+  background-color: var(--system1);
   border-radius: var(--r5);
   padding: 5px 10px;
   width: -webkit-fit-content;
@@ -713,9 +710,12 @@ select:hover {
 
 .cautionBanner {
   padding: 30px;
-  border: 2px solid #e89191;
+  border: 1px solid #f5bbbb;
   border-radius: var(--r5);
-  background-color: #ffcccc;
+  color: red;
+  background-color: #ffd4d4;
+  -webkit-box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   margin: 0;
 }
 
@@ -733,8 +733,8 @@ select:hover {
   overflow-x: scroll;
   -webkit-transition: 1s;
   transition: 1s;
-  -webkit-box-shadow: 0px 7px 15px var(--system2);
-          box-shadow: 0px 7px 15px var(--system2);
+  -webkit-box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
   -webkit-transform: translateY(-15%);
           transform: translateY(-15%);
   padding: 2px;
@@ -919,7 +919,7 @@ select:hover {
 }
 
 .colors::-webkit-scrollbar-thumb {
-  background: var(--system3);
+  background: var(--system2);
   border-radius: 10px 10px 0px 0px;
 }
 
@@ -955,8 +955,8 @@ select:hover {
   opacity: 1;
   -webkit-transition: all 0.1s ease 0.5s;
   transition: all 0.1s ease 0.5s;
-  -webkit-box-shadow: 0px 1px 20px var(--system2);
-          box-shadow: 0px 1px 20px var(--system2);
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
   visibility: visible;
 }
 
@@ -967,7 +967,7 @@ select:hover {
 [datatitle]:after {
   font-weight: normal;
   font-size: 14px;
-  border: 1px solid var(--system3);
+  border: 1px solid var(--system0);
   content: attr(dataTitle);
   position: absolute;
   bottom: -2.5em;
@@ -985,10 +985,12 @@ select:hover {
   margin-top: 15px;
   max-height: 250px;
   overflow-y: scroll;
-  border-radius: var(--r10);
+  border-radius: var(--r5);
+  padding: 7.5px;
 }
 
 .dashboardOthersheets section {
+  color: var(--txtColor0);
   padding: 15px;
   border-radius: var(--r5);
   -webkit-transition: 0.25s;
@@ -998,6 +1000,9 @@ select:hover {
 .dashboardOthersheets section:hover {
   cursor: pointer;
   background-color: var(--system3);
+  -webkit-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
+  color: var(--txtColor1);
   font-weight: bold;
 }
 
@@ -1038,35 +1043,13 @@ select:hover {
 .profileImg {
   margin-top: 5%;
   border-radius: var(--r10);
-  border: 2px solid var(--system3);
+  border: 1px solid var(--system1);
   width: 130px;
   height: 130px;
 }
 
 details {
   cursor: pointer;
-}
-
-.selectorDiv {
-  cursor: pointer;
-  border-radius: var(--r10);
-  border: 2px solid var(--system3);
-  padding: 15px;
-  margin: 5px;
-  -webkit-transition: 0.25s;
-  transition: 0.25s;
-}
-
-.selectorDiv h3 {
-  margin-bottom: 0;
-}
-
-.selectorDiv:hover {
-  -webkit-transform: scale3d(1.05, 1.05, 1.05);
-          transform: scale3d(1.05, 1.05, 1.05);
-  -webkit-box-shadow: 0px 1px 20px var(--system2);
-          box-shadow: 0px 1px 20px var(--system2);
-  border: 1px solid #006372;
 }
 
 .templateSelector {
@@ -1105,18 +1088,18 @@ details {
   border-radius: var(--r10);
   width: 300px;
   height: 240px;
-  border: 2px solid var(--system3);
+  border: 1px solid var(--system1);
   padding: 15px;
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 10;
   background-color: var(--system0);
-  -webkit-box-shadow: 0px 7px 15px var(--system2);
-          box-shadow: 0px 7px 15px var(--system2);
+  -webkit-box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 .dropdown .dropdownLeftIcon {
-  color: var(--txtColor0);
+  color: var(--txtColor1);
   background-color: var(--system3);
   border-radius: var(--r5);
   font-size: large;
@@ -1158,12 +1141,18 @@ details {
   border-radius: var(--r5);
 }
 
+.dropdownItem:hover time,
+.dropdownItemSheet:hover time {
+  -webkit-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
+}
+
 .dropdownItemSheet {
   padding-left: 15px;
 }
 
 .dropdownItemSheet time {
-  color: var(--txtColor0);
+  color: var(--txtColor1);
   font-size: 12px;
   float: right;
   border-radius: var(--r5);

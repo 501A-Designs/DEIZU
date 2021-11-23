@@ -1,5 +1,5 @@
 import React from 'react'
-import DeizuPlaceholderImg from './deizuFavicon.png'
+import DeizuPlaceholderImg from '../img/deizuFavicon.png'
 
 export default function ThemeButton(props) {
     return (

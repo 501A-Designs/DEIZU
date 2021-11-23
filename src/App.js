@@ -3,11 +3,11 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { MdReportProblem,MdPerson, MdDescription } from 'react-icons/md';
 import './App.css';
-import logo from './deizuAppIconUpdated.png';
+import logo from './img/deizuAppIconUpdated.png';
 
 import firebase, { auth } from './firebase';
 import Dashboard from './Dashboard'
-import DeizuButton from './DeizuButton'
+import DeizuButton from './buttons/DeizuButton'
 
 function App() {
   const [user] = useAuthState(auth);
@@ -27,15 +27,14 @@ function App() {
           </div>
           <div>
             <section className="card">
-              {/* <div className="cautionBanner">
+              <div className="cautionBanner">
                 <strong className="alignItems" style={{marginBottom: '10px'}}><MdReportProblem className="largeIcon" />注意</strong>
                 <ul style={{ marginLeft: '-20px' }}>
-                  <li><code>schedule-creator-site.web.app</code>から<code>deizu-site.web.app</code>へと変わりました。</li>
                   <li>ベータ版ですので、機能の追加・切り替えによってデータの損失があるかも知れません。</li>
                   <li>スマートフォンまた小さいディスプレイご利用の場合は、時間割表作成に置いて画角における不具合がございます。ご了承下さい。</li>
                 </ul>
-              </div> */}
-              <h1>時間割表をすばやく作成</h1>
+              </div>
+              <h1 >時間割表をすばやく作成</h1>
               <p>
                 DEIZUへようこそ！
                 <br />
