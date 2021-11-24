@@ -227,9 +227,7 @@ a {
 		box-shadow: $shadowSmallest;
 	}
 }
-// .largeIcon {
-// 	font-size: 25px;
-// }
+
 .iconBtn {
 	font-size: large;
 }
@@ -448,21 +446,6 @@ input[type="time"] {
 		}
 	}
 }
-.saveBtn {
-	user-select: none;
-	background-color: lightblue;
-	cursor: pointer;
-	padding: $miniBtnPadding;
-	outline: none;
-	border: none;
-	border-radius: var(--r5);
-	max-width: 70px;
-	outline: none;
-	transition: 0.5s;
-	&::before {
-		content: "保存";
-	}
-}
 
 @mixin slideSide {
 	display: flex;
@@ -489,19 +472,15 @@ input[type="time"] {
 	background-color: var(--system0);
 	box-shadow: $shadowLarge;
 	border: $border;
-	// width: 80%;
 	outline: none;
-
 	position: fixed;
 	top: calc(15% - 25px);
 	bottom: calc(25% - 25px);
 	width: 50%;
 	height: fit-content;
-	// max-height: 260px;
 	overflow-y: auto;
 	max-width: 400px;
 	z-index: 10;
-	// transform: translateY(-250px);
 	transition: $transitionSpeed;
 	animation: selectAni $transitionSpeed;
 
@@ -929,9 +908,9 @@ details {
 	overflow-x: hidden;
 	z-index: 10;
 	background-color: var(--system0);
-	// box-shadow: $heavyBoxShadow;
 	box-shadow: $shadowMedium;
 	.dropdownLeftIcon {
+		border: 1px solid var(--system0);
 		color: var(--txtColor1);
 		background-color: var(--system3);
 		border-radius: var(--r5);
@@ -949,7 +928,6 @@ details {
 .dropdownItem,
 .dropdownItemSheet {
 	color: var(--txtColor0);
-
 	text-decoration: none;
 	cursor: pointer;
 	height: 50px;
@@ -957,12 +935,12 @@ details {
 	justify-content: space-between;
 	align-items: center;
 	border-radius: var(--border-radius);
-	transition: background var(--speed);
 	padding: $padding/3;
 	&:hover {
 		background-color: var(--system1);
 		border-radius: var(--r5);
-		time {
+		time,
+		.dropdownLeftIcon {
 			box-shadow: $shadowExtraSmall;
 		}
 	}
@@ -970,6 +948,7 @@ details {
 .dropdownItemSheet {
 	padding-left: $padding;
 	time {
+		border: 1px solid var(--system0);
 		color: var(--txtColor1);
 		font-size: 12px;
 		float: right;
@@ -978,7 +957,6 @@ details {
 		margin-right: $margin/2;
 		margin-left: $margin;
 		background-color: var(--system3);
-		transition: $transitionSpeed;
 	}
 }
 

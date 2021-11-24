@@ -37,7 +37,6 @@ export default function DropdownSettings(props) {
         url: wallpaperUrl
         }, { merge: true });
         alert('壁紙が保存されました。変更を見るにはページをリロードする必要がございます。');
-        // setWallpaperUrl('');
     }
 
     const showProfile = () => {

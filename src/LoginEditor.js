@@ -27,11 +27,6 @@ export default function LoginEditor(prop) {
   const [openSheetsDropdown, setOpenSheetsDropdown] = useState(false);
   const [otherSheets, setOtherSheets] = useState();
   const otherSheetsArray = [];
-
-  // Dropdown multilayer functionality
-  // const [activeMenu, setActiveMenu] = useState({display: 'none'})
-  // const [unActiveMenu, setUnActiveMenu] = useState({ display: 'block' })
-  // const [activeMenu2, setActiveMenu2] = useState({display: 'none'})
   
   // Screenshots & tites
   const [style, setStyle] = useState({ display: 'none' });
@@ -198,7 +193,6 @@ export default function LoginEditor(prop) {
                 />
               </>
               : null}
-            {/* <SettingButton /> */}
             <ToggleButton
               btnTitle="設定"
               btnIcon={<MdSettings />}

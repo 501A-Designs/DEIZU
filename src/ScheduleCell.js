@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import {options} from './options';
+import { options } from './options';
+import {MdSave} from 'react-icons/md';
+import DeizuButton from './buttons/DeizuButton'
 
 import CreatableSelect from 'react-select/creatable';
 
@@ -32,8 +34,6 @@ export default function ScheduleCell(props) {
     const [subjectDescription, setSubjectDescription] = useState('');
     const createdAt = firebase.firestore.FieldValue.serverTimestamp();
     const [selectedOption, setSelectedOption] = useState('');
-    // const arraySelectedOption = Object.keys(selectedOption);
-    // console.log(arraySelectedOption);
 
     const [cellColor, setCellColor] = useState('');
 
@@ -50,7 +50,7 @@ export default function ScheduleCell(props) {
             paddingLeft: 15,
             width: '95%',
             marginRight: 5,
-            backgroundColor: state.isFocused ? `${selectorColorProp[2]}` : 0,
+            backgroundColor: state.isFocused ? `${selectorColorProp[3]}` : 0,
             color: state.isFocused ? `${selectorColorProp[5]}` : 0,
             boxShadow: state.isFocused ? '0px 1px 3px lightgray' : 0,
             fontWeight: state.isFocused ? 'bold' : 0,
@@ -84,7 +84,6 @@ export default function ScheduleCell(props) {
 
     const handleSelectChange = (inputValue) => {
         const sValue = Object.values(inputValue)[0];
-        // console.log("input change" + inputValue);
         setSubjectName(sValue);
     };
     const handleLinkChanges = (e) => {
@@ -250,9 +249,10 @@ export default function ScheduleCell(props) {
                             value={subjectDescription}
                             onChange={handleDescriptionChanges}
                         />
-                        <button
-                            type="submit"
-                            className="saveBtn"
+                        <DeizuButton
+                            btnIcon={<MdSave className="iconBtn" />}
+                            btnName="保存"
+                            btnType={"submit"}
                         />
                     </form>
 

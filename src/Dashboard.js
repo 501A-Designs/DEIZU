@@ -98,7 +98,6 @@ export default function Dashboard() {
         }
 
         const date = new Date();
-        // const day = date.getDay();
         const hinichi = date.getDate();
         const months = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
         const currentDay = months[date.getMonth()]+hinichi+"日";
@@ -123,7 +122,6 @@ export default function Dashboard() {
                                         btnIcon={<MdAddCircle className="iconBtn" />}
                                         btnName="新しい表を作成"
                                     />
-                                    {/* <button className="standardBtn blueBtn" onClick={() => { setTemplateBtn('change'); }}><MdPhotoFilter className="iconBtn" />テンプレートで表を作成</button> */}
                                 </span>
                             <OtherSheet/>
                         </section>

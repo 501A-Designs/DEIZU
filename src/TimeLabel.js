@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
+import {MdSave} from 'react-icons/md';
+import DeizuButton from './buttons/DeizuButton'
+
 import Modal from 'react-modal';
 import { auth, dataRef } from './firebase';
 // Modal.setAppElement('#root');
@@ -90,10 +93,11 @@ export default function TimeLabel(props) {
                         value={timeEnd}
                         onChange={handleEndChanges}
                     />
-                    <button
-                        type="submit"
-                        className="saveBtn"
-                    ></button>
+                    <DeizuButton
+                        btnIcon={<MdSave className="iconBtn" />}
+                        btnName="保存"
+                        btnType={"submit"}
+                    />
                 </form>
             </Modal>
         </div>
