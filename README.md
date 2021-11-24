@@ -1,4 +1,4 @@
-![DEIZU logo](./src/deizuBanner.png)
+![DEIZU logo](./src/img/deizuBanner.png)
 
 DEIZU に興味を持ちありがとうございます。
 
