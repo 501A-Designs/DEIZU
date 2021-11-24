@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import {MdAddCircle,MdArrowBack} from 'react-icons/md';
+import {MdAddCircle} from 'react-icons/md';
 import './App.css';
 
 import { auth,db,root } from './firebase';
