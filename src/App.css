@@ -716,10 +716,11 @@ input[type="time"]:focus {
           box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
   -webkit-transform: translateY(-15%);
           transform: translateY(-15%);
-  padding: 2px;
+  padding: 5px;
 }
 
 .screenshotMode .screenshotTitle {
+  color: var(--txtColor0);
   text-align: center;
   display: block;
   margin-bottom: 5px;

@@ -158,11 +158,6 @@ export default function ScheduleCell(props) {
             />
         );
     }
-    // const MyComponent = () => (
-    //     <Select
-
-    //     />
-    // )
 
     function ColorButton(props) {
         return (
@@ -214,7 +209,7 @@ export default function ScheduleCell(props) {
                     </div>
                     {/* CELL COLOR SELECTOR */}
                     <div className="colors">
-                        <ColorButton btnColor="#f3f3f3" btnName="無" />
+                        <ColorButton btnColor="var(--system1)" btnName="無" />
                         <ColorButton btnColor="rgb(255, 153, 153)" btnName="赤"/>
                         <ColorButton btnColor="lightblue" btnName="青"/>
                         <ColorButton btnColor="#ffde88" btnName="黄"/>
