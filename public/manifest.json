@@ -1,5 +1,5 @@
 {
-  "short_name": "SC",
+  "short_name": "DEIZU",
   "name": "時間割表を作成するウェブアプリ",
   "icons": [
     {
@@ -8,7 +8,7 @@
       "type": "image/x-icon"
     }
   ],
-  "start_url": ".",
+  "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
