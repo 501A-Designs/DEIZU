@@ -17,7 +17,7 @@ DEIZU に興味を持ちありがとうございます。
 - 壁紙の指定可
 - テーマの変更可
 - 色の変更可
-- [詳しくはこちらへ！](https://www.notion.so/Schedule-Creator-687747c356924e13ad96b981161d3cd3)
+- [詳しくはこちらへ！](https://deizu.vercel.app/)
 
 ### 現在検討中の機能
 
