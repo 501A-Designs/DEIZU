@@ -570,14 +570,21 @@ input[type="time"] {
 	margin: $margin/3 auto;
 }
 
-.cautionBanner {
+.banner {
 	padding: $padding * 2;
-	border: 1px solid rgb(245, 187, 187);
 	border-radius: var(--r5);
-	color: red;
-	background-color: rgb(255, 212, 212);
 	box-shadow: $shadowMedium;
 	margin: 0;
+}
+.cautionbanner {
+	border: 1px solid rgb(245, 187, 187);
+	background-color: rgb(255, 212, 212);
+	color: red;
+}
+.announceBanner {
+	border: 1px solid rgb(187, 198, 245);
+	background-color: rgb(212, 231, 255);
+	color: rgb(0, 102, 255);
 }
 
 // screenshot mode

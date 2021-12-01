@@ -33,10 +33,8 @@ export default function ScheduleCell(props) {
     const [subjectLinkValue, setSubjectLinkValue] = useState('');
     const [subjectDescription, setSubjectDescription] = useState('');
     const createdAt = firebase.firestore.FieldValue.serverTimestamp();
-    const [selectedOption, setSelectedOption] = useState('');
 
     const [cellColor, setCellColor] = useState('');
-
     const cellName = props.cellId;
     const cellClr = props.cellId + "Color";
     const cellLink = props.cellId + "Link";

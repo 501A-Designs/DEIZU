@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { MdReportProblem,MdPerson, MdDescription } from 'react-icons/md';
+import { MdOutlineFlashOn,MdPerson, MdDescription } from 'react-icons/md';
 import './App.css';
 import logo from './img/deizuAppIconUpdated.png';
 
@@ -27,13 +27,20 @@ function App() {
           </div>
           <div>
             <section className="card">
-              <div className="cautionBanner">
+              <div className="banner announceBanner">
+                <strong className="alignItems" style={{marginBottom: '10px'}}><MdOutlineFlashOn className="largeIcon" />新規</strong>
+                <ul style={{ marginLeft: '-20px' }}>
+                  <li>2021年12月1日よりDEIZUのv1.0.0が一般公開されました（過去のバージョン情報はGitHubから見れます）</li>
+                  <li>Zennにて開発に関する記事が投稿されました。</li>
+                </ul>
+              </div>
+              {/* <div className="banner cautionBanner">
                 <strong className="alignItems" style={{marginBottom: '10px'}}><MdReportProblem className="largeIcon" />注意</strong>
                 <ul style={{ marginLeft: '-20px' }}>
                   <li>ベータ版ですので、機能の追加・切り替えによってデータの損失があるかも知れません。</li>
                   <li>スマートフォンまた小さいディスプレイご利用の場合は、時間割表作成に置いて画角における不具合がございます。ご了承下さい。</li>
                 </ul>
-              </div>
+              </div> */}
               <h1 >時間割表をすばやく作成</h1>
               <p>
                 DEIZUへようこそ！
