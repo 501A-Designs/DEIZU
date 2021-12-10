@@ -1,14 +1,14 @@
 import { useState} from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, dataRef } from '../firebase';
-
 import {MdPerson,MdPalette,MdInfo, MdOutlineBugReport,MdDirectionsRun, MdCode,MdKeyboardArrowRight,MdKeyboardArrowLeft,MdSave } from 'react-icons/md';
 
 import ThemeButton from '../buttons/ThemeButton'
 import ThemeColorButton from '../buttons/ThemeColorButton'
 import DropdownItem from './DropdownItem'
 import DeizuButton from '../buttons/DeizuButton'
-
+import GradeButton from '../buttons/GradeButton'
+import SubmenuBox from '../components/SubmenuBox'
 
 // imgs
 import Default from '../img/deizu-default.png'
@@ -19,16 +19,25 @@ import Cutout from '../img/deizu-cutout.png'
 import { Colors } from '../theme-data/themeColors'
 import { Themes } from '../theme-data/theme'
 
-
 export default function DropdownSettings(props) {
     const [user] = useAuthState(auth);
     const fullName = auth.currentUser.displayName;
     const firstName = fullName.split(" ")[0];
-    const [wallpaperUrl, setWallpaperUrl] = useState(props.wallpaperUrl);
-
+    const [wallpaperUrl, setWallpaperUrl] = useState(props.wallpaperUrl);  
+  
     const [activeMenu, setActiveMenu] = useState({display: 'none'})
     const [unActiveMenu, setUnActiveMenu] = useState({ display: 'block' })
-    const [activeMenu2, setActiveMenu2] = useState({display: 'none'})
+    const [activeMenu2, setActiveMenu2] = useState({ display: 'none' })
+    
+  const gradeValue = props.gradeValue;
+    let gradeView;
+    if (gradeValue == 'ib') {
+      gradeView ='IB'
+    }if (gradeValue == 'highschool') {
+      gradeView ='中学・高校'
+    }if (gradeValue == 'university') {
+      gradeView ='大学'
+    }
 
     // Fetch data
     const saveWallpaper = (w) => {
@@ -100,7 +109,7 @@ export default function DropdownSettings(props) {
         </div>
         <div style={activeMenu}>
           <DropdownItem leftIcon={<MdKeyboardArrowLeft />} click={() => hideProfile()}>戻る</DropdownItem>
-          <div className="submenuBox">
+          <SubmenuBox header={'プロフィール'}>
             <div className="profileSectionFlex">
               <img src={user.photoURL}/>
               <div>
@@ -109,13 +118,18 @@ export default function DropdownSettings(props) {
               </div>
             </div>
             <SignOut />
-          </div>
+          </SubmenuBox>
+          <SubmenuBox header={'学年'} text={`指定されている学年：${gradeView}`}>
+            <GradeButton
+              setToIb={props.setToIb}
+              setToHighschool={props.setToHighschool}
+              setToUniversity={props.setToUniversity}
+            />
+          </SubmenuBox>
         </div>
         <div style={activeMenu2}>
           <DropdownItem leftIcon={<MdKeyboardArrowLeft />} click={() => hideCustomize()}>戻る</DropdownItem>
-          <div className="submenuBox">
-            <h3>壁紙の変更</h3>
-            <p>インターネットにある画像のURLを貼るだけでシート全体における壁紙を指定することができます。</p>
+          <SubmenuBox header={'壁紙の変更'} text={'インターネットにある画像のURLを貼るだけでシート全体における壁紙を指定することができます。'}>
             <form onSubmit={saveWallpaper} className="alignItems">
               <input
                 className="deizuInput"
@@ -129,12 +143,8 @@ export default function DropdownSettings(props) {
                 btnType={"submit"}
               />
             </form>
-          </div>
-          <div className="submenuBox">
-            <div>
-                <h3>テーマの変更</h3>
-                <p>自分の好みにあった形状を選ぶことができます。</p>
-            </div>
+          </SubmenuBox>
+          <SubmenuBox header={'テーマの変更'} text={'自分の好みにあった形状を選ぶことができます。'}>
             <ThemeButton
                 systemCornerStyle={props.systemCornerStyle}
                 cornerData={Themes.default}
@@ -171,12 +181,8 @@ export default function DropdownSettings(props) {
                 btnImg={null}
                 btnName="アブストラクト"
             />
-          </div>
-          <div className="submenuBox">
-            <div>
-                <h3>色の変更</h3>
-                <p>自分の好みにあった色を選ぶことができます。</p>
-            </div>
+          </SubmenuBox>
+          <SubmenuBox header={'色の変更'} text={'自分の好みにあった色を選ぶことができます。'}>
             <div className="slideSide">            
                 <ThemeColorButton
                     btnTitle="デフォルト"
@@ -229,7 +235,7 @@ export default function DropdownSettings(props) {
                     btnTabColors={Colors.deepPurple}
                 />
             </div>
-          </div>
+          </SubmenuBox>
         </div>
       </div>
     )

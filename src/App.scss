@@ -40,7 +40,7 @@ $shadowHover: 0 30px 60px rgba(0, 0, 0, 0.12);
 
 $scale: scale3d(1.05, 1.05, 1.05);
 
-$transitionSpeed: 0.5s;
+$transitionSpeed: 0.3s;
 
 body {
 	background-color: var(--system0);
@@ -182,6 +182,9 @@ a {
 		transform: $scale;
 		box-shadow: $shadowSmall;
 	}
+	&:disabled {
+		opacity: 0.5;
+	}
 }
 .themeBtn {
 	display: flex;
@@ -230,6 +233,28 @@ a {
 
 .iconBtn {
 	font-size: large;
+}
+.gradeButton {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 5px;
+	border-radius: var(--r5);
+	padding: $btnPadding;
+	font-weight: bold;
+	font-size: 12px;
+	outline: none;
+	cursor: pointer;
+	transition: $transitionSpeed / 2;
+	background-color: var(--system3);
+	border: 1px solid var(--system3);
+	color: var(--txtColor1);
+	&:hover {
+		transform: $scale;
+		box-shadow: $shadowSmall;
+	}
+	&:disabled {
+		opacity: 0.5;
+	}
 }
 
 .alignItems {
@@ -445,6 +470,12 @@ input[type="time"] {
 			background-color: var(--system2);
 		}
 	}
+}
+
+.lightBtn {
+	color: var(--txtColor0);
+	background-color: var(--system2);
+	border: $border;
 }
 
 @mixin slideSide {

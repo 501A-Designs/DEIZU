@@ -2,19 +2,18 @@ import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { options } from './options';
-import {MdSave} from 'react-icons/md';
+import {MdSave,MdHelpOutline} from 'react-icons/md';
 import DeizuButton from './buttons/DeizuButton'
 
 import CreatableSelect from 'react-select/creatable';
 
-import firebase, { auth, dataRef } from './firebase';
+import firebase, { auth, dataRef,optionsDataRef } from './firebase';
 import Modal from 'react-modal';
 // Modal.setAppElement('#root');
 
 export default function ScheduleCell(props) {
     const cornerProp = props.corner;
     const selectorColorProp = props.selectorColor;
-
     const [user] = useAuthState(auth);
     const modalStyle = {
         overlay: {
@@ -33,6 +32,7 @@ export default function ScheduleCell(props) {
     const [subjectLinkValue, setSubjectLinkValue] = useState('');
     const [subjectDescription, setSubjectDescription] = useState('');
     const createdAt = firebase.firestore.FieldValue.serverTimestamp();
+    const [subjectOptions, setSubjectOptions] = useState()
 
     const [cellColor, setCellColor] = useState('');
     const cellName = props.cellId;
@@ -79,7 +79,6 @@ export default function ScheduleCell(props) {
         })
     ]
 
-
     const handleSelectChange = (inputValue) => {
         const sValue = Object.values(inputValue)[0];
         setSubjectName(sValue);
@@ -92,6 +91,21 @@ export default function ScheduleCell(props) {
     }
     const handleColorValuesChanges = (e) => {
         setCellColor(e.target.value);
+    }
+    const saveSubjectToSubjectDB = () => {
+
+        let confirm = window.confirm(`「${subjectName}」をDEIZUの科目のデータベースに保存します。`);
+        if (confirm == true) {
+          optionsDataRef.doc('university').update({
+              options: firebase.firestore.FieldValue.arrayUnion(
+                  {
+                      label: subjectName,
+                      value: subjectName
+                  }
+                  
+              )
+          },{ merge: true })
+        }
     }
 
     const saveSubject = async (e) => {
@@ -140,6 +154,14 @@ export default function ScheduleCell(props) {
             console.log("Error getting document:", error);
         });
     }, [sheetTitle])
+
+    useEffect(() => {
+        optionsDataRef.doc('university').get().then((doc) => {
+            setSubjectOptions(doc.data().options)
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+    }, [modalIsOpen])
     
     // SELECT INPUT
     function SubjectSelector(){
@@ -152,7 +174,7 @@ export default function ScheduleCell(props) {
                 placeholder="科目を選択"
                 defaultValue={subjectName}
                 onChange={handleSelectChange}
-                options={options}
+                options={subjectOptions}
             />
         );
     }
@@ -227,7 +249,13 @@ export default function ScheduleCell(props) {
 
                     {/* CELL SUBJECT & LINK INPUT */} 
                     <form className="modalForm" onSubmit={saveSubject}>
-                        <SubjectSelector/>
+                        <SubjectSelector />
+                        <DeizuButton
+                            btnIcon={<MdSave className="iconBtn" />}
+                            btnName="科目をDEIZUのデータベースに保存"
+                            btnColor={'lightBtn'}
+                            btnClick={saveSubjectToSubjectDB}
+                        />
                         <input
                             className="deizuInput"
                             type="url"

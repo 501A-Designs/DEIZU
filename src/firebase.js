@@ -15,9 +15,10 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 
-
 export const db = firebase.firestore();
 export const auth = firebase.auth();
+// export const signInWithCustomToken = firebase.auth().signInWithCustomToken();
 export const dataRef = db.collection('users');
+export const optionsDataRef = db.collection('subjects');
 export const root = document.documentElement;
 export default firebase;

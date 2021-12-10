@@ -7,7 +7,6 @@ export default function ThemeColorButton(props) {
     const [user] = useAuthState(auth);
     const [systemColorStyle, setSystemColorStyle] = useState(props.systemColorStyle);
     let colorData = props.btnTabColors;
-    console.log(colorData);
 
     useEffect(() => {
         setSystemColorStyle(colorData);
@@ -19,7 +18,7 @@ export default function ThemeColorButton(props) {
         }, { merge: true });
         alert('色が保存されました。変更を見るにはページをリロードする必要がございます。');
     }
-    
+
     return (
         <section
             datatitle={props.btnTitle}

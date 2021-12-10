@@ -1,19 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
-
-import { MdAddCircle,MdSettings, MdList, MdCropFree, MdReplay,MdDelete} from 'react-icons/md';
+import { MdAddCircle,MdSettings, MdList, MdCropFree,MdDelete} from 'react-icons/md';
 
 import firebase, { auth, root,dataRef } from './firebase';
+
 import ScheduleGrid from './ScheduleGrid'
 import DeizuButton from './buttons/DeizuButton'
 import ToggleButton from './buttons/ToggleButton';
-
 import DropdownSettings from './drop-down/DropdownSettings';
-
-
 import NavItem from './buttons/NavItem'
-
-
 
 export default function LoginEditor(prop) {
   // User related
@@ -21,6 +16,10 @@ export default function LoginEditor(prop) {
   const fullName = auth.currentUser.displayName;
   const firstName = fullName.split(" ")[0];
   const [wallpaperUrl, setWallpaperUrl] = useState('');
+  const [gradeValue, setGradeValue] = useState('');
+  const setToIb = () => { setGradeValue('ib')};
+  const setToHighschool = () => {setGradeValue('highschool')};
+  const setToUniversity = () => {setGradeValue('university')};
 
   // Dropdown functionality
   const [openSettingsDropdown, setOpenSettingsDropdown] = useState(false);
@@ -55,7 +54,6 @@ export default function LoginEditor(prop) {
     dataRef.doc(user.uid).get().then((doc) => {
       const titleForOtherSheets = doc.data().sheets;
       const arrayTitle = Object.keys(titleForOtherSheets);
-
       for (let i = 0; i < arrayTitle.length; i++) {
         const firestoreTime = Object.values(titleForOtherSheets)[i].date.toDate().toDateString();
         otherSheetsArray.push(arrayTitle[i] + '$' + firestoreTime);
@@ -74,8 +72,8 @@ export default function LoginEditor(prop) {
       console.log("Error getting document:", error);
     });
     console.log("fetch");
-  },[])
-
+  }, [])
+  
 
   function DropdownOthersheets() {
     function OtherSheet() {
@@ -109,14 +107,6 @@ export default function LoginEditor(prop) {
               setOpenSheetsDropdown(false);
             }}
           />
-          <DeizuButton
-            btnIcon={<MdReplay className="iconBtn" />}
-            btnName=""
-            btnTitle="更新"
-            btnClick={() => {
-              getSheetTitles();
-            }}
-          />
         </div>
         <OtherSheet/>
       </div>
@@ -146,7 +136,6 @@ export default function LoginEditor(prop) {
                 setOpenSheetsDropdown(false);
               }}
           />
-          
             <ToggleButton
               btnTitle="他の表"
               btnIcon={<MdList />}
@@ -157,7 +146,12 @@ export default function LoginEditor(prop) {
                 setOpenSheetsDropdown(!openSheetsDropdown);
                 getSheetTitles();
               }}
-              dropDownComponent={<DropdownOthersheets/>}
+              dropDownComponent={
+                <DropdownOthersheets
+                  otherSheets={otherSheets}
+                  titleValue={titleName}
+                  openSheetsDropdown={openSheetsDropdown}
+                />}
             />
             {titleName ?
               <>
@@ -206,6 +200,10 @@ export default function LoginEditor(prop) {
                   systemCornerStyle={systemCornerStyle}
                   systemColorStyle={systemColorStyle}
                   wallpaperUrl={wallpaperUrl}
+                  gradeValue={gradeValue}
+                  setToIb={setToIb}
+                  setToHighschool={setToHighschool}
+                  setToUniversity={setToUniversity}
                 />
               }
             />
