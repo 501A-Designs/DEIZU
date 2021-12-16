@@ -466,7 +466,7 @@ input[type="time"] {
 			content: "✕";
 		}
 		&:hover {
-			color: var(--txtColor1);
+			color: var(--txtColor0);
 			background-color: var(--system2);
 		}
 	}
@@ -515,32 +515,47 @@ input[type="time"] {
 	transition: $transitionSpeed;
 	animation: selectAni $transitionSpeed;
 
+	.cellNameData {
+		display: flex;
+		align-items: center;
+		gap: $margin/2;
+		border: $border;
+		margin: $margin/3;
+		border-radius: var(--r5);
+		padding: $padding/2;
+		width: fit-content;
+		font-size: small;
+	}
+
 	.colors {
-		margin-bottom: $margin;
-		button {
-			width: 100%;
-			max-width: 40px;
-			cursor: pointer;
-			outline: none;
-			border: none;
-			margin: $btnMargin;
-			padding: $miniBtnPadding;
-			border-radius: var(--r5);
-			transition: $transitionSpeed;
-			&:hover {
-				box-shadow: $shadowSmall;
+		padding: $padding/3;
+		section {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			gap: $margin/2;
+			button {
+				height: 15px;
+				width: auto;
+				cursor: pointer;
+				outline: none;
+				border: none;
+				border-radius: var(--r5);
+				transition: $transitionSpeed;
+				&:hover {
+					box-shadow: $shadowSmall;
+				}
 			}
 		}
 		div {
-			padding: 5px;
+			padding: $padding/3;
 			display: flex;
-			gap: 5px;
+			gap: $padding/3;
 			flex-direction: row;
 			align-items: center;
 			border-radius: var(--r5);
-			width: min-content;
+			// width: min-content;
+			margin-top: $margin/1.5;
 			background-color: var(--system3);
-			margin: $btnMargin;
 			input[type="color"] {
 				border-radius: var(--r5);
 				width: 40px;
@@ -568,8 +583,7 @@ input[type="time"] {
 		border: 1px solid transparent;
 		text-align: center;
 		padding: 5px;
-		margin: $margin * 2 auto;
-		width: 50%;
+		margin: $margin/3;
 		border-radius: var(--r5);
 		transition: $transitionSpeed;
 	}
@@ -775,23 +789,11 @@ input[type="time"] {
 		padding: 3% 16% 0% 16%;
 	}
 }
-
-.centerAll {
-	margin-top: $margin * 2;
-}
-.colors {
-	@include slideSide;
-	padding: $padding;
-	margin: 0 $margin;
-	gap: 5px;
-	margin-bottom: $margin;
-}
 .modalForm {
-	padding: $padding;
+	padding: $padding/3;
 	display: flex;
 	gap: $padding/2;
 	flex-direction: column;
-	margin-bottom: $margin;
 	.deizuInput {
 		min-width: none;
 		max-width: none;
@@ -935,10 +937,10 @@ details {
 
 .dropdown {
 	position: absolute;
-	transform: translateX(13%) translateY(20%);
+	transform: translateX(13%) translateY(15%);
 	border-radius: var(--r10);
 	width: 300px;
-	height: 240px;
+	height: 300px;
 	border: $border;
 	padding: $padding;
 	overflow-y: auto;

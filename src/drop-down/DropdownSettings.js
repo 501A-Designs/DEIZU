@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useState, useEffect} from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, dataRef } from '../firebase';
 import {MdPerson,MdPalette,MdInfo, MdOutlineBugReport,MdDirectionsRun, MdCode,MdKeyboardArrowRight,MdKeyboardArrowLeft,MdSave } from 'react-icons/md';
@@ -37,9 +37,12 @@ export default function DropdownSettings(props) {
       gradeView ='中学・高校'
     }if (gradeValue == 'university') {
       gradeView ='大学'
+    }if (gradeValue == 'custom') {
+      gradeView ='カスタム'
     }
 
-    // Fetch data
+  
+    // Set data
     const saveWallpaper = (w) => {
         w.preventDefault();
         dataRef.doc(user.uid).set({
@@ -48,6 +51,7 @@ export default function DropdownSettings(props) {
         alert('壁紙が保存されました。変更を見るにはページをリロードする必要がございます。');
     }
 
+    // Function for multilevel dropdow menu
     const showProfile = () => {
         setActiveMenu({ display: 'block' })
         setUnActiveMenu({display:'none'})
@@ -119,11 +123,13 @@ export default function DropdownSettings(props) {
             </div>
             <SignOut />
           </SubmenuBox>
-          <SubmenuBox header={'学年'} text={`指定されている学年：${gradeView}`}>
+          <SubmenuBox header={'科目の系統'} text={`指定されているモード：${gradeView}`}>
             <GradeButton
+              gradeValue={gradeValue}
               setToIb={props.setToIb}
               setToHighschool={props.setToHighschool}
               setToUniversity={props.setToUniversity}
+              setToCustom={props.setToCustom}
             />
           </SubmenuBox>
         </div>

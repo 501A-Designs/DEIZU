@@ -547,7 +547,7 @@ input[type="time"]:focus {
 }
 
 .closeBtn button:hover {
-  color: var(--txtColor1);
+  color: var(--txtColor0);
   background-color: var(--system2);
 }
 
@@ -604,24 +604,48 @@ input[type="time"]:focus {
           animation: selectAni 0.3s;
 }
 
-.popup .colors {
-  margin-bottom: 15px;
+.popup .cellNameData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 7.5px;
+  border: 1px solid var(--system1);
+  margin: 5px;
+  border-radius: var(--r5);
+  padding: 7.5px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: small;
 }
 
-.popup .colors button {
-  width: 100%;
-  max-width: 40px;
+.popup .colors {
+  padding: 5px;
+}
+
+.popup .colors section {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 7.5px;
+}
+
+.popup .colors section button {
+  height: 15px;
+  width: auto;
   cursor: pointer;
   outline: none;
   border: none;
-  margin: 5px;
-  padding: 0.5em 1em 0.5em 1em;
   border-radius: var(--r5);
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
-.popup .colors button:hover {
+.popup .colors section button:hover {
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
           box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
 }
@@ -640,11 +664,8 @@ input[type="time"]:focus {
       -ms-flex-align: center;
           align-items: center;
   border-radius: var(--r5);
-  width: -webkit-min-content;
-  width: -moz-min-content;
-  width: min-content;
+  margin-top: 10px;
   background-color: var(--system3);
-  margin: 5px;
 }
 
 .popup .colors div input[type="color"] {
@@ -676,8 +697,7 @@ input[type="time"]:focus {
   border: 1px solid transparent;
   text-align: center;
   padding: 5px;
-  margin: 30px auto;
-  width: 50%;
+  margin: 5px;
   border-radius: var(--r5);
   -webkit-transition: 0.3s;
   transition: 0.3s;
@@ -925,36 +945,8 @@ input[type="time"]:focus {
   }
 }
 
-.centerAll {
-  margin-top: 30px;
-}
-
-.colors {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  padding: 15px;
-  margin: 0 15px;
-  gap: 5px;
-  margin-bottom: 15px;
-}
-
-.colors::-webkit-scrollbar-thumb {
-  background: var(--system2);
-  border-radius: 10px 10px 0px 0px;
-}
-
 .modalForm {
-  padding: 15px;
+  padding: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -963,7 +955,6 @@ input[type="time"]:focus {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-bottom: 15px;
 }
 
 .modalForm .deizuInput {
@@ -1113,11 +1104,11 @@ details {
 
 .dropdown {
   position: absolute;
-  -webkit-transform: translateX(13%) translateY(20%);
-          transform: translateX(13%) translateY(20%);
+  -webkit-transform: translateX(13%) translateY(15%);
+          transform: translateX(13%) translateY(15%);
   border-radius: var(--r10);
   width: 300px;
-  height: 240px;
+  height: 300px;
   border: 1px solid var(--system1);
   padding: 15px;
   overflow-y: auto;

@@ -16,10 +16,27 @@ export default function LoginEditor(prop) {
   const fullName = auth.currentUser.displayName;
   const firstName = fullName.split(" ")[0];
   const [wallpaperUrl, setWallpaperUrl] = useState('');
-  const [gradeValue, setGradeValue] = useState('');
-  const setToIb = () => { setGradeValue('ib')};
-  const setToHighschool = () => {setGradeValue('highschool')};
-  const setToUniversity = () => {setGradeValue('university')};
+  const [gradeValue, setGradeValue] = useState('custom');
+
+  function setSubjectSuggestion(prop){
+    setGradeValue(prop);
+    dataRef.doc(user.uid).set({
+      subjectSuggestionType: prop
+    }, { merge: true });
+    alert('科目の系統が保存されました。変更を見るにはページをリロードする必要がございます。');
+  }
+  const setToIb = () => {
+    setSubjectSuggestion('ib')
+  };
+  const setToHighschool = () => {
+    setSubjectSuggestion('highschool')
+  };
+  const setToUniversity = () => {
+    setSubjectSuggestion('university')
+  };
+  const setToCustom = () => {
+    setSubjectSuggestion('custom')
+  };
 
   // Dropdown functionality
   const [openSettingsDropdown, setOpenSettingsDropdown] = useState(false);
@@ -204,6 +221,7 @@ export default function LoginEditor(prop) {
                   setToIb={setToIb}
                   setToHighschool={setToHighschool}
                   setToUniversity={setToUniversity}
+                  setToCustom={setToCustom}
                 />
               }
             />
@@ -221,7 +239,17 @@ export default function LoginEditor(prop) {
         </div>
         <section className={screenshotFrame} style={{overflowX: 'scroll', borderRadius:'20px'}}>
           <h1 className="screenshotTitle">{titleName}</h1>
-          {titleName ? <ScheduleGrid corner={systemCornerStyle} selectorColor={systemColorStyle} sheetTitle={titleName} /> : <p>［スーパーインプット］でタイトルを指定する必要がございます。<br/>なお、タイトルは一度指定すると変更することができませんのでご了承下さい。<br/>スーパーインプットはタイトルの指定以外にも、他の表のタイトルを入力すると時間割表が表示されので検索バーとしても使用できます。</p>}
+          {titleName ? <ScheduleGrid corner={systemCornerStyle} selectorColor={systemColorStyle} sheetTitle={titleName} /> :
+            <>
+              <h2>時間割表の作成</h2>
+              <ol>
+                <li>［スーパーインプット］で作成したい時間割表のタイトルを入力する。</li>
+                <li>タイトルを入力すると表がでできますので、時間割のセルをクリックすると時間割表を埋めていくことができます。</li>
+                <li>セルを編集し保存すると、[1]で指定したタイトルは変更することができませんのでご了承下さい。</li>
+              </ol>
+              ※［スーパーインプット］に以前作成した他の表のタイトルを入力すると、時間割表が表示されます。(使用法に関する詳しい情報は<a href="https://deizu.vercel.app/usage">こちら</a>へ)
+            </>
+          }
         </section>
       </div>
     </>
