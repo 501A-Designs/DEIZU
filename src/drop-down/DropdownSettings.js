@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react'
+import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, dataRef } from '../firebase';
 import {MdPerson,MdPalette,MdInfo, MdOutlineBugReport,MdDirectionsRun, MdCode,MdKeyboardArrowRight,MdKeyboardArrowLeft,MdSave } from 'react-icons/md';
@@ -30,18 +30,7 @@ export default function DropdownSettings(props) {
     const [activeMenu2, setActiveMenu2] = useState({ display: 'none' })
     
   const gradeValue = props.gradeValue;
-    let gradeView;
-    if (gradeValue == 'ib') {
-      gradeView ='IB'
-    }if (gradeValue == 'highschool') {
-      gradeView ='中学・高校'
-    }if (gradeValue == 'university') {
-      gradeView ='大学'
-    }if (gradeValue == 'custom') {
-      gradeView ='カスタム'
-    }
 
-  
     // Set data
     const saveWallpaper = (w) => {
         w.preventDefault();
@@ -123,7 +112,7 @@ export default function DropdownSettings(props) {
             </div>
             <SignOut />
           </SubmenuBox>
-          <SubmenuBox header={'科目の系統'} text={`指定されているモード：${gradeView}`}>
+          <SubmenuBox header={'科目の系統'} text={`自分にあったモードを選んで下さい：`}>
             <GradeButton
               gradeValue={gradeValue}
               setToIb={props.setToIb}

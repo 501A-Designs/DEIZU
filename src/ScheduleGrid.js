@@ -13,6 +13,7 @@ export default function ScheduleGrid(props) {
     const sheetTitle = props.sheetTitle;
     const cornerProps = props.corner;
     const selectorColorProps = props.selectorColor;
+    const subjectSuggestionTypeData = props.subjectSuggestionTypeData;
 
     const date = new Date();
     const day = date.getDay();
@@ -21,56 +22,56 @@ export default function ScheduleGrid(props) {
     const months = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
     const currentDay = months[date.getMonth()] + hinichi + "日";
     
-    const [selectedCellId, setSelectedCellId] = useState('');
+    const [selectedCellId, setSelectedCellId] = useState('a1');
     const [modalIsOpen, setIsOpen] = useState(false);
     const closeSubjectModal　= () => setIsOpen(false);
 
-    const setA1 = () => setSelectedCellId("a1");
-    const setB1 = () => setSelectedCellId("b1");
-    const setC1 = () => setSelectedCellId("c1");
-    const setD1 = () => setSelectedCellId("d1");
-    const setE1 = () => setSelectedCellId("e1");
-    const setF1 = () => setSelectedCellId("f1");
-    const setA2 = () => setSelectedCellId("a2");
-    const setB2 = () => setSelectedCellId("b2");
-    const setC2 = () => setSelectedCellId("c2");
-    const setD2 = () => setSelectedCellId("d2");
-    const setE2 = () => setSelectedCellId("e2");
-    const setF2 = () => setSelectedCellId("f2");
-    const setA3 = () => setSelectedCellId("a3");
-    const setB3 = () => setSelectedCellId("b3");
-    const setC3 = () => setSelectedCellId("c3");
-    const setD3 = () => setSelectedCellId("d3");
-    const setE3 = () => setSelectedCellId("e3");
-    const setF3 = () => setSelectedCellId("f3");
-    const setA4 = () => setSelectedCellId("a4");
-    const setB4 = () => setSelectedCellId("b4");
-    const setC4 = () => setSelectedCellId("c4");
-    const setD4 = () => setSelectedCellId("d4");
-    const setE4 = () => setSelectedCellId("e4");
-    const setF4 = () => setSelectedCellId("f4");
-    const setA5 = () => setSelectedCellId("a5");
-    const setB5 = () => setSelectedCellId("b5");
-    const setC5 = () => setSelectedCellId("c5");
-    const setD5 = () => setSelectedCellId("d5");
-    const setE5 = () => setSelectedCellId("e5");
-    const setF5 = () => setSelectedCellId("f5");
-    const setA6 = () => setSelectedCellId("a6");
-    const setB6 = () => setSelectedCellId("b6");
-    const setC6 = () => setSelectedCellId("c6");
-    const setD6 = () => setSelectedCellId("d6");
-    const setE6 = () => setSelectedCellId("e6");
-    const setF6 = () => setSelectedCellId("f6");
-    const setA7 = () => setSelectedCellId("a7");
-    const setB7 = () => setSelectedCellId("b7");
-    const setC7 = () => setSelectedCellId("c7");
-    const setD7 = () => setSelectedCellId("d7");
-    const setE7 = () => setSelectedCellId("e7");
-    const setF7 = () => setSelectedCellId("f7");
+    const setA1 = () => {setSelectedCellId("a1"); setIsOpen(true);};
+    const setB1 = () => {setSelectedCellId("b1"); setIsOpen(true);};
+    const setC1 = () => {setSelectedCellId("c1"); setIsOpen(true);};
+    const setD1 = () => {setSelectedCellId("d1"); setIsOpen(true);};
+    const setE1 = () => {setSelectedCellId("e1"); setIsOpen(true);};
+    const setF1 = () => {setSelectedCellId("f1"); setIsOpen(true);};
+    const setA2 = () => {setSelectedCellId("a2"); setIsOpen(true);};
+    const setB2 = () => {setSelectedCellId("b2"); setIsOpen(true);};
+    const setC2 = () => {setSelectedCellId("c2"); setIsOpen(true);};
+    const setD2 = () => {setSelectedCellId("d2"); setIsOpen(true);};
+    const setE2 = () => {setSelectedCellId("e2"); setIsOpen(true);};
+    const setF2 = () => {setSelectedCellId("f2"); setIsOpen(true);};
+    const setA3 = () => {setSelectedCellId("a3"); setIsOpen(true);};
+    const setB3 = () => {setSelectedCellId("b3"); setIsOpen(true);};
+    const setC3 = () => {setSelectedCellId("c3"); setIsOpen(true);};
+    const setD3 = () => {setSelectedCellId("d3"); setIsOpen(true);};
+    const setE3 = () => {setSelectedCellId("e3"); setIsOpen(true);};
+    const setF3 = () => {setSelectedCellId("f3"); setIsOpen(true);};
+    const setA4 = () => {setSelectedCellId("a4"); setIsOpen(true);};
+    const setB4 = () => {setSelectedCellId("b4"); setIsOpen(true);};
+    const setC4 = () => {setSelectedCellId("c4"); setIsOpen(true);};
+    const setD4 = () => {setSelectedCellId("d4"); setIsOpen(true);};
+    const setE4 = () => {setSelectedCellId("e4"); setIsOpen(true);};
+    const setF4 = () => {setSelectedCellId("f4"); setIsOpen(true);};
+    const setA5 = () => {setSelectedCellId("a5"); setIsOpen(true);};
+    const setB5 = () => {setSelectedCellId("b5"); setIsOpen(true);};
+    const setC5 = () => {setSelectedCellId("c5"); setIsOpen(true);};
+    const setD5 = () => {setSelectedCellId("d5"); setIsOpen(true);};
+    const setE5 = () => {setSelectedCellId("e5"); setIsOpen(true);};
+    const setF5 = () => {setSelectedCellId("f5"); setIsOpen(true);};
+    const setA6 = () => {setSelectedCellId("a6"); setIsOpen(true);};
+    const setB6 = () => {setSelectedCellId("b6"); setIsOpen(true);};
+    const setC6 = () => {setSelectedCellId("c6"); setIsOpen(true);};
+    const setD6 = () => {setSelectedCellId("d6"); setIsOpen(true);};
+    const setE6 = () => {setSelectedCellId("e6"); setIsOpen(true);};
+    const setF6 = () => {setSelectedCellId("f6"); setIsOpen(true);};
+    const setA7 = () => {setSelectedCellId("a7"); setIsOpen(true);};
+    const setB7 = () => {setSelectedCellId("b7"); setIsOpen(true);};
+    const setC7 = () => {setSelectedCellId("c7"); setIsOpen(true);};
+    const setD7 = () => {setSelectedCellId("d7"); setIsOpen(true);};
+    const setE7 = () => {setSelectedCellId("e7"); setIsOpen(true);};
+    const setF7 = () => {setSelectedCellId("f7"); setIsOpen(true);};
 
-    useEffect(() => {
-        setIsOpen(true);
-    }, [selectedCellId])
+    // useEffect(() => {
+    //     setIsOpen(true);
+    // }, [selectedCellId])
 
     return (
         <div>
@@ -81,6 +82,7 @@ export default function ScheduleGrid(props) {
                 modalState={modalIsOpen}
                 closeSubjectModal={closeSubjectModal}
                 cellId={selectedCellId}
+                subjectSuggestionTypeData={subjectSuggestionTypeData}
             />
             <section className="scheduleGrid">
                 <br />

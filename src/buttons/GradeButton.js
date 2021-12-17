@@ -18,7 +18,7 @@ export default function GradeButton(props) {
     return (
         <>
             <IndivisualGradeButtons btnClick={props.setToCustom} btnIcon={<MdNoteAdd className="iconBtn" />} btnName="カスタム (プライベートデータベース)" />
-            <p>以下の「カスタム以外のものはDEIZUのパブリックデータベースに保存された科目が表示されます」</p>
+            <p>※以下の「カスタム」以外のものはDEIZUのパブリックデータベースに保存された科目が表示されます。</p>
             <div style={{display: 'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'7px'}}>
                 <IndivisualGradeButtons btnClick={props.setToIb} btnIcon={<MdLanguage className="iconBtn" />} btnName="IB" />
                 <IndivisualGradeButtons btnClick={props.setToHighschool} btnIcon={<MdLocationCity className="iconBtn" />} btnName="中高" />

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
-import {MdSave,MdOutlineModeEditOutline} from 'react-icons/md';
+import {MdSave,MdOutlineModeEditOutline,MdKeyboardArrowRight} from 'react-icons/md';
 import DeizuButton from '../buttons/DeizuButton'
 import CreatableSelect from 'react-select/creatable';
 import firebase, { auth,dataRef,optionsDataRef } from '../firebase';
 
-// original data
-// import { options } from './options';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
@@ -32,7 +30,9 @@ export default function SubjectModal(props) {
     const [subjectDescription, setSubjectDescription] = useState('');
     const createdAt = firebase.firestore.FieldValue.serverTimestamp();
     const [subjectOptions, setSubjectOptions] = useState()
+    
     const [subjectSuggestionType, setSubjectSuggestionType] = useState()
+
     const [cellColor, setCellColor] = useState('var(--system1)');
 
     const modalStyle = {
@@ -84,15 +84,14 @@ export default function SubjectModal(props) {
     ]
 
     useEffect(() => {
-        dataRef.doc(user.uid).get().then((doc) => {
-            const subjectSuggestionTypeData = doc.data().subjectSuggestionType;
-            setSubjectSuggestionType(subjectSuggestionTypeData)
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
+        setSubjectName('');
+        setSubjectLinkValue('');
+        setSubjectDescription('');
+        setCellColor('var(--system1)');
+        setSubjectSuggestionType(props.subjectSuggestionTypeData)
     }, [modalIsOpen])
     useEffect(() => {
-        if (subjectSuggestionType == 'custom') {
+        if (subjectSuggestionType === 'custom') {
             dataRef.doc(user.uid).get().then((doc) => {
                 setSubjectOptions(doc.data().customSubjectOptions)
             }).catch((error) => {
@@ -152,21 +151,20 @@ export default function SubjectModal(props) {
     }
     const saveSubjectToSubjectDB = () => {
         let confirm = window.confirm(`「${subjectName}」をDEIZUの科目のデータベースに保存します。`);
-        if (confirm == true) {
-          optionsDataRef.doc(subjectSuggestionType).update({
-              options: firebase.firestore.FieldValue.arrayUnion(
-                  {
-                      label: subjectName,
-                      value: subjectName
-                  }
-                  
-              )
-          },{ merge: true })
+        if (confirm === true) {
+            optionsDataRef.doc(subjectSuggestionType).update({
+                options: firebase.firestore.FieldValue.arrayUnion(
+                    {
+                        label: subjectName,
+                        value: subjectName
+                    }
+                )
+            },{ merge: true })
         }
     }
     const saveCustomSubjectToSubjectDB = () => {
         let confirm = window.confirm(`「${subjectName}」を個人の科目のデータベースに保存します。`);
-        if (confirm == true) {
+        if (confirm === true) {
           dataRef.doc(user.uid).update({
               customSubjectOptions: firebase.firestore.FieldValue.arrayUnion(
                   {
@@ -200,7 +198,7 @@ export default function SubjectModal(props) {
     }
 
     return (
-        <div>
+        <>
             <Modal
                 style={modalStyle}
                 isOpen={modalIsOpen}
@@ -213,19 +211,22 @@ export default function SubjectModal(props) {
                     />
                 </div>
                 <div className="cellNameData">
-                    <MdOutlineModeEditOutline className="iconBtn"/>
-                    {cellDay == 'a' && '月曜'}
-                    {cellDay == 'b' && '火曜'}
-                    {cellDay == 'c' && '水曜'}
-                    {cellDay == 'd' && '木曜'}
-                    {cellDay == 'e' && '金曜'}
-                    {cellDay == 'f' && '土曜'}
-                    の
-                    {cellPeriod}
-                    時間目を編集中
+                    <div>
+                        <MdOutlineModeEditOutline className="iconBtn"/>
+                        {cellDay === 'a' && '月曜'}
+                        {cellDay === 'b' && '火曜'}
+                        {cellDay === 'c' && '水曜'}
+                        {cellDay === 'd' && '木曜'}
+                        {cellDay === 'e' && '金曜'}
+                        {cellDay === 'f' && '土曜'}
+                        の
+                        {cellPeriod}
+                        時間目を編集中
+                    </div>
+                    <div>次へ<MdKeyboardArrowRight className="iconBtn"/></div>
                 </div>
-                <div className="centerAll">
-                    <section style={{display:'grid', gridTemplateColumns:'1.5fr 1fr', gap:'5px'}}>
+                <div>
+                    <section style={{display:'grid', gridTemplateColumns:'1.5fr 1fr', gap:'2px'}}>
                         <div
                             className="displayTitle"
                             style={{ background: cellColor, border: `1px solid ${cellColor ? cellColor: 'transparent'}`}}>
@@ -256,7 +257,7 @@ export default function SubjectModal(props) {
                     </section>
                     <form className="modalForm" onSubmit={saveSubject}>
                         <SubjectSelector />
-                        {subjectSuggestionType != 'custom' && 
+                        {subjectSuggestionType !== 'custom' && 
                             <DeizuButton
                                 btnIcon={<MdSave className="iconBtn" />}
                                 btnName="科目をDEIZUのデータベースに保存"
@@ -264,7 +265,7 @@ export default function SubjectModal(props) {
                                 btnClick={saveSubjectToSubjectDB}
                             />
                         }
-                        {subjectSuggestionType == 'custom' && 
+                        {subjectSuggestionType === 'custom' && 
                             <DeizuButton
                                 btnIcon={<MdSave className="iconBtn" />}
                                 btnName="科目を自分のデータベースに保存"
@@ -294,6 +295,6 @@ export default function SubjectModal(props) {
                     </form>
                 </div>
             </Modal>
-        </div>
+        </>
     )
 }

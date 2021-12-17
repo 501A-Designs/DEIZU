@@ -438,6 +438,7 @@ a {
 }
 
 .deizuInput,
+.deizuTextArea,
 input[type="time"] {
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
@@ -455,10 +456,15 @@ input[type="time"] {
 }
 
 .deizuInput:focus,
+.deizuTextArea:focus,
 input[type="time"]:focus {
   border: 1px solid var(--system1);
   -webkit-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
           box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.deizuTextArea {
+  resize: vertical;
 }
 
 .duoGrid {
@@ -611,7 +617,16 @@ input[type="time"]:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 7.5px;
+}
+
+.popup .cellNameData div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
   border: 1px solid var(--system1);
   margin: 5px;
   border-radius: var(--r5);
@@ -620,6 +635,11 @@ input[type="time"]:focus {
   width: -moz-fit-content;
   width: fit-content;
   font-size: small;
+}
+
+.popup .cellNameData div:last-child:hover {
+  cursor: pointer;
+  background-color: var(--system1);
 }
 
 .popup .colors {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { MdAddCircle,MdSettings, MdList, MdCropFree,MdDelete} from 'react-icons/md';
+import { MdAddCircle,MdSettings, MdList, MdCropFree,MdDelete,MdLibraryAdd} from 'react-icons/md';
 
 import firebase, { auth, root,dataRef } from './firebase';
 
@@ -9,6 +9,7 @@ import DeizuButton from './buttons/DeizuButton'
 import ToggleButton from './buttons/ToggleButton';
 import DropdownSettings from './drop-down/DropdownSettings';
 import NavItem from './buttons/NavItem'
+import QuickSubjectInsertModal from './components/QuickSubjectInsertModal'
 
 export default function LoginEditor(prop) {
   // User related
@@ -16,7 +17,24 @@ export default function LoginEditor(prop) {
   const fullName = auth.currentUser.displayName;
   const firstName = fullName.split(" ")[0];
   const [wallpaperUrl, setWallpaperUrl] = useState('');
-  const [gradeValue, setGradeValue] = useState('custom');
+  const [quickSubjectInsertModalIsOpen, setQuickSubjectInsertModalIsOpen] = useState(false);
+  
+  
+  const [subjectSuggestionTypeData, setSubjectSuggestionTypeData] = useState()
+  useEffect(() => {
+    dataRef.doc(user.uid).get().then((doc) => {
+      setSubjectSuggestionTypeData(doc.data().subjectSuggestionType);
+    }).catch((error) => {
+      console.log("Error getting document:", error);
+    });
+  },[])
+  const [gradeValue, setGradeValue] = useState(subjectSuggestionTypeData);
+
+  const openQuickSubjectInsertModal = () => {
+    setOpenSheetsDropdown(false);
+    setQuickSubjectInsertModalIsOpen(true)
+  };
+  const closeQuickSubjectInsertModal = () => setQuickSubjectInsertModalIsOpen(false);
 
   function setSubjectSuggestion(prop){
     setGradeValue(prop);
@@ -108,7 +126,7 @@ export default function LoginEditor(prop) {
               </section>;
             });
           } else {
-        itemsToRender = <p style={{color:'var(--txtColor0'}}><h3>作成した時間割表はありません。</h3>作成した表が表示されない場合更新ボタンを押して下さい</p>;
+        itemsToRender = <p style={{color:'var(--txtColor0'}}><h3>作成した時間割表はありません。</h3>作成した表が表示されない場合、ブラウザを一度更新して下さい</p>;
       }
       return <>{itemsToRender}</>;
     }
@@ -124,6 +142,13 @@ export default function LoginEditor(prop) {
               setOpenSheetsDropdown(false);
             }}
           />
+          {subjectSuggestionTypeData === 'custom' &&            
+            <DeizuButton
+              btnIcon={<MdLibraryAdd className="iconBtn" />}
+              btnTitle="科目をまとめて追加"
+              btnClick={() => openQuickSubjectInsertModal()}
+            />
+          }
         </div>
         <OtherSheet/>
       </div>
@@ -152,9 +177,9 @@ export default function LoginEditor(prop) {
                 setOpenSettingsDropdown(false);
                 setOpenSheetsDropdown(false);
               }}
-          />
+            />
             <ToggleButton
-              btnTitle="他の表"
+              btnTitle="ユーティリティ"
               btnIcon={<MdList />}
               dropDownState={openSheetsDropdown}
               btnClick={(e) => {
@@ -170,7 +195,7 @@ export default function LoginEditor(prop) {
                   openSheetsDropdown={openSheetsDropdown}
                 />}
             />
-            {titleName ?
+            {titleName &&
               <>
                 <NavItem
                   tip={'スクショモード'}
@@ -203,7 +228,7 @@ export default function LoginEditor(prop) {
                   }
                 />
               </>
-              : null}
+            }
             <ToggleButton
               btnTitle="設定"
               btnIcon={<MdSettings />}
@@ -237,9 +262,14 @@ export default function LoginEditor(prop) {
           }
           }>
         </div>
-        <section className={screenshotFrame} style={{overflowX: 'scroll', borderRadius:'20px'}}>
+        <section className={screenshotFrame} style={{ overflowX: 'scroll', borderRadius: '20px' }}>
+          <QuickSubjectInsertModal
+            modalState={quickSubjectInsertModalIsOpen}
+            closeModal={closeQuickSubjectInsertModal}
+            selectorColor={systemColorStyle}
+          />
           <h1 className="screenshotTitle">{titleName}</h1>
-          {titleName ? <ScheduleGrid corner={systemCornerStyle} selectorColor={systemColorStyle} sheetTitle={titleName} /> :
+          {titleName ? <ScheduleGrid subjectSuggestionTypeData={subjectSuggestionTypeData} corner={systemCornerStyle} selectorColor={systemColorStyle} sheetTitle={titleName} /> :
             <>
               <h2>時間割表の作成</h2>
               <ol>

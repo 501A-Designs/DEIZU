@@ -370,6 +370,7 @@ a {
 }
 
 .deizuInput,
+.deizuTextArea,
 input[type="time"] {
 	@include blurEffect;
 	background: none;
@@ -384,6 +385,9 @@ input[type="time"] {
 		border: $border;
 		box-shadow: $shadowExtraSmall;
 	}
+}
+.deizuTextArea {
+	resize: vertical;
 }
 // select {
 // 	@include blurEffect;
@@ -518,13 +522,23 @@ input[type="time"] {
 	.cellNameData {
 		display: flex;
 		align-items: center;
-		gap: $margin/2;
-		border: $border;
-		margin: $margin/3;
-		border-radius: var(--r5);
-		padding: $padding/2;
-		width: fit-content;
-		font-size: small;
+		div {
+			display: flex;
+			align-items: center;
+			gap: $margin/3;
+			border: $border;
+			margin: $margin/3;
+			border-radius: var(--r5);
+			padding: $padding/2;
+			width: fit-content;
+			font-size: small;
+		}
+		div:last-child {
+			&:hover {
+				cursor: pointer;
+				background-color: var(--system1);
+			}
+		}
 	}
 
 	.colors {
