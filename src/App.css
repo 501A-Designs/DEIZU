@@ -635,9 +635,13 @@ input[type="time"]:focus {
   width: -moz-fit-content;
   width: fit-content;
   font-size: small;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
-.popup .cellNameData div:last-child:hover {
+.popup .cellNameData .resetAllBtn:hover {
   cursor: pointer;
   background-color: var(--system1);
 }

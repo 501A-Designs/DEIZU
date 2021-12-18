@@ -45,9 +45,6 @@ export default function QuickSubjectInsertModal(props) {
         }
     }
 
-    // for (let i = 0; i < inputValueArray.length; i++) {
-    // }
-
     return (
         <>
             <Modal

@@ -532,8 +532,9 @@ input[type="time"] {
 			padding: $padding/2;
 			width: fit-content;
 			font-size: small;
+			user-select: none;
 		}
-		div:last-child {
+		.resetAllBtn {
 			&:hover {
 				cursor: pointer;
 				background-color: var(--system1);

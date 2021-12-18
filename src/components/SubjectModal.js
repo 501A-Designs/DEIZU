@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
-import {MdSave,MdOutlineModeEditOutline,MdKeyboardArrowRight} from 'react-icons/md';
+import {MdSave,MdModeEdit,MdCheckCircle,MdBlock,MdKeyboardArrowRight} from 'react-icons/md';
 import DeizuButton from '../buttons/DeizuButton'
 import CreatableSelect from 'react-select/creatable';
 import firebase, { auth,dataRef,optionsDataRef } from '../firebase';
@@ -13,6 +13,7 @@ export default function SubjectModal(props) {
     const sheetTitle = props.sTitle;
     const cornerProp = props.corner;
     const modalIsOpen = props.modalState;
+
     const cellName = props.cellId;
     const cellClr = props.cellId + "Color";
     const cellLink = props.cellId + "Link";
@@ -24,6 +25,15 @@ export default function SubjectModal(props) {
     let cellDay = cellIdString.split('')[0];
     let cellPeriod = cellIdString.split('')[1];
 
+    const goToNextCell = () => {
+        let cellNumber = parseInt(cellName.split('')[1]);
+        if (cellNumber === 7) {
+            console.log(1);
+        } else {
+            console.log(cellNumber + 1);
+        }
+    }
+
 
     const [subjectName, setSubjectName] = useState('');
     const [subjectLinkValue, setSubjectLinkValue] = useState('');
@@ -34,6 +44,7 @@ export default function SubjectModal(props) {
     const [subjectSuggestionType, setSubjectSuggestionType] = useState()
 
     const [cellColor, setCellColor] = useState('var(--system1)');
+    const [editingIcon, setEditingIcon] = useState('editing');
 
     const modalStyle = {
         overlay: {
@@ -83,12 +94,32 @@ export default function SubjectModal(props) {
         })
     ]
 
-    useEffect(() => {
+    const resetAll = () => {
         setSubjectName('');
         setSubjectLinkValue('');
         setSubjectDescription('');
         setCellColor('var(--system1)');
-        setSubjectSuggestionType(props.subjectSuggestionTypeData)
+        setEditingIcon('editing');
+    }
+
+    useEffect(() => {
+        setSubjectSuggestionType(props.subjectSuggestionTypeData);
+        dataRef.doc(user.uid).get().then((doc) => {
+            resetAll();
+            const dataObject = doc.data().sheets[sheetTitle];
+            const cellData = dataObject.cells[cellName];
+            const cellNameData = cellData[cellName];
+            const cellLinkData = cellData[cellLink];
+            const cellDscrpData = cellData[cellDscrp];
+            const cellColorData = cellData[cellClr];
+            console.log(cellNameData);
+            setSubjectName(cellNameData);
+            setSubjectLinkValue(cellLinkData);
+            setSubjectDescription(cellDscrpData);
+            setCellColor(cellColorData);
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
     }, [modalIsOpen])
     useEffect(() => {
         if (subjectSuggestionType === 'custom') {
@@ -131,22 +162,29 @@ export default function SubjectModal(props) {
                         border: `1px solid ${props.btnColor}`
                     }
                 }
-                onClick={() => { setCellColor(`${props.btnColor}`) }}
+                onClick={() => {
+                    setCellColor(`${props.btnColor}`);
+                    setEditingIcon('editing');
+                }}
             />
         )
     }
 
     const handleSelectChange = (inputValue) => {
+        setEditingIcon('editing');
         const sValue = Object.values(inputValue)[0];
         setSubjectName(sValue);
     };
     const handleLinkChanges = (e) => {
+        setEditingIcon('editing');
         setSubjectLinkValue(e.target.value);
     }
     const handleDescriptionChanges = (e) => {
+        setEditingIcon('editing');
         setSubjectDescription(e.target.value);
     }
     const handleColorValuesChanges = (e) => {
+        setEditingIcon('editing');
         setCellColor(e.target.value);
     }
     const saveSubjectToSubjectDB = () => {
@@ -194,7 +232,8 @@ export default function SubjectModal(props) {
                 }
             }
         }, { merge: true })
-        modalIsClosed()
+        setEditingIcon('saved')
+        console.log(editingIcon)
     }
 
     return (
@@ -212,18 +251,22 @@ export default function SubjectModal(props) {
                 </div>
                 <div className="cellNameData">
                     <div>
-                        <MdOutlineModeEditOutline className="iconBtn"/>
+                        {editingIcon === 'editing' ? <MdModeEdit className="iconBtn"/>:<MdCheckCircle className="iconBtn" />}
                         {cellDay === 'a' && '月曜'}
                         {cellDay === 'b' && '火曜'}
                         {cellDay === 'c' && '水曜'}
                         {cellDay === 'd' && '木曜'}
                         {cellDay === 'e' && '金曜'}
                         {cellDay === 'f' && '土曜'}
-                        の
-                        {cellPeriod}
-                        時間目を編集中
+                        の{cellPeriod}時間目
+                        {editingIcon === 'editing' ? 'を編集中・・・':'を保存しました'}  
                     </div>
-                    <div>次へ<MdKeyboardArrowRight className="iconBtn"/></div>
+                    {editingIcon === 'saved' && 
+                        <div onClick={resetAll} className="resetAllBtn">
+                            <MdBlock className="iconBtn" />
+                            セルをリセット
+                        </div>
+                    }
                 </div>
                 <div>
                     <section style={{display:'grid', gridTemplateColumns:'1.5fr 1fr', gap:'2px'}}>
