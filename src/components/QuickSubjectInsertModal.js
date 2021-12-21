@@ -25,24 +25,30 @@ export default function QuickSubjectInsertModal(props) {
 
     const [textAreaValue, setTextAreaValue] = useState('');
     const [textAreaDataForDB, setTextAreaDataForDB] = useState();
-    let inputValueArray = [];
+    let inputValueArray;
+    let inputValueArrayForDB = [];
     const splitUserInput = (e) => {
         setTextAreaValue(e.target.value);
-        inputValueArray.push(textAreaValue.toString().split("、"));
-        setTextAreaDataForDB(inputValueArray)
     }
+
     const saveInputData = () => {
-        for (let i = 0; i < textAreaDataForDB.length; i++) {
+        inputValueArray = textAreaValue.toString().split("、");
+        let data;
+        inputValueArray.map((prop) => {
+            data = { 'label': prop, 'value': prop };
+            inputValueArrayForDB.push(data);
+        });
+        // setTextAreaDataForDB(inputValueArrayForDB);
+        // console.log(textAreaDataForDB);
+        inputValueArrayForDB.map((dataProp) => {            
             dataRef.doc(user.uid).update({
                 customSubjectOptions:
                     firebase.firestore.FieldValue.arrayUnion(
-                        {
-                            label: textAreaDataForDB[i],
-                            value: textAreaDataForDB[i]
-                        }
-                    )[i]
+                        dataProp
+                    )
             }, { merge: true })
-        }
+            setTextAreaValue('')
+        })
     }
 
     return (
@@ -61,7 +67,7 @@ export default function QuickSubjectInsertModal(props) {
                 <div>
                     <h3 style={{marginLeft:'5px'}}>科目をまとめてデータベースに追加</h3>
                     <p style={{margin:'5px'}}>
-                        科目を「、」で並べて入力し、保存のボタンを押すと入力したものが全てユーザー様のプライベートDEIZUデータベースに保存されます。
+                        科目を「、」で並べて入力し、保存のボタンを押すと入力したものが全てユーザー様のプライベートDEIZUデータベースに保存されます。なお、一度追加した物は消去できませんのでご了承下さい。
                     </p>
                     <div className="modalForm">
                         <textarea

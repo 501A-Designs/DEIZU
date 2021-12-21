@@ -648,8 +648,12 @@ input[type="time"] {
 }
 
 // screenshot mode
-.screenshotTitle {
+
+.screenshotHeader {
 	display: none;
+}
+.screenshotButton {
+	margin: auto;
 }
 
 .screenshotMode {
@@ -661,11 +665,22 @@ input[type="time"] {
 	box-shadow: $shadowLarge;
 	transform: translateY(-15%);
 	padding: $padding/3;
-	.screenshotTitle {
-		color: var(--txtColor0);
-		text-align: center;
-		display: block;
-		margin-bottom: $margin/3;
+	.screenshotHeader {
+		margin: $margin * 2;
+		display: flex;
+		align-items: center;
+		gap: $margin;
+		h1 {
+			width: fit-content;
+			color: var(--txtColor0);
+			text-align: center;
+			display: block;
+			margin: auto 0;
+		}
+		.screenshotButton {
+			display: block;
+			margin: auto 0;
+		}
 	}
 	.waterMark {
 		opacity: 1;
@@ -735,6 +750,7 @@ input[type="time"] {
 	.screenshotMode {
 		padding: 5px;
 		transform: translateY(-18%);
+		box-shadow: none;
 	}
 
 	.cell,
@@ -920,22 +936,6 @@ input[type="time"] {
 details {
 	cursor: pointer;
 }
-// .selectorDiv {
-// 	cursor: pointer;
-// 	border-radius: var(--r10);
-// 	border: $border;
-// 	padding: $padding;
-// 	margin: $margin/3;
-// 	transition: $transitionSpeed/2;
-// 	h3 {
-// 		margin-bottom: 0;
-// 	}
-// 	&:hover {
-// 		transform: $scale;
-// 		box-shadow: $floatBoxShadow;
-// 		border: 1px solid $blue;
-// 	}
-// }
 
 .templateSelector {
 	animation: templateSelectorAni $transitionSpeed;
@@ -1038,5 +1038,41 @@ details {
 	small {
 		color: var(--txtColor0);
 		margin: 0;
+	}
+}
+
+@media print {
+	.screenshotMode {
+		background-color: white;
+		box-shadow: none;
+		padding: 5px;
+		transform: translateY(-10%);
+		.screenshotHeader {
+			h1 {
+				width: max-content;
+				margin: 0 auto;
+				font-size: 1.5em;
+			}
+			.screenshotButton {
+				display: none;
+			}
+		}
+		.cell {
+			h2 {
+				font-size: 1em;
+			}
+		}
+		.periodLabel {
+			font-size: 0.8em;
+			margin: 0;
+			padding: 0;
+		}
+		.dayLabel {
+			font-size: 0.8em;
+		}
+		#dayLabelToday {
+			font-size: 0.8em;
+			box-shadow: none;
+		}
 	}
 }

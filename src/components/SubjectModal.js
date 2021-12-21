@@ -187,33 +187,6 @@ export default function SubjectModal(props) {
         setEditingIcon('editing');
         setCellColor(e.target.value);
     }
-    const saveSubjectToSubjectDB = () => {
-        let confirm = window.confirm(`「${subjectName}」をDEIZUの科目のデータベースに保存します。`);
-        if (confirm === true) {
-            optionsDataRef.doc(subjectSuggestionType).update({
-                options: firebase.firestore.FieldValue.arrayUnion(
-                    {
-                        label: subjectName,
-                        value: subjectName
-                    }
-                )
-            },{ merge: true })
-        }
-    }
-    const saveCustomSubjectToSubjectDB = () => {
-        let confirm = window.confirm(`「${subjectName}」を個人の科目のデータベースに保存します。`);
-        if (confirm === true) {
-          dataRef.doc(user.uid).update({
-              customSubjectOptions: firebase.firestore.FieldValue.arrayUnion(
-                  {
-                      label: subjectName,
-                      value: subjectName
-                  }
-                  
-              )
-          },{ merge: true })
-        }
-    }
 
     const saveSubject = async (e) => {
         e.preventDefault();
@@ -300,22 +273,6 @@ export default function SubjectModal(props) {
                     </section>
                     <form className="modalForm" onSubmit={saveSubject}>
                         <SubjectSelector />
-                        {subjectSuggestionType !== 'custom' && 
-                            <DeizuButton
-                                btnIcon={<MdSave className="iconBtn" />}
-                                btnName="科目をDEIZUのデータベースに保存"
-                                btnColor={'lightBtn'}
-                                btnClick={saveSubjectToSubjectDB}
-                            />
-                        }
-                        {subjectSuggestionType === 'custom' && 
-                            <DeizuButton
-                                btnIcon={<MdSave className="iconBtn" />}
-                                btnName="科目を自分のデータベースに保存"
-                                btnColor={'lightBtn'}
-                                btnClick={saveCustomSubjectToSubjectDB}
-                            />
-                        }
                         <input
                             className="deizuInput"
                             type="url"

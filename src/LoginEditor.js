@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { MdAddCircle,MdSettings, MdList, MdCropFree,MdDelete,MdLibraryAdd} from 'react-icons/md';
+import { MdAddCircle,MdSettings, MdList, MdCropFree,MdDelete,MdLibraryAdd,MdPrint} from 'react-icons/md';
 
 import firebase, { auth, root,dataRef } from './firebase';
 
@@ -70,6 +70,8 @@ export default function LoginEditor(prop) {
   // Theme State From Dashboard
   const systemCornerStyle = prop.systemCornerProp;
   const systemColorStyle = prop.systemColorProp;
+
+  const printScheduleSheet = () => {window.print()}
 
   
   useEffect(() => {
@@ -159,7 +161,7 @@ export default function LoginEditor(prop) {
     {wallpaperUrl ? <img className="backgroundImg" src={wallpaperUrl} alt="壁紙は指定されていません" /> : null}
     <div className="loginEditor">
       {/* <Menu /> */}
-      <section className="alignItems spaceBetween printNull">
+      <section className="alignItems spaceBetween">
         <div className="alignItems">
           <h1 className="classicHeader">{titleName ? titleName : `${firstName}さんの時間割表`}</h1>
         </div>
@@ -267,7 +269,17 @@ export default function LoginEditor(prop) {
             closeModal={closeQuickSubjectInsertModal}
             selectorColor={systemColorStyle}
           />
-          <h1 className="screenshotTitle">{titleName}</h1>
+          <div className="screenshotHeader">
+            <h1>{titleName}</h1>
+            <DeizuButton
+              btnColor={'screenshotButton'}
+              btnIcon={<MdPrint className="iconBtn" />}
+              btnName=""
+              btnTitle="時間割表を印刷"
+              btnClick={printScheduleSheet}
+            />
+          </div>
+
           {titleName ? <ScheduleGrid subjectSuggestionTypeData={subjectSuggestionTypeData} corner={systemCornerStyle} selectorColor={systemColorStyle} sheetTitle={titleName} /> :
             <>
               <h2>時間割表の作成</h2>

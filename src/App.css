@@ -792,8 +792,12 @@ input[type="time"]:focus {
   color: #0066ff;
 }
 
-.screenshotTitle {
+.screenshotHeader {
   display: none;
+}
+
+.screenshotButton {
+  margin: auto;
 }
 
 .screenshotMode {
@@ -813,11 +817,30 @@ input[type="time"]:focus {
   padding: 5px;
 }
 
-.screenshotMode .screenshotTitle {
+.screenshotMode .screenshotHeader {
+  margin: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 15px;
+}
+
+.screenshotMode .screenshotHeader h1 {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   color: var(--txtColor0);
   text-align: center;
   display: block;
-  margin-bottom: 5px;
+  margin: auto 0;
+}
+
+.screenshotMode .screenshotHeader .screenshotButton {
+  display: block;
+  margin: auto 0;
 }
 
 .screenshotMode .waterMark {
@@ -896,6 +919,8 @@ input[type="time"]:focus {
     padding: 5px;
     -webkit-transform: translateY(-18%);
             transform: translateY(-18%);
+    -webkit-box-shadow: none;
+            box-shadow: none;
   }
   .cell div,
   .cellHover div {
@@ -1240,5 +1265,42 @@ details {
 .profileSectionFlex small {
   color: var(--txtColor0);
   margin: 0;
+}
+
+@media print {
+  .screenshotMode {
+    background-color: white;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    padding: 5px;
+    -webkit-transform: translateY(-10%);
+            transform: translateY(-10%);
+  }
+  .screenshotMode .screenshotHeader h1 {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    margin: 0 auto;
+    font-size: 1.5em;
+  }
+  .screenshotMode .screenshotHeader .screenshotButton {
+    display: none;
+  }
+  .screenshotMode .cell h2 {
+    font-size: 1em;
+  }
+  .screenshotMode .periodLabel {
+    font-size: 0.8em;
+    margin: 0;
+    padding: 0;
+  }
+  .screenshotMode .dayLabel {
+    font-size: 0.8em;
+  }
+  .screenshotMode #dayLabelToday {
+    font-size: 0.8em;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
 }
 /*# sourceMappingURL=App.css.map */
