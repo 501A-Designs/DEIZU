@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { MdAddCircle,MdSettings, MdList, MdCropFree,MdDelete,MdLibraryAdd,MdPrint} from 'react-icons/md';
+import { MdAddCircle, MdSettings, MdList, MdCropFree, MdDelete, MdLibraryAdd, MdPrint } from 'react-icons/md';
 
-import firebase, { auth, root,dataRef } from './firebase';
+import firebase, { auth, root, dataRef } from './firebase';
 
 import ScheduleGrid from './ScheduleGrid'
 import DeizuButton from './buttons/DeizuButton'
@@ -18,16 +18,16 @@ export default function LoginEditor(prop) {
   const firstName = fullName.split(" ")[0];
   const [wallpaperUrl, setWallpaperUrl] = useState('');
   const [quickSubjectInsertModalIsOpen, setQuickSubjectInsertModalIsOpen] = useState(false);
-  
-  
-  const [subjectSuggestionTypeData, setSubjectSuggestionTypeData] = useState()
+
+
+  const [subjectSuggestionTypeData, setSubjectSuggestionTypeData] = useState();
   useEffect(() => {
     dataRef.doc(user.uid).get().then((doc) => {
       setSubjectSuggestionTypeData(doc.data().subjectSuggestionType);
     }).catch((error) => {
       console.log("Error getting document:", error);
     });
-  },[])
+  }, [])
   const [gradeValue, setGradeValue] = useState(subjectSuggestionTypeData);
 
   const openQuickSubjectInsertModal = () => {
@@ -36,7 +36,7 @@ export default function LoginEditor(prop) {
   };
   const closeQuickSubjectInsertModal = () => setQuickSubjectInsertModalIsOpen(false);
 
-  function setSubjectSuggestion(prop){
+  function setSubjectSuggestion(prop) {
     setGradeValue(prop);
     dataRef.doc(user.uid).set({
       subjectSuggestionType: prop
@@ -61,7 +61,7 @@ export default function LoginEditor(prop) {
   const [openSheetsDropdown, setOpenSheetsDropdown] = useState(false);
   const [otherSheets, setOtherSheets] = useState();
   const otherSheetsArray = [];
-  
+
   // Screenshots & tites
   const [style, setStyle] = useState({ display: 'none' });
   const [titleName, setTitleValue] = useState(prop.dashSheetTitle);
@@ -71,9 +71,8 @@ export default function LoginEditor(prop) {
   const systemCornerStyle = prop.systemCornerProp;
   const systemColorStyle = prop.systemColorProp;
 
-  const printScheduleSheet = () => {window.print()}
+  const printScheduleSheet = () => { window.print() }
 
-  
   useEffect(() => {
     document.title = `${titleName}`
     root?.style.setProperty("--r5", systemCornerStyle[0]);
@@ -100,7 +99,7 @@ export default function LoginEditor(prop) {
       console.log("Error getting document:", error);
     })
   }
-  
+
   useEffect(() => {
     dataRef.doc(user.uid).get().then((doc) => {
       const wallUrl = doc.data().url;
@@ -116,18 +115,18 @@ export default function LoginEditor(prop) {
       let itemsToRender;
       if (otherSheets) {
         itemsToRender = otherSheets.map(item => {
-            return <section
-                    className="dropdownItemSheet"
-                    key={item}
-                    onClick={() => {
-                      setTitleValue(`${(item.split('$')[0])}`);
-                      setOpenSheetsDropdown(false);
-                    }}>{item.split('$')[0]}
-                <time>{item.split('$')[1]}</time>
-              </section>;
-            });
-          } else {
-        itemsToRender = <p style={{color:'var(--txtColor0'}}><h3>作成した時間割表はありません。</h3>作成した表が表示されない場合、ブラウザを一度更新して下さい</p>;
+          return <section
+            className="dropdownItemSheet"
+            key={item}
+            onClick={() => {
+              setTitleValue(`${(item.split('$')[0])}`);
+              setOpenSheetsDropdown(false);
+            }}>{item.split('$')[0]}
+            <time>{item.split('$')[1]}</time>
+          </section>;
+        });
+      } else {
+        itemsToRender = <p style={{ color: 'var(--txtColor0' }}><h3>作成した時間割表はありません。</h3>作成した表が表示されない場合、ブラウザを一度更新して下さい</p>;
       }
       return <>{itemsToRender}</>;
     }
@@ -143,31 +142,35 @@ export default function LoginEditor(prop) {
               setOpenSheetsDropdown(false);
             }}
           />
-          {subjectSuggestionTypeData === 'custom' &&            
-            <DeizuButton
-              btnIcon={<MdLibraryAdd className="iconBtn" />}
-              btnTitle="科目をまとめて追加"
-              btnClick={() => openQuickSubjectInsertModal()}
-            />
-          }
+          <DeizuButton
+            btnIcon={<MdLibraryAdd className="iconBtn" />}
+            btnTitle="科目をまとめて追加"
+            btnClick={() => openQuickSubjectInsertModal()}
+          />
+          <p style={{ marginLeft: '10px' }}>
+            科目選択：
+            {subjectSuggestionTypeData === 'ib' && 'IBDP生'}
+            {subjectSuggestionTypeData === 'highschool' && '中学・高校生'}
+            {subjectSuggestionTypeData === 'university' && '大学生'}
+            {subjectSuggestionTypeData === 'custom' && 'カスタム'}
+          </p>
         </div>
-        <OtherSheet/>
+        <OtherSheet />
       </div>
     )
   }
 
   return (
     <>
-    {wallpaperUrl ? <img className="backgroundImg" src={wallpaperUrl} alt="壁紙は指定されていません" /> : null}
-    <div className="loginEditor">
-      {/* <Menu /> */}
-      <section className="alignItems spaceBetween">
-        <div className="alignItems">
-          <h1 className="classicHeader">{titleName ? titleName : `${firstName}さんの時間割表`}</h1>
-        </div>
-          
-        <div className="alignItems" style={{alignItems:'stretch'}}>
-          <input
+      {wallpaperUrl ? <img className="backgroundImg" src={wallpaperUrl} alt="壁紙は指定されていません" /> : null}
+      <div className="loginEditor">
+        {/* <Menu /> */}
+        <section className="alignItems spaceBetween">
+          <div className="alignItems">
+            <h1 className="classicHeader">{titleName ? titleName : `${firstName}さんの時間割表`}</h1>
+          </div>
+          <div className="alignItems" style={{ alignItems: 'stretch' }}>
+            <input
               className="deizuInput"
               id="titleInput"
               type="text"
@@ -219,7 +222,7 @@ export default function LoginEditor(prop) {
                       var resault = window.confirm("今開いている時間割表を消去したいですか？一度消去すると復旧することはできません。");
                       if (resault == true) {
                         dataRef.doc(user.uid).set({
-                          sheets:{
+                          sheets: {
                             [titleName]: firebase.firestore.FieldValue.delete()
                           }
                         }, { merge: true })
@@ -251,8 +254,8 @@ export default function LoginEditor(prop) {
                 />
               }
             />
-        </div>
-      </section>
+          </div>
+        </section>
 
         <div
           className="backdrop"
@@ -265,6 +268,7 @@ export default function LoginEditor(prop) {
         </div>
         <section className={screenshotFrame} style={{ overflowX: 'scroll', borderRadius: '20px' }}>
           <QuickSubjectInsertModal
+            subjectSuggestionTypeData={subjectSuggestionTypeData}
             modalState={quickSubjectInsertModalIsOpen}
             closeModal={closeQuickSubjectInsertModal}
             selectorColor={systemColorStyle}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
-import {MdSave,MdOutlineModeEditOutline} from 'react-icons/md';
+import { MdSave, MdOutlineModeEditOutline } from 'react-icons/md';
 import DeizuButton from '../buttons/DeizuButton'
 import firebase, { auth, dataRef, optionsDataRef } from '../firebase';
 
@@ -8,6 +8,7 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
 export default function QuickSubjectInsertModal(props) {
+    const subjectSuggestionTypeData = props.subjectSuggestionTypeData;
     const [user] = useAuthState(auth);
     const modalIsClosed = () => props.closeModal;
     const selectorColorProp = props.selectorColor;
@@ -40,15 +41,27 @@ export default function QuickSubjectInsertModal(props) {
         });
         // setTextAreaDataForDB(inputValueArrayForDB);
         // console.log(textAreaDataForDB);
-        inputValueArrayForDB.map((dataProp) => {            
-            dataRef.doc(user.uid).update({
-                customSubjectOptions:
-                    firebase.firestore.FieldValue.arrayUnion(
-                        dataProp
-                    )
-            }, { merge: true })
-            setTextAreaValue('')
-        })
+        if (subjectSuggestionTypeData === 'custom') {
+            inputValueArrayForDB.map((dataProp) => {
+                dataRef.doc(user.uid).update({
+                    customSubjectOptions:
+                        firebase.firestore.FieldValue.arrayUnion(
+                            dataProp
+                        )
+                }, { merge: true })
+                setTextAreaValue('')
+            })
+        } else {
+            inputValueArrayForDB.map((dataProp) => {
+                optionsDataRef.doc(subjectSuggestionTypeData).update({
+                    options:
+                        firebase.firestore.FieldValue.arrayUnion(
+                            dataProp
+                        )
+                }, { merge: true })
+                setTextAreaValue('')
+            })
+        }
     }
 
     return (
@@ -65,8 +78,8 @@ export default function QuickSubjectInsertModal(props) {
                     />
                 </div>
                 <div>
-                    <h3 style={{marginLeft:'5px'}}>科目をまとめてデータベースに追加</h3>
-                    <p style={{margin:'5px'}}>
+                    <h3 style={{ marginLeft: '5px' }}>科目をまとめてデータベースに追加</h3>
+                    <p style={{ margin: '5px' }}>
                         科目を「、」で並べて入力し、保存のボタンを押すと入力したものが全てユーザー様のプライベートDEIZUデータベースに保存されます。なお、一度追加した物は消去できませんのでご了承下さい。
                     </p>
                     <div className="modalForm">
@@ -85,7 +98,7 @@ export default function QuickSubjectInsertModal(props) {
                         />
                     </div>
                 </div>
-            </Modal>    
+            </Modal>
         </>
     )
 }
